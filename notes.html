@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Andreas Lietz's Homepage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+          });
+    </script>
+    <script type="text/javascript" async
+            src="https://www.wwu.de/IVV5WS/MathJax-master/MathJax.js?config=TeX-AMS_HTML-full">
+    </script>
+</head>
+<body>
+<div id="page-container">
+    <div id="page-wrap">
+        <nav>
+            <div><a href="index.html" class="button">Home</a></div>
+            <div><a href="notes.html" class="button" style="background-color: #ccc;
+                    color: black;
+                    border: 2px solid #555555;">Notes</a></div>
+            <div><a href="teaching.html" class="button">Teaching</a></div>
+            <div><a href="contact.html" class="button">Contact</a></div>
+        </nav>
+
+        <article>
+
+            <h1>Notes</h1>
+            <p>This page contains mostly notes on small bits of mathematics that I found interesting. Any comments are welcome!</p>
+            <ul>
+                <li><button onclick="myFunction(1)" class="ddheader">Choice may fail in the ${<}\kappa$-Mantle </button></li>
+                <div id="entry1" class="info">
+                    <a href = "notes/aocinmantle.pdf" class="download">PDF</a>
+                    <aside class = "infoaside">
+                        The ${<}\kappa$-mantle is the intersection of all grounds that extend to $V$ via a forcing of size
+                        ${<}\kappa$. For various cardinals $\kappa$, we show that the axiom of choice can fail in the
+                        $\kappa$-mantle. This answers a question of Usuba. An interesting question left open is whether
+                        choice can fail in the ${<}\kappa$-mantle if $\kappa$ is weakly compact.
+                    </aside>
+                </div>
+                <li><button onclick="myFunction(2)" class="ddheader">A Woodin from the Zipper Lemma </button></li>
+                <div id="entry2" class="info">
+                    <a href = "notes/woodinfromzipper.pdf" class="download">PDF</a>
+                    <aside class = "infoaside">The well-known Zipper lemma from inner model theory implies that if an iteration
+                        tree on $V$ has two different well-founded cofinal branches $b$ and $c$ with corresponding models
+                        $M_b$ and $M_c$ and $\delta=\delta(T)$ then $L(V_\delta^{M_b})$ believes $\delta$ to be Woodin. Note
+                        that choice may fail in this model. Martin and Steel mention in "Iteration Trees" that it is a theorem
+                        Woodin and Solovay that one can force choice over this model while retaining $\delta$ to be Woodin.
+                        As far as I know, this is not published. We present a proof of this result that makes use of
+                        "Laver functions for a Woodin cardinal".
+                    </aside>
+                </div>
+                <li><button  onclick="myFunction(3)" class="ddheader">The Problem with Exercise 34.5  </button></li>
+                <div id="entry3" class="info">
+                    <a href = "notes/exercise34.5.pdf" class="download">PDF</a>
+                    <aside class = "infoaside">Exercise 34.5 in Jech's "Set Theory" characterises when a given Boolen algebra is
+                        isomorphic to the Levy collapse of an inaccessible cardinal to $\omega_1$. It turns out that as stated,
+                        this characterisaion is false. We fix this, fix the use of this exercise in Theorem 34.5 and show
+                        that $\operatorname{Col}(\omega, \kappa)\times\operatorname{Col}(\kappa, {<}\lambda)$ is not isomorphic
+                        to $\operatorname{Col}(\omega, {<}\lambda)$ for inaccessible $\kappa<\lambda$. This makes it more
+                        complicated to get a dense ideal on $\omega_1$ from an almost huge cardinal.
+                    </aside>
+                </div>
+                <li><button  onclick="myFunction(4)" class="ddheader">A Dense Ideal on $\omega_1$ </button></li>
+                <div id="entry4" class="info">
+                    <a href = "notes/denseideal.pdf" class="download">PDF</a>
+                    <aside class = "infoaside">Woodin proved that one can force a dense ideal on $\omega_1$ from an almost huge cardinal.
+                        This result is published in Foremans's Handbook article. In this note, we present this result in full detail and try
+                        to motivate the strategy. A byproduct of this was the note titled "The Problem with Exercise 34.5".</aside>
+                </div>
+                <li><button  onclick="myFunction(5)" class="ddheader">A transitive model of ZC+$\neg$TC</button></li>
+                <div id="entry5" class="info">
+                    <a href = "notes/zermelo.pdf" class="download">PDF</a>
+                    <aside class = "infoaside">The main aim of theis note is to give an easy construction of a transitive model of Zermelo set theory
+                    that does not satisfy the axiom of transitive containment, i.e. all sets are subsets of a transitive set. As far as I know, there
+                    is no such construction in the literature. We go on and build a few more pathological models of Zermelo set theory and show
+                    that they need not have a "hierarchy", i.e. no definable sequence of sets that vaguely resemble the Von Neumann hierarchy.</aside>
+                </div>
+                <li><button  onclick="myFunction(6)" class="ddheader">Preserving Suslin Trees in Finite Support Iterations </button></li>
+                <div id="entry6" class="info">
+                    <a href = "notes/preservingsuslin.pdf.pdf" class="download">PDF</a>
+                    <aside class = "infoaside">This short note grew out of a discussion with Stefan Hoffelner. We show that
+                        the property of ccc + preserving a given Suslin tree is preserved by finite support iterations. This
+                        is certainly well-known, but was not by the author.
+                    </aside>
+                </div>
+                <li><button  onclick="myFunction(7)" class="ddheader">Set-Theoretic Geology</button></li>
+                <div id="entry7" class="info">
+                    <a href = "notes/geology.pdf" class="download">PDF</a>
+                    <aside class = "infoaside">This is my Masters' Thesis. We present the topic of Set-Theoretic Geology and investigate
+                        the relation-ship between large cardinals in the universe and the mantle.</aside>
+                </div>
+            </ul>
+
+
+        </article>
+    </div>
+    <footer>
+        <a href="https://www.uni-muenster.de/FB10/impressum.html">Impressum</a>
+        |
+        <a href="https://www.uni-muenster.de/de/datenschutzerklaerung.html">Datenschutzhinweis</a>
+    </footer>
+
+
+
+</div>
+
+
+
+
+<script>
+    function myFunction(s) {
+        var i = 0;
+        var string = "entry0";
+        var t = s.toString();
+        while(document.getElementById(string) !== null) {
+
+            if (i != s) {
+                document.getElementById(string).classList.remove("show");
+            }
+            i++;
+            string = "entry" + i.toString();
+        }
+        string = "entry" + t;
+        document.getElementById(string).classList.toggle("show");
+    }
+</script>
+
+
+
+
+</body>
