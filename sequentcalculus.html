@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Andreas Lietz's Homepage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet/less" type="text/css" href="switch.less" />
+    <script src="//cdn.jsdelivr.net/npm/less@3.13" ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.css" integrity="sha384-t5CR+zwDAROtph0PXGte6ia8heboACF9R5l/DiY+WZ3P2lxNgvJkQk5n7GPvLMYw" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.js" integrity="sha384-FaFLTlohFghEIZkw6VGwmf9ISTubWAVYW8tG8+w2LAIftJEULZABrF9PPFv+tVkH" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/contrib/auto-render.min.js" integrity="sha384-bHBqxz8fokvgoJ/sc17HODNxa42TlaEhB+w8ZJXTc2nZf1VgEaFZeZvT4Mznfz0v" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+<div id="includeNavbar"></div>
+<script src="navbar.js"></script>
+<article>
+    <h1>
+        <input id="toggle-on" class="toggle toggle-left" name="toggle" value="true" type="radio" checked onclick="showBuilder('formulabuilder.html')">
+        <label for="toggle-on" class="switchbtn">Sequent Calculus</label>
+        <input id="toggle-off" class="toggle toggle-right" name="toggle" value="false" type="radio" onclick="showBuilder('whatisthis.html')">
+        <label for="toggle-off" class="switchbtn">What is this?</label>
+    </h1>
+    <div id="magic" height="250px" width = "100%">
+    </div>
+    <div id ="proof"></div>
+    <div id ="rules">
+        <h1>Derivation Rules</h1>
+        <table>
+            <tr>
+                <th>
+                <div class="dropdown">
+                    <button id="assumption" onclick="calculus('assumption')" class = "dropbtn">\(\begin{matrix} & & \\\hline \Gamma & \varphi & \varphi \end{matrix}\)</button>
+                    <div id="assumptioncontent" style = "display:none;float:left;z-index:3" class="dropdown-content">
+                        <button onclick="freeAssumption()">Use with \(\Gamma=\emptyset\)</button>
+                    </div>
+                </div>
+                </th>
+                <th>
+                    <button id="desubstitution" onclick="calculus('desubstitution')">\(\begin{matrix}\Gamma &  \varphi(t) \\\hline \Gamma &\varphi(x)\frac{t}{x} \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="implicationIntroduction" onclick="calculus('implicationIntroduction')">\(\begin{matrix}\Gamma & \varphi & \psi \\\hline \Gamma &  & (\varphi \rightarrow \psi) \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="contradictionIntroduction" onclick="calculus('contradictionIntroduction')">\(\begin{matrix}\Gamma & \varphi \\\Gamma & \neg \varphi \\\hline \Gamma & \bot \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="forallIntroduction" onclick="calculus('forallIntroduction')">\(\begin{matrix}\Gamma & \varphi(x) \\\hline \Gamma & \forall x \varphi(x) \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="equalIntroduction" onclick="calculus('equalIntroduction')">\(\begin{matrix} & \\\hline \Gamma & t = t \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="andIntroduction" onclick="calculus('andIntroduction')">\(\begin{matrix}\Gamma & \varphi \\\Gamma & \psi \\\hline \Gamma & (\varphi \wedge \psi) \end{matrix}\)</button>
+                </th>
+                <th>
+                    <div class="dropdown">
+                        <button id="orIntroductionLeft" onclick="calculus('orIntroductionLeft')">\(\begin{matrix}\Gamma & \varphi \\\hline \Gamma & (\varphi \vee \psi) \end{matrix}\)</button>
+                        <div id ="orIntroductionContent" style = "display:none;float:left;z-index:3" class="dropdown-content">
+                            <button id="orIntroductionRight" onclick="calculus('orIntroductionRight')">\(\begin{matrix}\Gamma & \varphi \\\hline \Gamma & (\psi \vee \varphi) \end{matrix}\)</button>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <button id="existsIntroduction" onclick="calculus('existsIntroduction')">\(\begin{matrix}\Gamma & \varphi\frac{t}{x} \\\hline \Gamma & \exists x (\varphi) \end{matrix}\)</button>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <button id="monotonicity" onclick="calculus('monotonicity')">\(\begin{matrix}\Gamma &  & \varphi \\\hline \Gamma & \psi & \varphi \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id='substitution' onclick="calculus('substitution')">\(\begin{matrix}\Gamma &  \varphi(x)\frac{t}{x} \\\hline \Gamma & \varphi(t) \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="implicationElimination" onclick="calculus('implicationElimination')">\(\begin{matrix}\Gamma & \varphi \\\Gamma & (\varphi \rightarrow \psi) \\\hline \Gamma & \psi \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="contradictionElimination" onclick="calculus('contradictionElimination')">\(\begin{matrix}\Gamma & \neg \varphi & \bot \\\hline \Gamma &  & \varphi \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="forallElimination" onclick="calculus('forallElimination')">\(\begin{matrix}\Gamma & \forall x \varphi(x) \\\hline \Gamma & \varphi(t) \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="equalElimination" onclick="calculus('equalElimination')">\(\begin{matrix}\Gamma & \varphi\frac{t}{x} \\\Gamma & s = t \\\hline \Gamma & \varphi\frac{s}{x} \end{matrix}\)</button>
+                </th>
+                <th>
+                    <div class="dropdown">
+                        <button id="andEliminationLeft" onclick="calculus('andEliminationLeft')">\(\begin{matrix}\Gamma & (\varphi \wedge \psi) \\\hline \Gamma & \varphi \end{matrix}\)</button>
+                        <div id ="andEliminationContent" style = "display:none;float:left;z-index:3" class="dropdown-content">
+                            <button id="andEliminationRight" onclick="calculus('andEliminationRight')">\(\begin{matrix}\Gamma & (\varphi \wedge \psi) \\\hline \Gamma & \psi \end{matrix}\)</button>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <button id="orElimination" onclick="calculus('orElimination')">\(\begin{matrix}\Gamma & (\varphi \vee \psi) \\\Gamma & \neg \varphi \\\hline \Gamma & \psi \end{matrix}\)</button>
+                </th>
+                <th>
+                    <button id="existsElimination" onclick="calculus('existsElimination')">\(\begin{matrix}\Gamma &  & \exists x \varphi(x) \\\Gamma & \varphi(y) & \psi \\\hline \Gamma &  & \psi \end{matrix}\)</button>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <p><button onclick="undoDerivation()">Undo</button> </p>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+
+</article>
+
+<footer>
+    <a href="https://www.uni-muenster.de/FB10/impressum.html">Impressum</a>
+    |
+    <a href="https://www.uni-muenster.de/de/datenschutzerklaerung.html">Datenschutzhinweis</a>
+</footer>
+
+
+
+<script src="calculus.js">
+</script>
+
+
+
+
+</body>

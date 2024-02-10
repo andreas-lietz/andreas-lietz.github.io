@@ -19,14 +19,7 @@
 <body>
 <div id="page-container">
     <div id="page-wrap">
-        <nav>
-            <div><a href="index.html" class="button">Home</a></div>
-            <div><a href="notes.html" class="button" style="background-color: #ccc;
-                    color: black;
-                    border: 2px solid #555555;">Notes</a></div>
-            <div><a href="teaching.html" class="button">Teaching</a></div>
-            <div><a href="contact.html" class="button">Contact</a></div>
-        </nav>
+        <div id="includeNavbar"></div>
 
         <article>
 
@@ -130,6 +123,8 @@
         document.getElementById(string).classList.toggle("show");
     }
 </script>
+
+<script src="navbar.js"></script>
 
 
 

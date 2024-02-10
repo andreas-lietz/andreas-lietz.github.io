@@ -1,1 +1,1 @@
-My personal webapp.
+My personal website.

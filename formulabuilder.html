@@ -1,0 +1,73 @@
+<p>
+    <h2>Formula Builder</h2>
+    <button onclick="formulaBuilder('atomic', '=')">\(t_0 = t_1\)</button>
+    <button onclick="formulaBuilder('atomic', '<')">\(t_0 < t_1\)</button>
+    <button onclick="formulaBuilder('atomic', '\\in')">\(t_0 \in t_1\)</button>
+    <button onclick="formulaBuilder('atomic', '\\bot')">\(\bot\)</button>
+    <button onclick="formulaBuilder('atomic', '\\varphi')">\(\varphi\)</button>
+    <button onclick="formulaBuilder('atomic', '\\psi')">\(\psi\)</button>
+    <button onclick="formulaBuilder('atomic', '\\chi')">\(\chi\)</button>
+    <button onclick="formulaBuilder('atomic', 'P')">\(P\left(\vec t\right)\)</button> with arity
+    <select id="Parity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <button onclick="formulaBuilder('atomic', 'Q')">\(Q\left(\vec t\right)\)</button> with arity
+    <select id="Qarity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <button onclick="formulaBuilder('negation')">\(\neg\varphi\)</button>
+    <button onclick="formulaBuilder('concat', 'conjunction')">\(\varphi\wedge\psi\)</button>
+    <button onclick="formulaBuilder('concat', 'disjunction')">\(\varphi\vee\psi\)</button>
+    <button onclick="formulaBuilder('concat', 'implication')">\(\varphi\rightarrow\psi\)</button>
+    <button onclick="formulaBuilder('quantifier', 'forall')">\(\forall x\varphi\)</button>
+    <button onclick="formulaBuilder('quantifier', 'exists')">\(\exists x\varphi\)</button>
+</p>
+<p>
+    <button onclick="formulaBuilder('variable', 'x')">Var \(x\)</button>
+    <button onclick="formulaBuilder('variable', 'y')">Var \(y\)</button>
+    <button onclick="formulaBuilder('variable', 'z')">Var \(z\)</button>
+    <button onclick="formulaBuilder('constant', '0')">Const \(0\)</button>
+    <button onclick="formulaBuilder('constant', '1')">Const \(1\)</button>
+    <button onclick="formulaBuilder('constant', 'c')">Const \(c\)</button>
+    <button onclick="formulaBuilder('constant', 'e')">Const \(e\)</button>
+    <button onclick="formulaBuilder('function', '+')">Funct \(+\)</button>
+    <button onclick="formulaBuilder('function', '*')">Funct \(\cdot\)</button>
+    <button onclick="formulaBuilder('function', 'f')">Funct \(f\)</button> with arity
+    <select id="farity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <button onclick="formulaBuilder('function', 'g')">Funct \(g\)</button> with arity
+    <select id="garity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    <!--
+    <button onclick="formulaBuilder('function', 'h')">Funct \(h\)</button> with arity
+    <select id="harity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    -->
+</p>
+<!--
+<div id="latex" width =  "100%">\(\_\) </div>
+<p id ='savedFormuli'></p>
+<p id ='savedTerms'></p>
+<button onclick="saveFormula()">Save</button>
+<button onclick="resetFormula()">Reset</button>
+<p><button id="gammaBuilder" onclick="buildGamma()">Build Gamma</button><button onclick="resetGamma">Reset Gamma</button></p>
+<p id="Gamma">\(\Gamma=\{\}\)</p>
+-->
