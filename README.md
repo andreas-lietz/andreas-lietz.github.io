@@ -1,1 +1,1 @@
-My personal webpage.
+My personal website.
