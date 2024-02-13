@@ -20,13 +20,18 @@
             }
         }
     </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     
 </head>
 <body>
 <div id="page-container">
     <div id="page-wrap">
-        <div id="includeNavbar"></div>
-        <script src="navbar.js"></script>
+        <div id="includeNavbar"><nav></nav></div>
+        <script>
+            $(function(){
+              $("#includeNavbar").load("navbar.html");
+            });
+            </script>
         
 
         <article>
