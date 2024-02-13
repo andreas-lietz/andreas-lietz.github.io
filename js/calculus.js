@@ -845,7 +845,7 @@ function formulaBuilder(type, symbol = null){
         showGamma()
         return;
     }
-    if(proof === []){
+    if(proof.length === 0){
         alert('Do a derivation! Start with the assumption rule with empty Gamma or the =-introduction rule!');
         return;
     }
@@ -883,7 +883,7 @@ let listener = {
                 }
             }
             if(element.tagName === 'BUTTON'){
-                element.style = '';
+                element.classList.remove("active-rule");
             }
         }
         this.rule = null;
@@ -954,7 +954,7 @@ function showProof(){
         let sequent = proof[i];
         code += '<p>';
         if(sequent.isComplete()){
-            code += '<button onclick = \"selectSequent(' + i.toString() + ')\">';
+            code += '<button class="sqbutton" onclick = \"selectSequent(' + i.toString() + ')\">';
         }
         code +=  '\\(' + sequent.latex() + '\\)';
         if(sequent.isComplete()){
@@ -972,7 +972,7 @@ showBuilder('formulabuilder.html');
 
 function calculus(rule){
     listener.reset(rule);
-    document.getElementById(rule).style = 'background-color:lightgrey';
+    document.getElementById(rule).classList.add("active-rule");
     if(rule === 'assumption'){
         let content = document.getElementById('assumptioncontent');
         if(content.style.display === 'none'){
