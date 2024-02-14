@@ -90,7 +90,12 @@ and is wrapped around the whole page content, except for the footer in this exam
 <div class="w3-row">
   <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
-  <!--<img src="resources/pictures/TU Wien.png" alt="TU Wien" style="width: 100%;">-->
+    <!-- TU Wien image
+    <div style="position: relative; text-align: center;">
+        <img src="resources/pictures/TU Wien.png" alt="TU Wien" style="width: 100%;"> 
+        <div style="position: absolute; bottom: 8px; right: 16px; border-radius: 5px; padding: 4px 5px; background-color: lightgrey; font-size:x-small;z-index: 6;">© Matthias Heisler</div>
+    </div>
+    -->
     <div class="w3-container">
       <h3><b>Address</b></h3>
     </div>
@@ -118,7 +123,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 </div>
 
 <!-- Footer -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top" style="position: fixed;bottom: 0; width: 100%;">
 </footer>
 
 <script src="js/jquery-3.3.1.min.js"></script>

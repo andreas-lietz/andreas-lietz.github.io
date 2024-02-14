@@ -1,14 +1,3 @@
-function substituteInArray(array, varout, varin){
-    let i;
-    let newarray = [...array];
-    for(i = 0; i < array.length; i++){
-        if(array[i] == varout){
-            newarray[i] = varin;
-        }
-    }
-    return newarray;
-}
-
 const symbols = new Map([
     ['conjunction', '\\wedge'],
     ['disjunction', '\\vee'],
@@ -248,7 +237,7 @@ class AtomicFormula extends Formula{
         if (this.arity === 0){
             return this.symbol;
         }
-        if (this.arity === 2) {
+        if (this.arity === 2 && symbol !== 'P' && symbol !== 'Q') {
             return this.terms[0].latex() + ' ' + symbol + ' ' + this.terms[1].latex();
         } else {
             let str = this.symbol+'(';
@@ -812,7 +801,7 @@ function getBlankFormula(type, symbol){
                 return new AtomicFormula(0, symbol, []);
             }
             let arity = 2;
-            if (symbol === 'f' || symbol === 'g'){
+            if (symbol === 'P' || symbol === 'Q'){
                 arity = document.getElementById(symbol + 'arity').value;
             }
             let terms = [];
