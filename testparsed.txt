@@ -1,5 +1,1 @@
-\begin{thm}hello$\mathbb B$<p><\p>
-
-<p>\begin{matrix}<\p>
-<p>Jo<\p>
-<p><\p>
+ <div style="display: flex;"><b style="padding: 0 4px;flex: 1 0 auto;">Theorem</b><span> hello $\mathbb B$ dasd asd </span></div>

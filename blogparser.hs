@@ -135,13 +135,22 @@ ignoreLinebreak :: Parser ()
 ignoreLinebreak = Parser p
     where p [] = Just ("", ())
           p input@(c:cs) = case c of 
-                    '\n' -> Just (cs, ())
+                    '\n' -> Just (' ':cs, ())
                     otherwise -> Just (input, ())
 
 anyHtmlP :: Parser HtmlCode
 anyHtmlP = Parser p
         where p "" = Nothing
               p (c:cs) = Just (cs, Inner [c])
+
+oneStepP :: Parser HtmlCode
+oneStepP = noEndP *> (newParagraphP <|> (ignoreLinebreak *> (theoremP <|> notSpecialHtmlP <|> anyHtmlP)))
+
+chainHtmlParser :: Parser HtmlCode -> Parser HtmlCode -> Parser HtmlCode
+chainHtmlParser (Parser p) (Parser q) = Parser $ \input -> do
+                            (remP, parseP) <- p input
+                            (remQ, parseQ) <- q remP
+                            return (remQ, More [parseP, parseQ]) 
 
 blogP :: Parser HtmlCode
 blogP = Parser $ \input -> case runParser noEndP input of 

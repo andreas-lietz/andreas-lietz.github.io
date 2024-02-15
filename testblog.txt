@@ -2,13 +2,6 @@
 \begin{thm}
 hello
 $\BB$
-
+dasd
+asd
 \end{thm}
-
-
-
-\begin{matrix}
-
-Jo
-
-\end{matrix}
