@@ -51,7 +51,7 @@ waitForStringP stopStr = Parser p
 
 specialChars = ['\\', '{']
 
-notSpecialP = spanP (\x -> x `notElem` specialChars)
+notSpecialP = spanP (isAlphaNum)
 
 notClosingBraceP = spanP (/= '}')
 
@@ -82,8 +82,6 @@ ws = spanP isSpace
 notAlphaNumCharCheckP = Parser p 
     where p [] = Nothing
           p (c:cs) = if isAlphaNum c then Nothing else Just (c:cs, c:[])
-
-breakChars = ['{', '}', '$', '[', ']']
 
 replaceByP :: String -> String -> Parser String
 replaceByP key value = stringP key *> pure value <* notAlphaNumCharCheckP
@@ -127,7 +125,18 @@ newParagraphP = Parser $ \input -> do
 
 
 notSpecialHtmlP :: Parser HtmlCode
-notSpecialHtmlP  = (\t-> Inner t) <$> notSpecialP
+notSpecialHtmlP  = Parser p
+    where p input = case runParser notSpecialP input of
+                Just (_, "") -> Nothing
+                Just (s, t) -> Just (s, Inner t) 
+                Nothing -> Nothing
+
+ignoreLinebreak :: Parser ()
+ignoreLinebreak = Parser p
+    where p [] = Just ("", ())
+          p input@(c:cs) = case c of 
+                    '\n' -> Just (cs, ())
+                    otherwise -> Just (input, ())
 
 anyHtmlP :: Parser HtmlCode
 anyHtmlP = Parser p
@@ -138,7 +147,7 @@ blogP :: Parser HtmlCode
 blogP = Parser $ \input -> case runParser noEndP input of 
                 Nothing -> Just (input, Inner "")
                 Just (input', _) -> do 
-                    (remaining, parsed) <- runParser ((newParagraphP <|> theoremP <|> notSpecialHtmlP <|> anyHtmlP)) input'
+                    (remaining, parsed) <- runParser (newParagraphP <|> (ignoreLinebreak *> (theoremP <|> notSpecialHtmlP <|> anyHtmlP))) input'
                     if null remaining 
                         then return ("", parsed)
                         else do 

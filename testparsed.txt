@@ -1,0 +1,5 @@
+\begin{thm}hello$\mathbb B$<p><\p>
+
+<p>\begin{matrix}<\p>
+<p>Jo<\p>
+<p><\p>
