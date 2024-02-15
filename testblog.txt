@@ -1,0 +1,6 @@
+\newcommand{\BB}{\mathbb B}
+
+\begin{thm}
+hello
+$\BB$
+\end{thm}
