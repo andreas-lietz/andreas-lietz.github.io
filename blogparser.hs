@@ -1,6 +1,7 @@
 import Data.Char
 import Control.Applicative
 import Data.Map qualified as M
+import System.FilePath
 
 
 type NewCommands = M.Map String String
@@ -53,12 +54,23 @@ specialChars = ['\\', '{']
 
 notSpecialP = spanP (isAlphaNum)
 
-notClosingBraceP = spanP (/= '}')
+noBraceP = Parser p
+    where p [] = Nothing
+          p (c:cs) = case c of 
+                '}' -> Nothing
+                '{' -> Nothing
+                otherwise -> Just (cs, [c])
+
+parseEnclosingBraces :: Parser String
+parseEnclosingBraces = (:) <$> (charP '{') <*> ((++) <$> parseCommand <*> stringP "}")
+
+parseCommand :: Parser String
+parseCommand = concat <$> many (parseEnclosingBraces <|> noBraceP)
 
 newCommandP :: Parser (String, String)
 newCommandP = (\key value -> ('\\':key, value)) <$> (stringP "\\newcommand{\\"
-                *> notClosingBraceP <* (stringP "}{"))
-                <*> (notClosingBraceP <* (charP '}'))
+                *> parseCommand <* (stringP "}{"))
+                <*> (parseCommand<* (charP '}') <* ignoreLinebreak)
 
 anyCharP = Parser p 
     where p [] = Nothing
@@ -97,7 +109,7 @@ preprocess s = case runParser preprocP leftover of
           preprocP =  many $ replaceCommandsP commands <|> anyCharP
 
 
-theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim")]
+theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim"), ("proof", "Proof")]
 
 envP :: String -> Parser HtmlCode
 envP env = Parser $ \input -> do 
@@ -108,11 +120,17 @@ envP env = Parser $ \input -> do
 
 theoremP :: Parser HtmlCode
 theoremP = asum (M.mapWithKey (\key value -> envP key) theoremEnvironments)
-        
-noEndP = Parser p 
-    where p s = case runParser (stringP "\\end{") s of
-                    Just _ -> Nothing
-                    Nothing -> Just (s, ())
+
+envEndP :: String -> Parser String
+envEndP env = stringP $ "\\end{" ++ env ++ "}"
+
+theoremEndP :: Parser String
+theoremEndP = asum (M.mapWithKey (\key value -> envEndP key) theoremEnvironments)
+
+flipP :: Parser a -> Parser ()
+flipP (Parser p) = Parser $ \input -> case p input of 
+                            Just _ -> Nothing
+                            Nothing -> Just (input, ())
 
 newParagraphP :: Parser HtmlCode
 newParagraphP = Parser $ \input -> do 
@@ -144,34 +162,27 @@ anyHtmlP = Parser p
               p (c:cs) = Just (cs, Inner [c])
 
 oneStepP :: Parser HtmlCode
-oneStepP = noEndP *> (newParagraphP <|> (ignoreLinebreak *> (theoremP <|> notSpecialHtmlP <|> anyHtmlP)))
+oneStepP = (flipP theoremEndP) *> (newParagraphP <|> (theoremP <|> notSpecialHtmlP <|> anyHtmlP))
 
-chainHtmlParser :: Parser HtmlCode -> Parser HtmlCode -> Parser HtmlCode
-chainHtmlParser (Parser p) (Parser q) = Parser $ \input -> do
-                            (remP, parseP) <- p input
-                            (remQ, parseQ) <- q remP
-                            return (remQ, More [parseP, parseQ]) 
+chainHtmlALAP :: Parser HtmlCode -> Parser HtmlCode
+chainHtmlALAP parser = pure More <*> many parser 
+
 
 blogP :: Parser HtmlCode
-blogP = Parser $ \input -> case runParser noEndP input of 
-                Nothing -> Just (input, Inner "")
-                Just (input', _) -> do 
-                    (remaining, parsed) <- runParser (newParagraphP <|> (ignoreLinebreak *> (theoremP <|> notSpecialHtmlP <|> anyHtmlP))) input'
-                    if null remaining 
-                        then return ("", parsed)
-                        else do 
-                            (nothing, remainingParsed) <- runParser blogP remaining
-                            return (nothing, More [parsed, remainingParsed]) 
+blogP = chainHtmlALAP oneStepP
 
 
 
 toHtml :: HtmlCode -> String
-toHtml (P code) = "<p>" ++ toHtml code ++ "<\\p>\n"
-toHtml (Environment env code) = "<div style=\"display: flex;\"><b style=\"padding: 0 4px;flex: 1 0 auto;\">"
+toHtml (P code) = "<p>" ++ toHtml code ++ "</p>\n"
+toHtml (Environment env code) = "<div style=\"display: flex; justify-content: flex-start;\"><b style=\"padding: 0 4px;flex: 0;\">"
                               ++ theoremEnvironments M.! env 
-                              ++ "</b><span>" 
+                              ++ "</b><span style=\"flex: 1;\">" 
                               ++ toHtml code
-                              ++ "</span></div>\n"
+                              ++ "</span>"
+                              ++ box
+                              ++"</div>\n"
+                    where box = if env == "proof" then "<span style=\"margin-top: auto\">$\\Box$</span>" else ""
 toHtml (Inner str) = str
 toHtml (More []) = ""
 toHtml (More (h:hs)) = toHtml h ++ (toHtml (More hs))
@@ -180,6 +191,12 @@ blogToHtml :: String -> String
 blogToHtml blog = case runParser blogP (preprocess blog) of
     Nothing -> "Something went wrong :("
     Just (_,htmlCode) -> toHtml htmlCode
+
+
+parseBlogFile :: String -> IO ()
+parseBlogFile path = do
+    input <- readFile path
+    writeFile ("parsedBlog\\" ++ takeBaseName path ++ "parsed.txt") (blogToHtml input)
 
 
 main = do
