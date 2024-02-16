@@ -1,14 +1,3 @@
-function substituteInArray(array, varout, varin){
-    let i;
-    let newarray = [...array];
-    for(i = 0; i < array.length; i++){
-        if(array[i] == varout){
-            newarray[i] = varin;
-        }
-    }
-    return newarray;
-}
-
 const symbols = new Map([
     ['conjunction', '\\wedge'],
     ['disjunction', '\\vee'],
@@ -248,7 +237,7 @@ class AtomicFormula extends Formula{
         if (this.arity === 0){
             return this.symbol;
         }
-        if (this.arity === 2) {
+        if (this.arity === 2 && symbol !== 'P' && symbol !== 'Q') {
             return this.terms[0].latex() + ' ' + symbol + ' ' + this.terms[1].latex();
         } else {
             let str = this.symbol+'(';
@@ -812,7 +801,7 @@ function getBlankFormula(type, symbol){
                 return new AtomicFormula(0, symbol, []);
             }
             let arity = 2;
-            if (symbol === 'f' || symbol === 'g'){
+            if (symbol === 'P' || symbol === 'Q'){
                 arity = document.getElementById(symbol + 'arity').value;
             }
             let terms = [];
@@ -845,7 +834,7 @@ function formulaBuilder(type, symbol = null){
         showGamma()
         return;
     }
-    if(proof === []){
+    if(proof.length === 0){
         alert('Do a derivation! Start with the assumption rule with empty Gamma or the =-introduction rule!');
         return;
     }
@@ -883,7 +872,7 @@ let listener = {
                 }
             }
             if(element.tagName === 'BUTTON'){
-                element.style = '';
+                element.classList.remove("active-rule");
             }
         }
         this.rule = null;
@@ -954,7 +943,7 @@ function showProof(){
         let sequent = proof[i];
         code += '<p>';
         if(sequent.isComplete()){
-            code += '<button onclick = \"selectSequent(' + i.toString() + ')\">';
+            code += '<button class="sqbutton" onclick = \"selectSequent(' + i.toString() + ')\">';
         }
         code +=  '\\(' + sequent.latex() + '\\)';
         if(sequent.isComplete()){
@@ -972,7 +961,7 @@ showBuilder('formulabuilder.html');
 
 function calculus(rule){
     listener.reset(rule);
-    document.getElementById(rule).style = 'background-color:lightgrey';
+    document.getElementById(rule).classList.add("active-rule");
     if(rule === 'assumption'){
         let content = document.getElementById('assumptioncontent');
         if(content.style.display === 'none'){

@@ -1,0 +1,55 @@
+      <p>There are two different ways to approach learning (or teaching for that matter) forcing. Both come with their own strengths and weaknesses. </p>
+<p>First, there is the "hands-on" approach:The slogan here is to "jump directly into action". Work with a general partial order, define dense sets, generic filters, names and 
+construct the forcing extension as the evaluation of all names in the ground model by the generic filter. This is certainly the shortest path towards the forcing theorem
+and applications of forcing, say the consistency of $\neg\mathrm{CH}$ with $\mathrm{ZFC}$.</p>
+<p>The other possibility is to take the road through the Boolean forest. Define complete Boolean algebras, Boolean valued models, construct the Boolean valued model associated to a 
+forcing and mod out by a generic filter. This introduces some significant overhead and additional abstraction. However one benefits from a significantly smoother theory. Just as a basic example, in the definition of the internal forcing relation, the 
+statement 
+$$\{q\leq p\mid \exists \dot x\in V^{\mathbb P}\ q\Vdash \varphi(\dot x)\}\text{ is dense below }p$$
+is less readable to me than 
+$$p\leq \sup_{\dot x\in V^{\mathbb B}}\Vert \varphi(\dot x)\Vert.$$
+But much more importantly, one can proof theorems about the theory of forcings which are simply not true for mere partial orders.</p>
+<p><div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"> 
+    Suppose $\mathbb B$, $\mathbb C$ are cBa's, $G\subseteq\mathbb B$ and $H\subseteq \mathbb C$ are generic over $V$ and $V[G]=V[H]$.
+    Then there are $b\in\mathbb B$ and $c\in\mathbb C$ with $\mathbb B\upharpoonright b\cong \mathbb C\upharpoonright c$.
+</span></div>
+</p>
+<p>Though the biggest problem using this apporach is that <b> nobody knows what a complete Boolean algebra is</b>! Obviously, this is not exactly true, but chances are that if you ask 
+a random mathematician what a Boolean algebra is, they will at least have to ponder for a short bit before coming up with the three operations and the 8 laws that they have to obey.</p>
+<p>Even worse, some of these laws do not have an immediate motivation coming from forcing. Even worse<i>er</i>, Boolean algebras are technically trivial forcings as they have a minimal
+element $0_{\mathbb B}$, so one has to carry around a little $\times$ in the pocket and write $\mathbb B^\times$ instead. </p>
+<p>Indeed, one must infer the order on a Boolean algebra from the other operations first before forcing. This is totally backwards! We only really care about the order!
+On the other hand, the order carries the full information about the Boolean algebra: We can define 
+$$b\wedge c = \inf \{b, c\},\ b\vee c = \sup \{b, c\} \text{ and } \neg b =\sup\{c\in\mathbb B\mid c\perp b\}.$$
+This suggests strongly that it is possible to characterize the partial orders which are induced by complete Boolean algebras. I would be surprised if this has not been done before,
+but I could not find anything in the literature, please let me know of a source if you know about one!</p>
+<p>In any case, let us start with separativity. A partial order is seperative if whenever $p\not\leq q$ then there is some $r\leq p$ with $r\perp q$. This property is easily motivated
+from a forcing perspective, as any partial order is forcing equivalent to the corresponding separative quotient. Passing to this quotient gets rid of "unnecessary fluff" that does not
+carry any relevant information.</p>
+<p>It is well-known that any Boolean algebra is seperative, so this should be part of our characterization. Clearly that does not suffice though!</p>
+<p><div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;">
+Suppose $\mathbb P$ is a partial order and $X\subseteq \mathbb P$ so that $\sup X$ exists. Then the supremum $\sup X$ is optimal if $X$ is predense below $\sup X$. We say that $\mathbb P$ admits
+optimal suprema if any non-empty $X\subseteq\mathbb P$ has a supremum and these suprema are all optimal.
+</span></div>
+</p>
+<p>If a supremum is optimal then basically "no information of $X$ is lost when passing to $\sup X$". Here is an instructive example of a non-optimal supremum: Consider the forcing 
+$$\mathbb P=\{p\colon n\rightarrow \omega\mid n<\omega}$$
+ordered by extension. This is of course one representation of Cohen forcing. For $i=7, 42$, let $p_i$ be the condition with domain $\{0\}$ which sends $0$ to $i$ and $X=\{p_7, p_42\}$.
+From a forcing perspective, $X$ says "the generic Cohen real will map $0$ to either $7$ or $42$". Notice that $X$ has a supremum in $\mathbb P$, namely $\sup X=\emptyset$. But now all 
+information of $X$ has been lost in translation, this is terrible!</p>
+<p>From a forcing perspective, suprema are only interesting if they are optimal. The supremum of some $X\subseteq\mathbb P$ should be $\mathbb{1}$ only if $X$ is predense (or in other words,
+if the downwards closure of $X$ is dense). It is easily seen that complete Boolean algebras admit optimal suprema, so let us add this property to our list.</p>
+<p><div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;">
+A <b>complete Boolean order</b> is a partial order which is seperative and admits optimal suprema.
+</span></div>
+</p>
+<p>It turns out that this is already it! </p>
+<p><div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;">
+The following are equivalent for any partial order $\mathbb P$:
+<p>$(1)$ There is a complete Boolean algebra $\mathbb B$ with $\mathbb P=\mathbb B^\times$</p>
+<p>$(2)$ $\mathbb P$ is a complete Boolean order.</p>
+</span></div>
+</p>
+<p>Only these two properties are necessary to complete characterize cBa's and both of them are natural.</p>
+<p>
+WIP, to be continued!</p>
