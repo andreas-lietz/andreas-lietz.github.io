@@ -68,6 +68,8 @@ If $b$ was not a tight supremum of $X$ then there is some $c\leq b$ incompatible
 
 \begin{defn}
 A <b>complete Boolean order</b> is a partial order which is seperative and admits tight suprema.
+
+
 \end{defn}
 
 It turns out that this is already it! 
