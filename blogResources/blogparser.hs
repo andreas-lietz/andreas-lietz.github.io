@@ -3,15 +3,12 @@ import Control.Applicative
 import Data.Map qualified as M
 import System.FilePath
 
-
+--typedefs
 type NewCommands = M.Map String String
-
 newtype Parser a = Parser {runParser :: String -> Maybe (String, a)}
-
 data HtmlCode = P HtmlCode | Environment String HtmlCode | Inner String | More [HtmlCode] deriving (Show)
 
-data Begin = Begin String String deriving (Show)
-
+--instancing Parser as Functor,Applicative,Alternative
 instance Functor Parser where
     fmap f (Parser p) = Parser (\input -> do
                                 (s, x) <- p input
@@ -28,6 +25,8 @@ instance Alternative Parser where
     empty = Parser (const Nothing)
     (Parser p) <|> (Parser q) = Parser (\input -> (p input) <|> (q input))
 
+
+--basic Parsers
 charP :: Char -> Parser Char
 charP c = Parser p
         where p [] = Nothing
@@ -40,6 +39,13 @@ spanP :: (Char -> Bool) -> Parser String
 spanP cond = Parser (\input -> 
                         let (met, failed) = span cond input
                         in Just (failed, met))
+
+ws = spanP isSpace
+
+
+anyCharP = Parser p 
+    where p [] = Nothing
+          p (c: cs) = Just (cs, c:[])
 
 waitForStringP :: String -> Parser String
 waitForStringP stopStr = Parser p 
@@ -61,6 +67,22 @@ noBraceP = Parser p
                 '{' -> Nothing
                 otherwise -> Just (cs, [c])
 
+
+notAlphaNumCharCheckP = Parser p 
+    where p [] = Nothing
+          p (c:cs) = if isAlphaNum c then Nothing else Just (c:cs, c:[])
+
+replaceByP :: String -> String -> Parser String
+replaceByP key value = stringP key *> pure value <* notAlphaNumCharCheckP
+
+consumeCharP :: Parser String
+consumeCharP = Parser p 
+    where p "" = Nothing
+          p (c:cs) = Just (cs, "")
+
+
+--preprocessor for macros
+
 parseEnclosingBraces :: Parser String
 parseEnclosingBraces = (:) <$> (charP '{') <*> ((++) <$> parseCommand <*> stringP "}")
 
@@ -72,9 +94,6 @@ newCommandP = (\key value -> ('\\':key, value)) <$> (stringP "\\newcommand{\\"
                 *> parseCommand <* (stringP "}{"))
                 <*> (parseCommand<* (charP '}') <* ignoreLinebreak)
 
-anyCharP = Parser p 
-    where p [] = Nothing
-          p (c: cs) = Just (cs, c:[])
  
 
 collectNewCommandsP :: Parser (NewCommands, String)
@@ -89,14 +108,7 @@ collectNewCommandsP =  Parser p
                 (nothing, (commands, leftover)) <- p rest
                 return (nothing, (commands, char ++ leftover))
 
-ws = spanP isSpace
 
-notAlphaNumCharCheckP = Parser p 
-    where p [] = Nothing
-          p (c:cs) = if isAlphaNum c then Nothing else Just (c:cs, c:[])
-
-replaceByP :: String -> String -> Parser String
-replaceByP key value = stringP key *> pure value <* notAlphaNumCharCheckP
 
 replaceCommandsP :: NewCommands -> Parser String
 replaceCommandsP commands = asum (M.mapWithKey replaceByP commands)
@@ -104,12 +116,19 @@ replaceCommandsP commands = asum (M.mapWithKey replaceByP commands)
 preprocess :: String -> String
 preprocess s = case runParser preprocP leftover of
                 Just (nothing, processed) -> concat processed
-                Nothing -> "Fail!"
+                Nothing -> "Failed preprocessing!"
     where Just (nothing, (commands,leftover)) = runParser collectNewCommandsP s
           preprocP =  many $ replaceCommandsP commands <|> anyCharP
 
+--extract tl;dr
 
-theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim"), ("proof", "Proof")]
+extractTldrP :: Parser String
+extractTldrP = concat <$> many (((\(Environment env cont) -> toHtml cont) <$> envP "tldr") <|> consumeCharP)
+
+--blog to html parser
+
+
+theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim"), ("proof", "Proof"), ("tldr", "tldr")]
 
 envP :: String -> Parser HtmlCode
 envP env = Parser $ \input -> do 
@@ -196,7 +215,14 @@ blogToHtml blog = case runParser blogP (preprocess blog) of
 parseBlogFile :: String -> IO ()
 parseBlogFile path = do
     input <- readFile path
-    writeFile ("parsedBlog\\" ++ takeBaseName path ++ "parsed.txt") (blogToHtml input)
+    let ppInput = preprocess input
+        Just (_,tldr) = runParser extractTldrP ppInput
+        Just (_,remainingInput) = runParser (concat <$> many (replaceByP ("\\begin{tldr}" ++ tldr ++ "\\end{tldr}") "" <|> anyCharP)) ppInput
+    htmlStart <- readFile "blogHtmlStart.txt" 
+    htmlMiddle <- readFile "beforeTldr.txt"
+    htmlEnd <- readFile "blogHtmlEnd.txt"
+    let htmlBlog = htmlStart ++ (blogToHtml remainingInput) ++ htmlMiddle ++ tldr ++ htmlEnd
+    writeFile ("..\\blog\\" ++ takeBaseName path ++ "_parsed.html") htmlBlog
 
 
 main = do

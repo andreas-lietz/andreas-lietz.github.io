@@ -5,6 +5,11 @@
 \newcommand{\ZFC}{\mathrm{ZFC}}
 \newcommand{\forces}{\Vdash}
 
+\begin{tldr}
+Complete Boolean algebras can be an extremely useful tool for forcing. However, the notion of a cBa is backwards in the theory of forcing. Here, I isolated 
+            properties that the forcings associated with cBa's have in a way which can be motivated through a forcing perspective. One should use these "complete Boolean orders" instead of complete Boolean algebras. 
+\end{tldr}
+
 
 There are two different ways to approach learning (or teaching for that matter) forcing. Both come with their own strengths and weaknesses. 
 
@@ -44,21 +49,25 @@ carry any relevant information.
 It is well-known that any Boolean algebra is seperative, so this should be part of our characterization. Clearly that does not suffice though!
 
 \begin{defn}
-Suppose $\PP$ is a partial order and $X\subseteq \PP$ so that $\sup X$ exists. Then the supremum $\sup X$ is optimal if $X$ is predense below $\sup X$. We say that $\PP$ admits
-optimal suprema if any non-empty $X\subseteq\PP$ has a supremum and these suprema are all optimal.
+Suppose $\PP$ is a partial order and $X\subseteq \PP$ so that $\sup X$ exists. Then the supremum $\sup X$ is tight if $X$ is predense below $\sup X$. We say that $\PP$ admits
+tight suprema if any non-empty $X\subseteq\PP$ has a supremum in $\PP$ and these suprema are all tight.
 \end{defn}
 
-If a supremum is optimal then basically "no information of $X$ is lost when passing to $\sup X$". Here is an instructive example of a non-optimal supremum: Consider the forcing 
-$$\PP=\{p\colon n\rightarrow \omega\mid n<\omega}$$
-ordered by extension. This is of course one representation of Cohen forcing. For $i=7, 42$, let $p_i$ be the condition with domain $\{0\}$ which sends $0$ to $i$ and $X=\{p_7, p_42\}$.
-From a forcing perspective, $X$ says "the generic Cohen real will map $0$ to either $7$ or $42$". Notice that $X$ has a supremum in $\PP$, namely $\sup X=\emptyset$. But now all 
+If a supremum is tight then basically "no information of $X$ about $\dot G$ is lost when passing to $\sup X$". Here is an instructive example of a non-tight supremum: Consider the forcing 
+$$\PP=\{p\colon n\rightarrow \omega\mid n<\omega\}$$
+ordered by extension. This is of course one representation of Cohen forcing. For $i=7, 42$, let $p_i$ be the condition with domain $\{0\}$ which sends $0$ to $i$ and let $X=\{p_7, p_{42}\}$.
+Now $X$ has some information about the generic Cohen real $\dot c$, namely "$\dot c(0)$ is either $7$ or $42$". Notice that $X$ has a supremum in $\PP$, namely $\sup X=\emptyset$. But now all 
 information of $X$ has been lost in translation, this is terrible!
 
-From a forcing perspective, suprema are only interesting if they are optimal. The supremum of some $X\subseteq\PP$ should be $\mathbb{1}$ only if $X$ is predense (or in other words,
-if the downwards closure of $X$ is dense). It is easily seen that complete Boolean algebras admit optimal suprema, so let us add this property to our list.
+From a forcing perspective, suprema are only interesting if they are tight. The supremum of some $X\subseteq\PP$ should be $1_{\PP}$ only if $X$ is predense (or in other words,
+if the downwards closure of $X$ is dense). 
+
+Complete Boolean algebras admit tight suprema: Suppose $X\subseteq\BB$ is non-empty, $X$ has a supremum $b$ in $\BB$ because $\BB$ is complete.
+If $b$ was not a tight supremum of $X$ then there is some $c\leq b$ incompatible with all $x\in X$. But then $b\wedge\neg c$ would be an upper bound of $X$ strictly below $b$, contradiction!
+ So let us add this property to our list of interesting properties of partial orders induced by cBa's.
 
 \begin{defn}
-A <b>complete Boolean order</b> is a partial order which is seperative and admits optimal suprema.
+A <b>complete Boolean order</b> is a partial order which is seperative and admits tight suprema.
 \end{defn}
 
 It turns out that this is already it! 
@@ -69,7 +78,7 @@ The following are equivalent for any partial order $\PP$:
 <p>$(2)$ $\PP$ is a complete Boolean order.</p>
 \end{lemm}
 
-Only these two properties are necessary to complete characterize cBa's and both of them are natural.
+Only these two properties are necessary to complete characterize cBa's and both of them are naturally motivated via forcing!
 
 
 WIP, to be continued!
