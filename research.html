@@ -19,6 +19,7 @@
     {left: '\\(', right: '\\)', display: false},
     {left: '\\[', right: '\\]', display: true}
 ]})"></script>
+<script src="js/abstract.js"></script>
 
 </head>
 
@@ -69,8 +70,8 @@ and is wrapped around the whole page content, except for the footer in this exam
         <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
           <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
             <li><a href="index.html" class="nav-link">Blog</a></li>
-            <li><a href="papers.html" class="nav-link">Papers</a></li>
-            <li class="active"><a href="CV.html" class="nav-link">CV + Talks</a></li>
+            <li class="active"><a href="papers.html" class="nav-link">Research</a></li>
+            <li><a href="CV.html" class="nav-link">CV + Talks</a></li>
             <li><a href="sequentcalculus.html" class="nav-link">Sequent Calculus App</a></li>
             <li><a href="contact.html" class="nav-link">Contact</a></li>
           </ul>
@@ -92,14 +93,36 @@ and is wrapped around the whole page content, except for the footer in this exam
   <!-- Blog entry -->
   <div class="w3-card-4 w3-margin w3-white">
     <div class="w3-container">
-      <h3><b>CV</b></h3>
+      <h3><b>Papers</b></h3>
     </div>
     <div class="w3-container">
-        <h5><b>Prizes</b><span class="w3-opacity"></span></h5>
-        <a href="https://aslonline.org/prizes-and-awards/sacks-prize-recipients/">Prize 2023</a> for most outstanding doctoral dissertation in mathematical logic.
-    <h5><b>Education</b><span class="w3-opacity"></span></h5>
-        <p>2018 - 2023: Universität Münster, PhD student supervised by Ralf Schindler. <i style="color:grey">graduated summa cum laude.</i></p>
-        <p>2016 - 2018: Universität Bonn, Master studies. <i style="color:grey">graduated with honours.</i></p>
+        <p><b>The Model-Theoretic Covering-Reflection Property</b>, Joel D. Hamkins, Nai-Chung Hou, Andreas Lietz and Farmer Schlutzenberg, in preparation. <a href= "#" onclick="openAbstract(5);event.preventDefault();">Abstract</a>
+        <div id="abstract5" style="display: none;">Abstract goes here.</div></p> 
+        <p><b>Infinite Hat Problems and MINA Cardinals</b>, Andreas Lietz and Jeroen Winkel, in preparation. <a href= "#" onclick="openAbstract(4);event.preventDefault();">Abstract</a>
+        <div id="abstract4" style="display: none;">Abstract goes here.</div></p>
+        <p><b>Forcing "\(\mathrm{NS}_{\omega_1}\) is \(\omega_1\)-Dense” from Large Cardinals.</b>, Andreas Lietz, Submitted. <a>Preprint</a> <a href= "#" onclick="openAbstract(3);event.preventDefault();">Abstract</a>
+          <div id="abstract3" style="display: none;">Abstract goes here.</div></p>
+        <p><b>An Iteration Theorem for $\omega_1$-Preserving Forcings</b>, Andreas Lietz, Submitted. <a>Preprint</a> <a href= "#" onclick="openAbstract(2);event.preventDefault();">Abstract</a>
+          <div id="abstract2" style="display: none;">Abstract goes here.</div></p>
+        <p><b>The Axiom of Choice in the $\kappa$-Mantle</b>, Andreas Lietz, Submitted. <a>Preprint</a> <a href= "#" onclick="openAbstract(1);event.preventDefault();">Abstract</a>
+          <div id="abstract1" style="display: none;">Abstract goes here.</div></p>
+    </div>
+  </div>
+  <hr>
+
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-container">
+      <h3><b>Further Writing</b></h3>
+    </div>
+    <div class="w3-container">
+        <p><b>A Journey Guided by the Stars</b>, my dissertation. <a href="resources/PDFs/AJourneyGuidedByTheStars.pdf">PDF</a> <a href= "#" onclick="openAbstract(103);event.preventDefault();">Abstract</a>
+        <div id="abstract103" style="display: none;">Abstract goes here.</div></p> 
+        <p><b>Forcing $(*)$ from less than a supercompact</b>, Andreas Lietz and Ralf Schindler. <a>PDF</a> <a href= "#" onclick="openAbstract(102);event.preventDefault();">Abstract</a>
+        <div id="abstract102" style="display: none;">Abstract goes here.</div></p>
+        <p><b>The Problem with Exercise 34.5</b>, <a href="resources/PDFs/exercise34.5.pdf">PDF</a> <a href= "#" onclick="openAbstract(102);event.preventDefault();">Abstract</a>
+          <div id="abstract102" style="display: none;">Abstract goes here.</div></p>
+        <p><b>Set-Theoretic Geology</b>, my Master thesis. <a>PDF</a> <a>Preprint</a> <a href= "#" onclick="openAbstract(101);event.preventDefault();">Abstract</a>
+          <div id="abstract101" style="display: none;">Abstract goes here.</div></p>
     </div>
   </div>
   <hr>
