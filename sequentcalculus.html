@@ -59,7 +59,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 
       <div class="col-3">
         <div class="site-logo">
-          <a href="index.html" class="font-weight-bold">&y</a>
+          <a href="index.html" class="font-weight-bold"></a>
         </div>
       </div>
 
@@ -70,8 +70,8 @@ and is wrapped around the whole page content, except for the footer in this exam
         <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
           <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
             <li><a href="index.html" class="nav-link">Blog</a></li>
-            <li><a href="papers.html" class="nav-link">Papers</a></li>
-            <li><a href="CV.html" class="nav-link">CV + Talks</a></li>
+            <li><a href="research.html" class="nav-link">Research</a></li>
+            <li><a href="CV.html" class="nav-link">CV</a></li>
             <li class="active"><a href="#" class="nav-link">Sequent Calculus App</a></li>
             <li><a href="contact.html" class="nav-link">Contact</a></li>
           </ul>
@@ -193,8 +193,8 @@ and is wrapped around the whole page content, except for the footer in this exam
       </div>
   
       <div class="w3-container">
-        <p>This is an implementation of a sequent calculus, a formal system of a mathematical proof. The intent of this program is to help students of mathematical logic learn how a sequent calculus works.</p>
-        <p>This sequent calculus is roughly based on <a href="http://www.math.uni-bonn.de/ag/logik/teaching/2014SS/mathematische%20logik/Scriptum01.pdf">this lecture notes by Peter Koepke</a>.</p>
+        <p>The app is designed to help students of mathematical logic learn how a sequent calculus works. A sequent calculus is a formal system of mathematical proof.</p>
+        <p>This sequent calculus is roughly based on <a href="http://www.math.uni-bonn.de/ag/logik/teaching/2014SS/mathematische%20logik/Scriptum01.pdf">these lecture notes by Peter Koepke</a>.</p>
         <p>Each derivation consists of a formula to the right of the turnstile which has been successfully proven from the assumptions on the left side of the turnstile \(\vdash\).
             A new derivation comes from applying one of the rules to earlier derivations.</p>
         <p>You have to start with either the assumption rule \(\begin{matrix} & & \\\hline \Gamma & \varphi & \varphi \end{matrix}\) (click on it and then on "Use with \(\Gamma=\{\}\)") or the \(=\)-introduction rule \(\begin{matrix} & \\\hline \Gamma & t = t \end{matrix}\).</p>
