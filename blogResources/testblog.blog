@@ -10,6 +10,13 @@ Complete Boolean algebras can be an extremely useful tool for forcing. However, 
             properties that the forcings associated with cBa's have in a way which can be motivated through a forcing perspective. One should use these "complete Boolean orders" instead of complete Boolean algebras. 
 \end{tldr}
 
+\title{Dont do the complety Booleany Algebray}
+
+\subtitle{YOYOYO}
+
+\date{Today!}
+
+\image{luminy.png}
 
 There are two different ways to approach learning (or teaching for that matter) forcing. Both come with their own strengths and weaknesses. 
 
@@ -68,6 +75,7 @@ If $b$ was not a tight supremum of $X$ then there is some $c\leq b$ incompatible
 
 \begin{defn}
 A <b>complete Boolean order</b> is a partial order which is seperative and admits tight suprema.
+
 \end{defn}
 
 It turns out that this is already it! 
@@ -113,3 +121,16 @@ If $V\leq_{\CC} U$, take any $p\in V$. By definition of $U$, $p$ is compatible w
 In a future post, I plan to show some use cases of complete Boolean algebras/orders. I will explore what exactly it means for two forcings to be forcing equivalent.
 Moreover, I will show that $\sigma$-strategically forcings are exactly those partial orders which are forcing equivalent to some $\sigma$-closed forcing, based on an argument of Jensen. 
 
+
+\begin{itemize}
+\item First item
+\item second item
+\end{itemize}
+
+\begin{enumerate}
+\item first item
+\item \begin{enumerate}
+        \item 2.1
+        \item 2.2
+        \end{enumerate}
+\end{enumerate}

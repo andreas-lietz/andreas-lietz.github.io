@@ -1,187 +1,58 @@
 import Data.Char
 import Control.Applicative
 import Data.Map qualified as M
+import Data.List
 import System.FilePath
+import Preprocessing
+import BasicParsing
 
---typedefs
-type NewCommands = M.Map String String
-newtype Parser a = Parser {runParser :: String -> Maybe (String, a)}
+--typedef
+
 data HtmlCode = P HtmlCode | Environment String HtmlCode | Inner String | More [HtmlCode] deriving (Show)
 
---instancing Parser as Functor,Applicative,Alternative
-instance Functor Parser where
-    fmap f (Parser p) = Parser (\input -> do
-                                (s, x) <- p input
-                                return (s, f x))
-
-instance Applicative Parser where
-    pure x = Parser (\input -> Just (input, x))
-    (Parser funcP) <*> (Parser argP) = Parser (\input -> do
-                                (s0, f) <- funcP input
-                                (s1, x) <- argP s0
-                                return (s1, f x))
-
-instance Alternative Parser where
-    empty = Parser (const Nothing)
-    (Parser p) <|> (Parser q) = Parser (\input -> (p input) <|> (q input))
-
-
---basic Parsers
-charP :: Char -> Parser Char
-charP c = Parser p
-        where p [] = Nothing
-              p (d:ds) = if d == c then Just (ds, c) else Nothing 
-            
-stringP :: String -> Parser String
-stringP = traverse charP
-
-spanP :: (Char -> Bool) -> Parser String
-spanP cond = Parser (\input -> 
-                        let (met, failed) = span cond input
-                        in Just (failed, met))
-
-ws = spanP isSpace
-
-
-anyCharP = Parser p 
-    where p [] = Nothing
-          p (c: cs) = Just (cs, c:[])
-
-waitForStringP :: String -> Parser String
-waitForStringP stopStr = Parser p 
-    where   p [] = Nothing
-            p input@(c:cs) = case runParser (stringP stopStr) input of
-                            Just _ -> Just (input, "")
-                            Nothing -> do
-                                 (remaining, cut) <- p cs
-                                 return (remaining, c:cut) 
-
-specialChars = ['\\', '{']
-
-notSpecialP = spanP (isAlphaNum)
-
-noBraceP = Parser p
-    where p [] = Nothing
-          p (c:cs) = case c of 
-                '}' -> Nothing
-                '{' -> Nothing
-                otherwise -> Just (cs, [c])
-
-
-notAlphaNumCharCheckP = Parser p 
-    where p [] = Nothing
-          p (c:cs) = if isAlphaNum c then Nothing else Just (c:cs, c:[])
-
-replaceByP :: String -> String -> Parser String
-replaceByP key value = stringP key *> pure value <* notAlphaNumCharCheckP
-
-consumeCharP :: Parser String
-consumeCharP = Parser p 
-    where p "" = Nothing
-          p (c:cs) = Just (cs, "")
-
-
---preprocessor for macros
-
-parseEnclosingBraces :: Parser String
-parseEnclosingBraces = (:) <$> (charP '{') <*> ((++) <$> parseCommand <*> stringP "}")
-
-parseCommand :: Parser String
-parseCommand = concat <$> many (parseEnclosingBraces <|> noBraceP)
-
-newCommandP :: Parser (String, String)
-newCommandP = (\key value -> ('\\':key, value)) <$> (stringP "\\newcommand{\\"
-                *> parseCommand <* (stringP "}{"))
-                <*> (parseCommand<* (charP '}') <* ignoreLinebreak)
-
- 
-
-collectNewCommandsP :: Parser (NewCommands, String)
-collectNewCommandsP =  Parser p 
-    where p "" = Just ("", (M.empty, ""))
-          p s = case runParser newCommandP s of
-            Just (rest, (key, value)) -> do
-                                    (nothing, (commands, leftover)) <- p rest 
-                                    return (nothing, (M.insert key value commands, leftover))
-            Nothing -> do
-                (rest, char) <- runParser anyCharP s
-                (nothing, (commands, leftover)) <- p rest
-                return (nothing, (commands, char ++ leftover))
-
-
-
-replaceCommandsP :: NewCommands -> Parser String
-replaceCommandsP commands = asum (M.mapWithKey replaceByP commands)
-
-preprocess :: String -> String
-preprocess s = case runParser preprocP leftover of
-                Just (nothing, processed) -> concat processed
-                Nothing -> "Failed preprocessing!"
-    where Just (nothing, (commands,leftover)) = runParser collectNewCommandsP s
-          preprocP =  many $ replaceCommandsP commands <|> anyCharP
-
---extract tl;dr
-
-extractTldrP :: Parser String
-extractTldrP = concat <$> many (((\(Environment env cont) -> toHtml cont) <$> envP "tldr") <|> consumeCharP)
-
---blog to html parser
-
+--environment parsing
 
 theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim"), ("proof", "Proof"), ("tldr", "tldr")]
 
-envP :: String -> Parser HtmlCode
-envP env = Parser $ \input -> do 
-    (remaining, _) <- runParser (stringP $ "\\begin{" ++ env ++ "}") input
-    (rest, inEnv) <- runParser blogP remaining
-    (finalRest, _) <- runParser (stringP $ "\\end{" ++ env ++ "}") rest
-    return (finalRest, Environment env inEnv)
+enumerateP :: Parser HtmlCode
+enumerateP = chainHtmlALAP (ws *> stringP "\\item " *> blogP)
+    
 
-theoremP :: Parser HtmlCode
-theoremP = asum (M.mapWithKey (\key value -> envP key) theoremEnvironments)
+environmentP :: Parser HtmlCode
+environmentP = Parser $ \input -> do
+    (afterBegin, _) <- runParser (stringP "\\begin{") input
+    (afterBeginEnv, env) <- runParser (waitForCondP  (isPrefixOf "}") <* charP '}') afterBegin
+    (afterInner, innerHtml) <- if env `elem` ["enumerate", "itemize"] then runParser enumerateP afterBeginEnv else runParser blogP $ "\n\n" ++ afterBeginEnv
+    (afterEnd, _) <- runParser  (ws *> (stringP $ "\\end{" ++ env ++ "}")) afterInner
+    return (afterEnd, Environment env innerHtml)
 
-envEndP :: String -> Parser String
-envEndP env = stringP $ "\\end{" ++ env ++ "}"
+--paragraph parsing
 
-theoremEndP :: Parser String
-theoremEndP = asum (M.mapWithKey (\key value -> envEndP key) theoremEnvironments)
-
-flipP :: Parser a -> Parser ()
-flipP (Parser p) = Parser $ \input -> case p input of 
-                            Just _ -> Nothing
-                            Nothing -> Just (input, ())
+addParagraphP :: Parser HtmlCode
+addParagraphP = Parser $ \input -> do
+            (rest, inner) <- runParser (waitForCondP (\str 
+                                -> str == "" 
+                                || (or $ map (flip isPrefixOf str) ["\n\n", "\\begin{", "\\end{"] ))) input
+            (nothing, parsedInner) <- runParser blogP inner
+            if nothing == "" then return (rest, P parsedInner) else Nothing
 
 newParagraphP :: Parser HtmlCode
-newParagraphP = Parser $ \input -> do 
-            (remaining, _) <- runParser (stringP "\n\n") input   
-            let (rest, inner) = case runParser (waitForStringP "\n\n") remaining of
-                            Nothing -> ("", remaining)
-                            Just (rest', inner') -> (rest', inner')
-            (nothing, parsedInner) <- runParser blogP inner
-            return (rest, P parsedInner)
-
+newParagraphP = stringP "\n\n" *> addParagraphP
 
 notSpecialHtmlP :: Parser HtmlCode
-notSpecialHtmlP  = Parser p
-    where p input = case runParser notSpecialP input of
-                Just (_, "") -> Nothing
-                Just (s, t) -> Just (s, Inner t) 
-                Nothing -> Nothing
+notSpecialHtmlP  = Inner <$> notSpecialP
 
-ignoreLinebreak :: Parser ()
-ignoreLinebreak = Parser p
-    where p [] = Just ("", ())
-          p input@(c:cs) = case c of 
-                    '\n' -> Just (' ':cs, ())
-                    otherwise -> Just (input, ())
 
 anyHtmlP :: Parser HtmlCode
 anyHtmlP = Parser p
         where p "" = Nothing
               p (c:cs) = Just (cs, Inner [c])
 
+noBeginEndOrItem :: String -> Bool
+noBeginEndOrItem s = not $ or $ map (flip isPrefixOf s) ["\\begin{", "\\end{", "\\item"]
+
 oneStepP :: Parser HtmlCode
-oneStepP = (flipP theoremEndP) *> (newParagraphP <|> (theoremP <|> notSpecialHtmlP <|> anyHtmlP))
+oneStepP = (flipP $ stringP "\\end{") *> (newParagraphP <|> (environmentP <|> notSpecialHtmlP <|> (condP noBeginEndOrItem anyHtmlP)))
 
 chainHtmlALAP :: Parser HtmlCode -> Parser HtmlCode
 chainHtmlALAP parser = pure More <*> many parser 
@@ -190,44 +61,58 @@ chainHtmlALAP parser = pure More <*> many parser
 blogP :: Parser HtmlCode
 blogP = chainHtmlALAP oneStepP
 
+environmentToHtml :: HtmlCode -> String
+environmentToHtml (Environment env inEnv)
+    | env `M.member` theoremEnvironments = "<div style=\"display: flex; justify-content: flex-start;\"><b style=\"padding: 0 4px;flex: 0;\">"
+                              ++ theoremEnvironments M.! env 
+                              ++ "</b><span style=\"flex: 1;\">" 
+                              ++ toHtml inEnv
+                              ++ "</span>"
+                              ++ box
+                              ++"</div>\n"
+    | env == "enumerate" = case inEnv of 
+                            More htmlList -> concatMap (\(index, code) -> toHtml (P (More [Inner $ "$(" ++ (show index) ++ ")$ ", code]))) $ zip [1..] htmlList
+                            otherwise -> "Error! More expected in enumerate environment!"
+    | env == "itemize" = case inEnv of 
+                            More htmlList -> concatMap (\(index, code) ->  (toHtml (P (More [Inner "&bull; ", code])))) $ zip [1..] htmlList
+                            otherwise -> "Error! More expected in enumerate environment!"    
+    | otherwise = "\\begin{" ++ env ++ "}\n" ++ (toHtml inEnv) ++ "\n\\end{" ++ env ++ "}" 
+                    where box = if env == "proof" then "<span style=\"margin-top: auto\">$\\Box$</span>" else ""
+
 
 
 toHtml :: HtmlCode -> String
 toHtml (P code) = "<p>" ++ toHtml code ++ "</p>\n"
-toHtml (Environment env code) = "<div style=\"display: flex; justify-content: flex-start;\"><b style=\"padding: 0 4px;flex: 0;\">"
-                              ++ theoremEnvironments M.! env 
-                              ++ "</b><span style=\"flex: 1;\">" 
-                              ++ toHtml code
-                              ++ "</span>"
-                              ++ box
-                              ++"</div>\n"
-                    where box = if env == "proof" then "<span style=\"margin-top: auto\">$\\Box$</span>" else ""
-toHtml (Inner str) = str
+toHtml c@(Environment _ _) = environmentToHtml c
 toHtml (More []) = ""
 toHtml (More (h:hs)) = toHtml h ++ (toHtml (More hs))
+toHtml (Inner str) = str
 
-blogToHtml :: String -> String
-blogToHtml blog = case runParser blogP (preprocess blog) of
-    Nothing -> "Something went wrong :("
-    Just (_,htmlCode) -> toHtml htmlCode
+replaceInString :: String -> String -> String -> String
+replaceInString key value input = case runParser (fullReplaceByP key value) input of
+        Nothing -> "Replacing " ++ key ++ " by " ++ value ++ " in " ++ input ++ " went horribly wrong!"
+        Just (_, replaced) -> replaced
 
 
 parseBlogFile :: String -> IO ()
 parseBlogFile path = do
-    input <- readFile path
-    let ppInput = preprocess input
-        Just (_,tldr) = runParser extractTldrP ppInput
-        Just (_,remainingInput) = runParser (concat <$> many (replaceByP ("\\begin{tldr}" ++ tldr ++ "\\end{tldr}") "" <|> anyCharP)) ppInput
-    htmlStart <- readFile "blogHtmlStart.txt" 
-    htmlMiddle <- readFile "beforeTldr.txt"
-    htmlEnd <- readFile "blogHtmlEnd.txt"
-    let htmlBlog = htmlStart ++ (blogToHtml remainingInput) ++ htmlMiddle ++ tldr ++ htmlEnd
-    writeFile ("..\\blog\\" ++ takeBaseName path ++ "_parsed.html") htmlBlog
-
-
-main = do
-    input <- readFile "testblog.txt"
-    let parsed = blogToHtml input
-    print $ preprocess input
-    writeFile "testparsed.txt" parsed
-    print parsed
+    input <- readFile $ path ++ ".blog"
+    html <- case preprocess input of 
+        Nothing -> return "Preprocessing went horribly wrong!"
+        Just (preprocessed, meta) -> do
+            template <- readFile "HtmlTemplate.txt"
+            let blogCode = runParser blogP preprocessed
+                blogHtml = case blogCode of
+                    Nothing -> "Parsing the blog went horribly wrong!"
+                    Just (nothing, code) -> case null nothing of 
+                        False -> toHtml code ++ "The blog did not fully parse!" 
+                        True -> toHtml code                
+                allInfo = M.insert "content" blogHtml meta
+                almostThere = foldl (\sofar key -> replaceInString ("<!--%%%" ++ (map toUpper key) ++ "%%%-->") (if key `M.member` allInfo then allInfo M.! key else "") sofar) template $ delete "image" fullData
+            if "image" `M.member` meta
+                then return $ replaceInString "<!--%%%IMAGE%%%-->" ("<img src=\"../resources/pictures/" ++ (meta M.! "image") ++ "\" style=\"width: 100%;\">") almostThere 
+                else return almostThere
+    writeFile ("..\\blog\\" ++ takeBaseName path ++ ".html") html
+                
+            
+            
