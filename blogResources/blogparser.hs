@@ -12,7 +12,7 @@ data HtmlCode = P HtmlCode | Environment String HtmlCode | Inner String | More [
 
 --environment parsing
 
-theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim"), ("proof", "Proof"), ("tldr", "tldr")]
+theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("cor", "Corollary"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim"), ("proof", "Proof"), ("tldr", "tldr")]
 
 enumerateP :: Parser HtmlCode
 enumerateP = chainHtmlALAP (ws *> stringP "\\item " *> blogP)

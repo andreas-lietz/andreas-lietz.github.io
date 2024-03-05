@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Andreas Lietz's Homepage
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<!-- Katex -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+]})"></script>
+
+</head>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="../css/navStyle.css">
+
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+
+<div class = "w3-padding-32">
+<div class="site-mobile-menu site-navbar-target">
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close mt-3">
+      <span class="icon-close2 js-menu-toggle"></span>
+    </div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
+</div>
+
+
+<header class="site-navbar site-navbar-target" role="banner">
+
+  <div class="w3-container">
+    <div class="row align-items-right position-relative">
+
+      <div class="col-3">
+        <div class="site-logo">
+          <a href="../index.html" class="font-weight-bold"></a>
+        </div>
+      </div>
+
+      <div class="col-9  text-right">
+        
+
+        <span class="d-inline-block d-lg-none"><a href="#" class="text-primary site-menu-toggle js-menu-toggle py-5"><img src="../resources/pictures/menu.svg" ></img></a></span>
+        <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
+          <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
+            <li><a href="../index.html" class="nav-link">Blog</a></li>
+            <li><a href="../research.html" class="nav-link">Research</a></li>
+            <li><a href="../CV.html" class="nav-link">CV</a></li>
+            <li><a href="../sequentcalculus.html" class="nav-link">Sequent Calculus App</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+
+      
+    </div>
+  </div>
+
+</header>
+</div>
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+    <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+            <!--%%%IMAGE%%%-->
+            <div class="w3-container">
+                <h3><b>The Complexity of a Collapse</b></h3>
+                <h5>Or how to seperate $\Delta_1$ from $\Delta_0$<span class="w3-opacity"> May 3rd, 2024</span></h5>
+            </div>
+        <div class="w3-container">
+        <style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style><p></p>
+<p>Recently Rahman Mohammadapour asked me how complicated exactly a transitive collapse is in terms of the Levy hierarchy. Surely, given an extensional set $X$, the transitive collapse of $X$ is $\Delta_1$-definable from $X$, but can one do better? For example, is it possible to recognize a set $Y$ as the transitive collapse of $X$ by a $\Delta_0$-formula? More precisely, is there a $\Delta_0$-formula $\varphi(x, y)$ so that 
+$\mathrm{ZFC}$ proves that $Y$ is  the transitive collapse of $X$ iff $\varphi(X, Y)$ holds? </p>
+<p>Here is a quick reminder about the Levy-hierarchy: A $\Delta_0$-formula is a $\in$-formula such that all quantifiers are bounded by some variable, i.e. $\exists x\in y$ or $\forall x\in y$. A $\Sigma_1$-formula is of the form $\exists x_0\dots\exists x_{n-1}\psi$ where $\psi$ is $\Delta_0$. Finally, a $\Delta_1^T$-formula is a $\in$-formula $\varphi$ such that both $\varphi$ and $\neg\varphi$ can be proved to be equivalent to $\Sigma_1$-formulas in the theory $T$. If we omit $T$, we assume $T=\mathrm{ZFC}^{-}$.</p>
+<p>
+This is a very elementary question and while I was sure the answer must be no, I realized that I do not have a clue for how to seperate $\Delta_1$-definitions from $\Delta_0$-definitions, not even in principle. And there is a good reason for that: in practice, a $\Delta_1$-definition is already sufficient for all intents and purposes as these are absolute between transitive models of $\mathrm{ZFC}$ with the same ordinals. In addition to this, if $j\colon M\rightarrow N$ is a $\Delta_0$-elementary embedding between two models of $\mathrm{ZFC}$ then $j$ is already $\Delta_1$-elementary.</p>
+<p>To get some kind of intuition about this problem, I first related $\Delta_0$ and $\Delta_1$-formulas to more concrete complexity classes which are easier to seperate. In the end, the problem can be solved within $V_\omega$, i.e. by considering only hereditarily finite sets. This allows us to give a characterization of $\Delta_1$-definability in terms of Turing machines. Let us say that a string of symbols denotes a set if it consists of matching curly brackets, e.g. $\{\{\}\{\{\}\{\}\}\}$. It should be clear which exact set such a string denotes and surely every set in $V_\omega$ is denoted by (usually many different) such strings.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+For $X\subseteq V_\omega$, the following are equivalent:
+</p>
+<p>$(1)$ $X$ is $\Delta_1^{\mathrm{\mathrm{Th}(V_\omega,\in)}}$-definable over $V_\omega$, i.e. there is a $\Delta_1^{\mathrm{\mathrm{Th}(V_\omega,\in)}}$-formula $\varphi(x)$ so that $X=\{x\in V_\omega\mid V_\omega\models\varphi(x)\}$.
+</p>
+<p>$(2)$ There is a Turing machine $T$ so that on input a string denoting a set $x$, $T$ holds iff $x\in X$.
+</p>
+
+</span></div>
+<p>Note that for extensional hereditarily finite sets $x$, the relation "$y$ is the transitive collapse of $x$" is $\Delta_1^{\mathrm{\mathrm{Th}(V_\omega,\in)}}$-definable over $V_\omega$: Let $\theta(y, x)$ be the $\Delta_0$-formula expressing that $y$ is transitive and $x$ is $\in$-extensional. Now we can define the transitive collapse relation via by the formula
+$$\varphi(x,y) = \exists\pi\colon y\rightarrow x\ (\theta(x, y)\wedge \pi\text{ is an }\in\text{-isomorphism })$$
+which is equivalent to 
+$$\psi(x,y)=\forall z\forall \pi\colon z\rightarrow x\ (\theta(x, y)\wedge (z\text{ is transitive }\wedge \pi\text{ is an $\in$-isomorphism}\rightarrow z=y)).$$
+In the above formulas, we are able to "store $\pi$ in memory", so to speak, by using an additional variable and describing $\pi$ uniquely. This is not possible in mere $\Delta_0$-formulas, so it seems that $\Delta_0$-formulas are similar to Turing machines without memory or "read-only" Turing machines in this context. </p>
+<p>Now, "read-only" Turing machines are equivalent in strength to finite-state machines, i.e. a machine which is fed one bit of input at a time and changes its state based on the new bit of input and the old state. These accept an input if after working through the hole input, the machine is in one of the designating accepting states.</p>
+<p>In the end, we will see that $\Delta_0$-formulas cannot even recognize the transitive collapse of a finite set linearly ordered by $\in$ (i.e. those sets which collapse to an integer). This amounts to merely recognizing the length of the order in question.</p>
+<p>The following problem for a finite state machine is similar in spirit: Given a string consistng of the form $a\dots ab\dots b$, accept only those which have the same number of $a$'s as $b$'s. While this is completely trivial for a Turing machine, this can famously not be solved by a finite state machine. Here is the reason: Suppose toward a contradiction that the finite state machine $M$ solves this problem. Let $k$ be the number of states of $M$. Then $M$ must accept the input $a^{k+1}b^{k+1}$, but crucially has to repeat some state $s$ while working through the block of $a$'s. Say $M$ is in state $s$ before receiving the $n$-th $a$ as well as before the $m$-th $a$ and $n &lt m$. This means that $M$ is caught in a loop of length $m-n$ after reading through $n-1$ many $a$'s. But then $M$ must also accepth $a^{k+1-(m-n)}b^{k+1}$, contradiction.</p>
+<p>This gives us good reason to believe that the transitive collapse relation is indeed not $\Delta_0$-definable. We will try to adapt this fairly simple argument above, though it is not quite clear yet what will play the role of a "state".  The argument will rely heavily on the syntax of $\Delta_0$-formulas, it would be nice to have a more semantic proof. Please let me know if you have a better argument!</p>
+<p>Suppose that $\varphi(v_0,\dots,v_n)$ is a $\Delta_0$-formula. Let us further assume that variables are not doubly bound by quantifiers, so e.g. 
+$$(\exists x\in v_0\ \psi(x, v_0))\wedge (\forall x\in v_1\ \theta(x, v_1))$$
+is forbidden. Clearly every $\Delta_0$-formula is equivalent to a $\Delta_0$-formula with no double bounds.</p>
+<p>We can then assign sorts in $0,\dots, n$ to all variables appearing in $\varphi(v_0,\dots, v_n)$ so that the following holds:
+</p>
+<p>$(1)$ $v_i$ is of sort $i$ for all $i\leq n$
+    </p>
+<p>$(2)$ if $\forall x\in y$ (resp. $\exists x\in y$) is a bounded quantifier appearing in $\varphi$ then $x$ and $y$ are of the same sort.
+</p>
+
+We implicitly assume that all free variables of $\varphi$ are among $v_0,\dots, v_n$ and so bounded quantification is the only way to introduce more variables. This specifies a sort uniquely.\smallskip
+
+Similarly, we can assign a depth to any variable in $\varphi$ so that 
+<p>$(1)$ $v_0,\dots, v_n$ are of depth $0$ and
+    </p>
+<p>$(2)$ if $\forall x\in y$ (resp. $\exists x\in y$) is a bounded quantifier appearing in $\varphi$ then the depth of $x$ is the depth of $y$ $+1$.
+</p>
+
+The total depth of $\varphi$ is the maximum depth of a variable appearing in $\varphi$.<p>Really what we are doing here is viewing the set of variables as a tree with $n+1$ roots. The total depth is the depth/height of this tree and the sort of a variable is essentially the connected components of the tree it occupies.</p>
+<p>The main idea is that if $\varphi(v_0, v_1)$ really was a $\Delta_0$-definition of the transitive collapse relation, it seems that there is no possible way to gain useful information out of atomic formulas of the form $w_0\in w_1$, $w_1\in w_0$ or $w_0=w_1$ if $w_i$ is of sort $i$. It should thus be possible to completely decouple the variables of different sorts.</p>
+<p>
+Before we go into analyzing $\Delta_0$-formulas, first some notation: If $\theta$ is $\Delta_0$ and $S$ is a set of sorts w.r.t. $\theta$, let us say that a $\Delta_0$-formula $\psi$ is $S$-sorted (w.r.t. $\theta$) if all variables appearing in $\psi$ are of a sort in $S$ (w.r.t. $\varphi$).</p>
+<p>
+</p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+Suppose $\varphi(v_0,\dots,v_n)$ is a $\Delta_0$-formula and $L, R$ is a partition of the sorts $0,\dots, n$. Suppose that whenever $x\in y$ or $x=y$ is an atomic subformula of $\varphi$ then the sorts of $x, y$ either both belong to $L$ or to $R$. Then $\varphi$ is equivalent to a Boolean combination of $\Delta_0$-formulas which are either $L$-sorted or $R$-sorted.
+</p>
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+The proof is by induction on the complexity of $\varphi$ and our assumption handles the atomic case. The most interesting case is the case of bounded quantification so let us do just that.</p>
+<p>So suppose $\varphi$ is of the form $\forall x\in v_i\psi(v_0,\dots, v_n, x)$, say wlog with $v_i$ of sort in $L$. Let $L'$ be $L$ together with the $\psi$-sort of $x$. By induction, $\psi$ is equivalent to a Boolean combination of $\Delta_0$-formulas $(\theta_i)_{i\leq m}$ which are either $L'$- or $R$-sorted w.r.t. $\psi$. We can now bring this whole presentation of $\psi$ into disjunctive normal form, treating the $\theta_i$ as literals (we may be forced to absorb some negations into the $\theta_i$ but that is fine). </p>
+<p>Now in each conjunction, first list all the literals which are $L'$-sorted and then all the $R$-sorted ones. It follows that $\psi$ is equivalent to a formula of the form
+$$\bigwedge_{i\leq k}\psi^{l}_i\vee\psi^{r}_i$$
+where $\psi^l_i, \psi^r_i$ are $\Delta_0$, $\psi^l_i$ is $L'$-sorted and $\psi^r_i$ is $R$-sorted. Some of the $\psi^l_i, \psi^r_i$ may just be the contradiction $\bot$.</p>
+<p>But now, $\varphi$ is clearly equivalent to 
+$$\bigwedge_{i\leq k}(\forall x\in v_i\ \psi^{l}_i)\vee\psi^{r}_i$$
+which is once again a Boolean combination of $L$-sorted and $R$-sorted $\Delta_0$-formulas!
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>We now prove the full thing:</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+There is no $\Delta_0$-formula $\varphi(x,y)$ which defines the relation "$x$ is the transitive collapse of $y$".
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+Suppose toward a contradiction that $\varphi(v_0, v_1)$ is a $\Delta_0$-formula and $\varphi(x, y)$ holds iff $y$ is the transitive collapse of $x$. Let $d$ be the total depth of $\varphi$. We promise that in the following proof, we will only consider $x, y$ so that 
+</p>
+<p>&bull; $x$ is transitive and
+    </p>
+<p>&bull; $(\bigcup_{j\leq d} \bigcup^{j} \{y\})\cap (x\cup\{x\})=\emptyset$.
+</p>
+
+Here, $\bigcup^0 z = z$ and $\bigcup^{n+1} z=\bigcup \bigcup^{n} z$. The point is the following: Let $\varphi'$ be $\varphi$, but every mixed-sort atomic subformula of $\varphi$ is replaced by $\bot$. Then for $x, y$ as above, we have $\varphi(x,y)$ holds iff $\varphi'(x, y)$ holds. So if we hold our promise, we may assume wlog that already $\varphi=\varphi'$ (that is $\varphi$ has only single sorted atomic subformulas). 
+Hence by the Lemma above, $\varphi(v_0,v_1)$ is equivalent to a Boolean combination of $\{0\}$-sorted $\Delta_0$-formulas $\psi^0_i$ and $\{1\}$-sorted $\Delta_0$-formulas $\psi^1_i$.<p>But now it is not hard to see that this is impossible. Define $\{z\}^0=z$, $\{z\}^{n+1}=\{\{z\}^n\}$ and let $f\colon V\rightarrow V$ be defined by $f(\emptyset)=\{\emptyset\}^{d+1}$ and 
+$$f(x)=\{f(y)\mid y\in x\}$$
+for $x\neq\emptyset$ and set $y_n=f(n)$ for $n &lt \omega$. Note that the transitive collapse of $y_n$ is $n$ and $x=n$, $y=y_n$ hold our promise. By the pigeon-hole principle, there are $n&lt m$ so that for all $i\leq k$, $\psi^1_i(y_n)$ iff $\psi^1_i(y_m)$. But now $\varphi$ cannot distinguish between $y_n$ and $y_m$ on the right-hand-side! In particular, we have 
+that $\varphi(n, y_m)$ holds true, contradiction.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>Similar ideas can be used to show that "$x$ is finite" is not $\Delta_0$-definable, but that is left as an exercise to the reader. Once again, it would be great to have a proof of this of a more semantic flavor. Note that, while tempting, the compactness theorem does not help at all to prove this! The problem is that the compactness theorem does not (and cannot) guarantee the existence of a transitive model for a finitely consistent theory. </p>
+<p>In fact, there are $\Delta_0$-formulas which are satisfied by arbitrarily large finite sets, but not by any infinite set: consider once again the class of finite sets which are linearly ordered by $\in$. This class is $\Delta_0$-definable via 
+$$(x \text{ is linearly ordered by }\in )\wedge (\exists y\in x\ x = (y\cap x)\cup\{y\})\wedge (\forall z\in x  (z\cap x = \emptyset\vee \exists u\in z\ z\cap x= (u\cap x)\cup \{u\}))$$
+and clearly fails for any infinite set.
+</p>
+
+            </div>
+    </div>
+</div>
+
+  <!-- Introduction menu -->
+<div class="w3-col l3 w3-col m3">
+    <!-- About Card -->
+    <div class="w3-card w3-margin w3-margin-top" media = "max">
+      <div class="w3-container w3-white">
+        <h4><b>TL;DR</b></h4>
+        <p>
+We take a look at the transitive collapse relation which holds for $y, x$ iff $y$ is the transitive collapse of $x$. It is clear that this relation is $\Delta_1$-definable and we answer here the slightly tricky question of whether it is $\Delta_0$ as well (negatively!).
+</p>
+      </div>
+    </div>
+    
+    <!-- Posts -->
+    <!--
+    <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4>Popular Posts</h4>
+      </div>
+      <ul class="w3-ul w3-hoverable w3-white">
+        <li class="w3-padding-16">
+          <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+        <li class="w3-padding-16">
+          <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Dorum</span><br>
+          <span>Ultricies congue</span>
+        </li>   
+        <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+          <img src="/w3images/rock.jpg" alt="Imag  e" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Mingsum</span><br>
+          <span>Lorem ipsum dipsum</span>
+        </li>  
+      </ul>
+    </div>
+    -->
+  
+  
+    
+  <!-- END Introduction Menu -->
+  </div>
+  
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+</footer>
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/navMain.js"></script>
+
+</body>
+</html>

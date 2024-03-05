@@ -1,0 +1,139 @@
+\newcommand{\Nm}{\mathsf{Nm}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\forces}{\Vdash}
+\newcommand{\SCC}{\mathrm{SCC}_{\mathrm{cof}}}
+\newcommand{\CH}{\mathrm{CH}}
+\title{The Basic Facts of Namba Forcing}
+\subtitle{An attempt at a minimal proof.}
+
+\begin{tldr}
+We try to give a short proof of the basic facts about Namba forcing: It preserves stationary subsets of $\omega_1$ (in particular it does not collapse $\omega_1$) and if $\CH$ holds then it does not add reals. Along the way we also prove that Namba forcing is semiproper iff the cofinal Strong Chang Conjecture holds. 
+\end{tldr}
+
+Everybody knows Namba forcing and everybody knows the basic facts about Namba forcing:
+
+\begin{enumerate}
+\item Namba forcing does not collapse $\omega_1$, in fact it preserves stationary subsets of $\omega_1$.
+\item If $\CH$ holds then Namba forcing does not add reals.
+\end{enumerate}
+
+Nonetheless, it is surprisingly difficult to find a minimal proof of these facts. For example Chapter XI in Shelah's Proper and Improper forcing is an amazing resource, but introduces a lot of overhead through the "$S$-condition" which is overkill if one is only interested in, e.g. $(1)$. We hope that the arguments below constitute a shortest path towards these facts. Along the way, we will proof another important fact about Namba forcing due to Shelah:
+
+\begin{itemize}
+\item Namba forcing is semiproper iff the cofinal Strong Chang Conjecture ($\SCC$) holds. 
+\end{itemize}
+
+We work with the standard Namba forcing, i.e. subtrees $p$ of $\omega_2^{<\omega}$ so that for each $t\in p$, $\vert\{s\in p\mid t\subseteq s\}\vert=\omega_2$, ordered by inclusion. It should be clear that the same arguments work for e.g. the version of Namba forcing in which every node above the stem has to split into $\omega_2$-many immediate successors. 
+
+Let us first give a central definition. We will deal with countable $X\prec H_\theta$ and it will be helpful to add ordinals below $\omega_2$ to $X$ without adding any countable ordinals to $X$. However, we want that the same is still possible with the resulting structure. This leads to the notion of $\infty$-Chang models. Recall that $X\sqsubseteq Y$ means $X\subseteq Y$ and $X\cap\omega_1= Y\cap\omega_1$.
+
+\begin{defn}
+Let $\theta$ is sufficiently large and regular. We define by induction on $\alpha$ when a countable $X\prec H_\theta$ is $\alpha$-Chang.
+\begin{itemize}
+\item Any such $X$ is $0$-Chang.
+\item $X$ is $\alpha+1$-Chang iff 
+$$\{\gamma<\omega_2\mid \exists X\sqsubseteq Y\prec H_\theta\ \gamma\in Y \wedge Y\text{ is }\alpha\text{-Chang}\}$$
+is cofinal in $\omega_2$.
+\item For limit $\alpha$, $X$ is $\alpha$-Chang if $X$ is $\beta$-Chang for all $\beta<\alpha$.
+\end{itemize}
+We say that $X$ is $\infty$-Chang iff $X$ is $\alpha$-Chang for all ordinals $\alpha$.
+\end{defn}
+
+The connection between $\infty$-Chang models and Namba forcing is easily explained: For countable elementary $X\prec H_\theta$, we can define the tree $T_X$ as 
+$$T_X=\{t\in\omega_2^{<\omega}\mid \exists X\sqsubseteq Y\prec H_\theta\ t\in Y\}.$$
+
+\begin{prop}
+The following are equivalent:
+\begin{enumerate}
+\item $X$ is $\infty$-Chang.
+\item $T_X$ contains a Namba forcing condition.
+\end{enumerate}
+\end{prop}
+If $X$ is $\infty$-Chang then there is a canonical Namba condition witnessing $(2)$, namely $$q_X:= \{t\in\omega_2^{<\omega}\mid \exists X\sqsubseteq Y\prec H_\theta\mid t\in Y\wedge Y\text{ is }\infty\text{-Chang}\}.$$
+This $q_X$ has the convenient property that it is compatible with every $p\in \Nm\cap X$. 
+We will talk about some approximations to semiproperness.
+
+\begin{defn}
+Let $\PP$ be a forcing, $\theta$ sufficiently large and regular. If $X\prec H_\theta$ is countable with $\PP\in X$ and if $p\in\PP\cap X$, we say that $X$ is $(p,\PP)$-semiproper iff there is some $q\leq p$ with 
+$$q\forces \check X\sqsubseteq \check X[\dot G].$$
+We also say that $X$ is $\PP$-semiproper if $X$ is $(p,\PP)$-semiproper for all $p\in \PP\cap X$.
+\end{defn}
+
+Note that $\PP$ is semiproper iff every countable $X\prec H_\theta$ is $\PP$-semiproper for sufficiently large regular $\theta$. 
+
+\begin{lemm}
+For sufficiently large regular $\theta$ and countable $X\prec H_\theta$, the following are equivalent:
+\begin{enumerate}
+\item $X$ is $\Nm$-semiproper.
+\item $X$ is $\infty$-Chang.
+\end{enumerate}
+\end{lemm}
+
+\begin{proof}
+$(1)\Rightarrow(2):$ Let $G$ be $\Nm$-generic so that $X\sqsubseteq X[G]$ and let $b$ be the generic branch through $\omega_2^{<\omega}$. Clearly, $b$ is cofinal in $\omega_2$, $b\in X[G]$ and $\mathrm{ran}(b)\subseteq X[G]$. It is not difficult to see that for any $\gamma\in\mathrm{ran}(b)$, we must have that there is some $X\sqsubseteq Y\prec H_\theta^V$ with $\gamma\in Y$ with $Y\in V$ (in $V[G]$, we may take $Y=X[G]\cap V$ and the existence of such $Y$ is absolute). 
+
+This shows that if $q\in G$ is such that $q\forces \check X\sqsubseteq\check X[\dot G]$ then $q\subseteq T_X$, so $X$ is $\infty$-Chang.
+
+$(2)\Rightarrow(1):$ If $p\in\Nm$, then $t\in p$ is a splitting node if $t$ has $\omega_2$-many immediate successors in the tree $p$. We say that $t$ is $n$-splitting if $t$ is splitting and exactly $n$ many proper initial segments of $t$ are splitting in $t$. We write $r\leq_n p$ if $r\leq p$ and $r, p$ agree up to and including their $n$-splitting nodes. This allows for typical fusion arguments: If $p_{n+1}\leq_n p_n$ for all $n<\omega$ then $\bigcap_{n<\omega} p_n\in \Nm$. We call such sequences $(p_n)_{n<\omega}$  fusion sequences and $\bigcap_{n<\omega} p_n$ the fusion along $(p_n)_{n<\omega}$.
+
+So let $p_0\in X\cap \Nm$ and let $D_n$ enumerate the dense subsets of $\Nm$ in $X$. By gluing together trees, we can find a fusion sequence $p_{n}$ so that whenever $1\leq n$, $t\in p_n$ is a $n$-splitting node of $p_n$ then for all immediate successors $s$ of $t$ in $p_n$, the condition 
+$$p_n\upharpoonright  s=\{u\in p_n\mid u\subseteq s \vee s\subseteq u\}$$
+is in $D_{n-1}$. In fact, we may assume $p_n\in X$ by elementarity. Hence the fusion $p_\omega=\bigcap_{n<\omega} p_n$ is a $\Nm$-condition, but even better: $(p_n\cap q_X)_{n<\omega}$ is also a fusion sequence with fusion $q_\ast:=p_\omega\cap q_X$. 
+
+We will see that $q_\ast\forces\check X\sqsubseteq \check X[\dot G]$. Suppose that $\dot x\in X$ is a name for a countable ordinal and $r\leq q_\ast$ decides the value of $\dot x$. For some $n<\omega$, $D_n$ is the set of conditions deciding $\dot x$. So if $s$ is the immediate successor of a $n$-splitting node in $p_{n+1}$ and $s\in r$ then $p_{n+1}\upharpoonright s$ and $r$ must decide the same value $\alpha$ for $\dot x$ as they are compatible. Finally, as $s\in q_X$, there is some $X\sqsubseteq Y\prec H_\theta$ with $s\in Y$ and hence $p_{n+1}\upharpoonright s\in Y$, so in fact $\alpha\in Y$. But $Y$ and $X$ have the same countable ordinals, so $\alpha\in X$.
+\end{proof}
+
+Recall that $\SCC$ states that any $X\prec H_\theta$ is $1$-Chang (so in fact all such $X$ are $\infty$-Chang). The equivalence of $\SCC$ and the semiproperness of $\Nm$ is an immediate consequence of the above Lemma.
+
+
+We can give a convenitent equivalent formulation of preserving stationary sets in terms of semiproper substructures.
+
+\begin{lemm}
+For any forcing $\PP$, the following are equivalent:
+\begin{enumerate}
+\item $\PP$ preserves stationary subsets of $\omega_1$.
+\item For sufficiently large regular $\theta$ and all $p\in\PP$,
+$$\{X\prec H_\theta\mid p,\PP\in X\wedge X\text{ is }(p,\PP)\text{-semiproper}\}$$
+is projective stationary in $[H_\theta]^\omega$.
+\end{enumerate}
+\end{lemm}
+
+We will only need the easier direction $(2)\Rightarrow (1)$, which can be proved by the standard argument which shows that semiproper forcings are stationary set preserving, so we will skip it.
+
+It is now clear what we have to show, but first we prove a technical lemma. This is where the magic happens. For a tree $p\in\Nm$, we denote the cofinal branches through $p$ by $[p]$.
+
+\begin{lemm}
+Suppose $p\in\Nm$ and $f\colon [p]\rightarrow\omega_1$. Then there is some $\alpha<\omega_1$ so that $\bigcup f^{-1}[\{\alpha\}]$ contains a Namba forcing condition.
+\end{lemm}
+\begin{proof}
+Observe that for $T\subseteq\omega_2^{<\omega}$ a tree, there is $q\in\Nm$ with $q\subseteq T$ iff player I has a winning strategy in the following game $\mathcal G^{\Nm}_T$: The game consists of $\leq\omega$-many innings. In inning $n$, player I plays some ordinal $\gamma_n<\omega_2$ and player II replies with some $t_n\in T$ properly extending the previously played $t_0,\dots,t_{n-1}$  so that the top ordinal of $t_n$ is ${>}\gamma_n$. Player I wins if player II has no valid moves, but loses in case II manages to survive through $\omega$-many rounds.
+
+For $\alpha<\omega$, let $\mathcal G_\alpha$ be $\mathcal G^{\Nm}_{\bigcup f^{-1}[\{\alpha\}]}$. We are done if we can show that player II has a winning strategy in $\mathcal G_\alpha$ for some $\alpha<\omega_1$. So suppose toward a contradiction that this is not the case. As all games $\mathcal G^{\Nm}_T$ are open, this means that player I has a winning strategy $\sigma_\alpha$ in each game $\mathcal G_\alpha$. 
+
+We will now take on the role of player II and play against all $\sigma_\alpha$ simultaneously. In inning $n$, let $\Gamma_n$ be the supremum over all responses of $\sigma_\alpha$ to our moves so that we did not yet lose against $\sigma_\alpha$. We now properly extend our previously played $t_0,\dots, t_{n-1}$ to some $t_n\in p$ so that the top ordinal of $t_n$ is ${>}\Gamma_n$ which is possible as $p\in\Nm$ and $\Gamma_n<\omega_2$. 
+
+After $\omega$-many rounds, we have constructed a cofinal branch $b$ through $p$, namely the downwards closure of $\{t_n\mid n<\omega\}$. But then for $\alpha=f(b)$, we have survived against $\sigma_\alpha$, contradiction!
+\end{proof}
+
+\begin{cor}
+Let $\theta$ be sufficiently large and regular. The set of countable $X\prec H_\theta$ which are $\infty$-Chang is projective stationary.
+\end{cor}
+
+\begin{proof}
+Let $\mathcal C$ be a club in $[H_\theta]^\omega$ and let $S\subseteq \omega_1$ be stationary. We have to find some $\infty$-Chang $X\in\mathcal C$ with $X\cap\omega_1\in S$. We may enrich $H_\theta$ with some structure, resulting in $\mathcal H$ so that any countable $X\prec \mathcal H$ is in $\mathcal C$. We will also assume that $\mathcal H$ admits definable Skolem terms, so we can take hulls. 
+
+Define $f\colon[\omega_2^{<\omega}]\rightarrow\omega_1$ via $f(b)=$ least $\alpha\in S$ so that $\mathrm{Hull}^{\mathcal H}(\alpha\cup b)\cap\omega_1=\alpha$. Such an $\alpha$ will always exists as $S$ is stationary. By the technical lemma, there is some $\alpha\in S$ so that $f^{-1}[\{\alpha\}]$ contains some $q\in\Nm$. If we let $X=\mathrm{Hull}^{\mathcal H}(\alpha)$, this means that $q\subseteq T_X$ and hence $X$ is $\infty$-Chang, $X\in\mathcal C$ and $X\cap\omega_1\in S$.
+\end{proof}
+
+It follows immediatetly that Namba forcing is stationary set preserving. It only remains to show one single thing:
+
+\begin{lemm}
+Suppose $\CH$ holds. Then Namba forcing does not add reals.
+\end{lemm}
+
+\begin{proof}
+Suppose $\dot x$ is a name for a real and $\langle y_\alpha\mid\alpha<\omega_1\rangle$ an enumeration of all reals. We can build a fusion sequence $(p_n)_{n<\omega}$ so that for each $n$-splitting node $t$ of $p_n$, $p_n\upharpoonright t$ decides $\dot x_n$. Let $p_\omega$ be the fusion along this sequence and for every cofinal branch $b$ through $p_\omega$, let $f(b)$ be the unique $\alpha<\omega_1$ so that $y_\alpha$ collects the decision of $p_\omega$ about $\dot x$ along $b$, i.e. 
+$$\forall n<\omega\exists t\in b\ p_\omega\upharpoonright t\forces\dot x(\check n) = \check y_\alpha(\check n).$$
+By the technical lemma, there is some $\alpha<\omega_1$ so that $f^{-1}[\{\alpha\}]$ contains some $q\in\Nm$. But now it is clear that if $G$ is $\Nm$-generic with $q\in G$ then $\dot x^G=y_\alpha\in V$.
+\end{proof}
+

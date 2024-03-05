@@ -1,0 +1,113 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\Th}{\mathrm{Th}}
+
+\title{The Complexity of a Collapse}
+\subtitle{Or how to seperate $\Delta_1$ from $\Delta_0$}
+\date{May 3rd, 2024}
+
+\begin{tldr}
+We take a look at the transitive collapse relation which holds for $y, x$ iff $y$ is the transitive collapse of $x$. It is clear that this relation is $\Delta_1$-definable and we answer here the slightly tricky question of whether it is $\Delta_0$ as well (negatively!).
+\end{tldr}
+
+Recently Rahman Mohammadapour asked me how complicated exactly a transitive collapse is in terms of the Levy hierarchy. Surely, given an extensional set $X$, the transitive collapse of $X$ is $\Delta_1$-definable from $X$, but can one do better? For example, is it possible to recognize a set $Y$ as the transitive collapse of $X$ by a $\Delta_0$-formula? More precisely, is there a $\Delta_0$-formula $\varphi(x, y)$ so that 
+$\ZFC$ proves that $Y$ is  the transitive collapse of $X$ iff $\varphi(X, Y)$ holds? 
+
+Here is a quick reminder about the Levy-hierarchy: A $\Delta_0$-formula is a $\in$-formula such that all quantifiers are bounded by some variable, i.e. $\exists x\in y$ or $\forall x\in y$. A $\Sigma_1$-formula is of the form $\exists x_0\dots\exists x_{n-1}\psi$ where $\psi$ is $\Delta_0$. Finally, a $\Delta_1^T$-formula is a $\in$-formula $\varphi$ such that both $\varphi$ and $\neg\varphi$ can be proved to be equivalent to $\Sigma_1$-formulas in the theory $T$. If we omit $T$, we assume $T=\ZFC^{-}$.
+
+
+This is a very elementary question and while I was sure the answer must be no, I realized that I do not have a clue for how to seperate $\Delta_1$-definitions from $\Delta_0$-definitions, not even in principle. And there is a good reason for that: in practice, a $\Delta_1$-definition is already sufficient for all intents and purposes as these are absolute between transitive models of $\ZFC$ with the same ordinals. In addition to this, if $j\colon M\rightarrow N$ is a $\Delta_0$-elementary embedding between two models of $\ZFC$ then $j$ is already $\Delta_1$-elementary.
+
+To get some kind of intuition about this problem, I first related $\Delta_0$ and $\Delta_1$-formulas to more concrete complexity classes which are easier to seperate. In the end, the problem can be solved within $V_\omega$, i.e. by considering only hereditarily finite sets. This allows us to give a characterization of $\Delta_1$-definability in terms of Turing machines. Let us say that a string of symbols denotes a set if it consists of matching curly brackets, e.g. $\{\{\}\{\{\}\{\}\}\}$. It should be clear which exact set such a string denotes and surely every set in $V_\omega$ is denoted by (usually many different) such strings.
+
+\begin{lemm}
+For $X\subseteq V_\omega$, the following are equivalent:
+\begin{enumerate}
+\item $X$ is $\Delta_1^{\mathrm{\Th(V_\omega,\in)}}$-definable over $V_\omega$, i.e. there is a $\Delta_1^{\mathrm{\Th(V_\omega,\in)}}$-formula $\varphi(x)$ so that $X=\{x\in V_\omega\mid V_\omega\models\varphi(x)\}$.
+\item There is a Turing machine $T$ so that on input a string denoting a set $x$, $T$ holds iff $x\in X$.
+\end{enumerate}
+\end{lemm}
+
+Note that for extensional hereditarily finite sets $x$, the relation "$y$ is the transitive collapse of $x$" is $\Delta_1^{\mathrm{\Th(V_\omega,\in)}}$-definable over $V_\omega$: Let $\theta(y, x)$ be the $\Delta_0$-formula expressing that $y$ is transitive and $x$ is $\in$-extensional. Now we can define the transitive collapse relation via by the formula
+$$\varphi(x,y) = \exists\pi\colon y\rightarrow x\ (\theta(x, y)\wedge \pi\text{ is an }\in\text{-isomorphism })$$
+which is equivalent to 
+$$\psi(x,y)=\forall z\forall \pi\colon z\rightarrow x\ (\theta(x, y)\wedge (z\text{ is transitive }\wedge \pi\text{ is an $\in$-isomorphism}\rightarrow z=y)).$$
+In the above formulas, we are able to "store $\pi$ in memory", so to speak, by using an additional variable and describing $\pi$ uniquely. This is not possible in mere $\Delta_0$-formulas, so it seems that $\Delta_0$-formulas are similar to Turing machines without memory or "read-only" Turing machines in this context. 
+
+Now, "read-only" Turing machines are equivalent in strength to finite-state machines, i.e. a machine which is fed one bit of input at a time and changes its state based on the new bit of input and the old state. These accept an input if after working through the hole input, the machine is in one of the designating accepting states.
+
+In the end, we will see that $\Delta_0$-formulas cannot even recognize the transitive collapse of a finite set linearly ordered by $\in$ (i.e. those sets which collapse to an integer). This amounts to merely recognizing the length of the order in question.
+
+The following problem for a finite state machine is similar in spirit: Given a string consistng of the form $a\dots ab\dots b$, accept only those which have the same number of $a$'s as $b$'s. While this is completely trivial for a Turing machine, this can famously not be solved by a finite state machine. Here is the reason: Suppose toward a contradiction that the finite state machine $M$ solves this problem. Let $k$ be the number of states of $M$. Then $M$ must accept the input $a^{k+1}b^{k+1}$, but crucially has to repeat some state $s$ while working through the block of $a$'s. Say $M$ is in state $s$ before receiving the $n$-th $a$ as well as before the $m$-th $a$ and $n &lt m$. This means that $M$ is caught in a loop of length $m-n$ after reading through $n-1$ many $a$'s. But then $M$ must also accepth $a^{k+1-(m-n)}b^{k+1}$, contradiction.
+
+This gives us good reason to believe that the transitive collapse relation is indeed not $\Delta_0$-definable. We will try to adapt this fairly simple argument above, though it is not quite clear yet what will play the role of a "state".  The argument will rely heavily on the syntax of $\Delta_0$-formulas, it would be nice to have a more semantic proof. Please let me know if you have a better argument!
+
+Suppose that $\varphi(v_0,\dots,v_n)$ is a $\Delta_0$-formula. Let us further assume that variables are not doubly bound by quantifiers, so e.g. 
+$$(\exists x\in v_0\ \psi(x, v_0))\wedge (\forall x\in v_1\ \theta(x, v_1))$$
+is forbidden. Clearly every $\Delta_0$-formula is equivalent to a $\Delta_0$-formula with no double bounds.
+
+We can then assign sorts in $0,\dots, n$ to all variables appearing in $\varphi(v_0,\dots, v_n)$ so that the following holds:
+\begin{enumerate}
+    \item $v_i$ is of sort $i$ for all $i\leq n$
+    \item if $\forall x\in y$ (resp. $\exists x\in y$) is a bounded quantifier appearing in $\varphi$ then $x$ and $y$ are of the same sort.
+\end{enumerate}
+We implicitly assume that all free variables of $\varphi$ are among $v_0,\dots, v_n$ and so bounded quantification is the only way to introduce more variables. This specifies a sort uniquely.\smallskip
+
+Similarly, we can assign a depth to any variable in $\varphi$ so that 
+\begin{enumerate}
+    \item $v_0,\dots, v_n$ are of depth $0$ and
+    \item if $\forall x\in y$ (resp. $\exists x\in y$) is a bounded quantifier appearing in $\varphi$ then the depth of $x$ is the depth of $y$ $+1$.
+\end{enumerate}
+The total depth of $\varphi$ is the maximum depth of a variable appearing in $\varphi$.
+
+Really what we are doing here is viewing the set of variables as a tree with $n+1$ roots. The total depth is the depth/height of this tree and the sort of a variable is essentially the connected components of the tree it occupies.
+
+The main idea is that if $\varphi(v_0, v_1)$ really was a $\Delta_0$-definition of the transitive collapse relation, it seems that there is no possible way to gain useful information out of atomic formulas of the form $w_0\in w_1$, $w_1\in w_0$ or $w_0=w_1$ if $w_i$ is of sort $i$. It should thus be possible to completely decouple the variables of different sorts.
+
+
+Before we go into analyzing $\Delta_0$-formulas, first some notation: If $\theta$ is $\Delta_0$ and $S$ is a set of sorts w.r.t. $\theta$, let us say that a $\Delta_0$-formula $\psi$ is $S$-sorted (w.r.t. $\theta$) if all variables appearing in $\psi$ are of a sort in $S$ (w.r.t. $\varphi$).
+
+
+\begin{lemm}
+Suppose $\varphi(v_0,\dots,v_n)$ is a $\Delta_0$-formula and $L, R$ is a partition of the sorts $0,\dots, n$. Suppose that whenever $x\in y$ or $x=y$ is an atomic subformula of $\varphi$ then the sorts of $x, y$ either both belong to $L$ or to $R$. Then $\varphi$ is equivalent to a Boolean combination of $\Delta_0$-formulas which are either $L$-sorted or $R$-sorted.
+\end{lemm}
+\begin{proof}
+The proof is by induction on the complexity of $\varphi$ and our assumption handles the atomic case. The most interesting case is the case of bounded quantification so let us do just that.
+
+So suppose $\varphi$ is of the form $\forall x\in v_i\psi(v_0,\dots, v_n, x)$, say wlog with $v_i$ of sort in $L$. Let $L'$ be $L$ together with the $\psi$-sort of $x$. By induction, $\psi$ is equivalent to a Boolean combination of $\Delta_0$-formulas $(\theta_i)_{i\leq m}$ which are either $L'$- or $R$-sorted w.r.t. $\psi$. We can now bring this whole presentation of $\psi$ into disjunctive normal form, treating the $\theta_i$ as literals (we may be forced to absorb some negations into the $\theta_i$ but that is fine). 
+
+Now in each conjunction, first list all the literals which are $L'$-sorted and then all the $R$-sorted ones. It follows that $\psi$ is equivalent to a formula of the form
+$$\bigwedge_{i\leq k}\psi^{l}_i\vee\psi^{r}_i$$
+where $\psi^l_i, \psi^r_i$ are $\Delta_0$, $\psi^l_i$ is $L'$-sorted and $\psi^r_i$ is $R$-sorted. Some of the $\psi^l_i, \psi^r_i$ may just be the contradiction $\bot$.
+
+But now, $\varphi$ is clearly equivalent to 
+$$\bigwedge_{i\leq k}(\forall x\in v_i\ \psi^{l}_i)\vee\psi^{r}_i$$
+which is once again a Boolean combination of $L$-sorted and $R$-sorted $\Delta_0$-formulas!
+\end{proof}
+
+We now prove the full thing:
+
+\begin{thm}
+There is no $\Delta_0$-formula $\varphi(x,y)$ which defines the relation "$x$ is the transitive collapse of $y$".
+\end{thm}
+
+\begin{proof}
+Suppose toward a contradiction that $\varphi(v_0, v_1)$ is a $\Delta_0$-formula and $\varphi(x, y)$ holds iff $y$ is the transitive collapse of $x$. Let $d$ be the total depth of $\varphi$. We promise that in the following proof, we will only consider $x, y$ so that 
+\begin{itemize}
+    \item $x$ is transitive and
+    \item $(\bigcup_{j\leq d} \bigcup^{j} \{y\})\cap (x\cup\{x\})=\emptyset$.
+\end{itemize}
+Here, $\bigcup^0 z = z$ and $\bigcup^{n+1} z=\bigcup \bigcup^{n} z$. The point is the following: Let $\varphi'$ be $\varphi$, but every mixed-sort atomic subformula of $\varphi$ is replaced by $\bot$. Then for $x, y$ as above, we have $\varphi(x,y)$ holds iff $\varphi'(x, y)$ holds. So if we hold our promise, we may assume wlog that already $\varphi=\varphi'$ (that is $\varphi$ has only single sorted atomic subformulas). 
+Hence by the Lemma above, $\varphi(v_0,v_1)$ is equivalent to a Boolean combination of $\{0\}$-sorted $\Delta_0$-formulas $\psi^0_i$ and $\{1\}$-sorted $\Delta_0$-formulas $\psi^1_i$.
+
+But now it is not hard to see that this is impossible. Define $\{z\}^0=z$, $\{z\}^{n+1}=\{\{z\}^n\}$ and let $f\colon V\rightarrow V$ be defined by $f(\emptyset)=\{\emptyset\}^{d+1}$ and 
+$$f(x)=\{f(y)\mid y\in x\}$$
+for $x\neq\emptyset$ and set $y_n=f(n)$ for $n &lt \omega$. Note that the transitive collapse of $y_n$ is $n$ and $x=n$, $y=y_n$ hold our promise. By the pigeon-hole principle, there are $n&lt m$ so that for all $i\leq k$, $\psi^1_i(y_n)$ iff $\psi^1_i(y_m)$. But now $\varphi$ cannot distinguish between $y_n$ and $y_m$ on the right-hand-side! In particular, we have 
+that $\varphi(n, y_m)$ holds true, contradiction.
+\end{proof}
+
+Similar ideas can be used to show that "$x$ is finite" is not $\Delta_0$-definable, but that is left as an exercise to the reader. Once again, it would be great to have a proof of this of a more semantic flavor. Note that, while tempting, the compactness theorem does not help at all to prove this! The problem is that the compactness theorem does not (and cannot) guarantee the existence of a transitive model for a finitely consistent set theory. 
+
+In fact, there are $\Delta_0$-formulas which are satisfied by arbitrarily large finite sets, but not by any infinite set: consider once again the class of finite sets which are linearly ordered by $\in$. This class is $\Delta_0$-definable via 
+$$(x \text{ is linearly ordered by }\in )\wedge (\exists y\in x\ x = (y\cap x)\cup\{y\})\wedge (\forall z\in x  (z\cap x = \emptyset\vee \exists u\in z\ z\cap x= (u\cap x)\cup \{u\}))$$
+and does not conatin any infinite set.
