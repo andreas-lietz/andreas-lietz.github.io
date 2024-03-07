@@ -15,7 +15,7 @@ function addSheets(lenaWebsite){
 }
 //"https://www.tuwien.at/mg/dmg/lenawallner/lehre"
 
-fetch("https://crossorigin.me/https://www.tuwien.at/mg/dmg/lenawallner/lehre")
+fetch("http://corsproxy.io/?https://www.tuwien.at/mg/dmg/lenawallner/lehre")
     .then((response) => {
         if(!response.ok){
             alert("Fetching URL failed!");
