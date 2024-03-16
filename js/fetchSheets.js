@@ -1,7 +1,8 @@
 function addSheets(lenaWebsite){
     console.log(lenaWebsite);
     const parser = new DOMParser();
-    let lenaDocument = parser.parseFromString(lenaWebsite.contents, 'text/html');
+    //let lenaDocument = parser.parseFromString(lenaWebsite.contents, 'text/html');
+    let lenaDocument = parser.parseFromString(lenaWebsite, 'text/html');
     let downloads = lenaDocument.getElementsByClassName("wpContentElementDownloadButton");
     console.log(downloads)
     let sheetsHtml = "<p> The exercise sheets are mirrored below.</p>";
@@ -15,10 +16,10 @@ function addSheets(lenaWebsite){
 }
 //"https://www.tuwien.at/mg/dmg/lenawallner/lehre"
 
-fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.tuwien.at/mg/dmg/lenawallner/lehre')}`)
+fetch('https://corsproxy.io/?' + encodeURIComponent('https://www.tuwien.at/mg/dmg/lenawallner/lehre'))
     .then((response) => {
         if(!response.ok){
             alert("Fetching URL failed!");
         }
-        response.json().then((data) => {addSheets(data);});
+        response.text().then((data) => {addSheets(data);});
   });
