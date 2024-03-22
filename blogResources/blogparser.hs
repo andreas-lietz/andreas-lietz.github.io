@@ -75,7 +75,8 @@ environmentToHtml (Environment env inEnv)
                             otherwise -> "Error! More expected in enumerate environment!"
     | env == "itemize" = case inEnv of 
                             More htmlList -> concatMap (\(index, code) ->  (toHtml (P (More [Inner "&bull; ", code])))) $ zip [1..] htmlList
-                            otherwise -> "Error! More expected in enumerate environment!"    
+                            otherwise -> "Error! More expected in enumerate environment!"  
+    | env == "comment" = ""
     | otherwise = "\\begin{" ++ env ++ "}\n" ++ (toHtml inEnv) ++ "\n\\end{" ++ env ++ "}" 
                     where box = if env == "proof" then "<span style=\"margin-top: auto\">$\\Box$</span>" else ""
 
