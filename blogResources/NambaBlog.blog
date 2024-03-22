@@ -5,6 +5,7 @@
 \newcommand{\CH}{\mathrm{CH}}
 \title{The Basics of Namba Forcing}
 \subtitle{An attempt at a minimal proof.}
+\date{March 22nd, 2024}
 
 \begin{tldr}
 We give a short proof of the basic facts about Namba forcing: It preserves stationary subsets of $\omega_1$ (in particular it does not collapse $\omega_1$) and if $\CH$ holds then it does not add reals. Along the way we also prove that Namba forcing is semiproper iff the cofinal Strong Chang Conjecture holds. 
