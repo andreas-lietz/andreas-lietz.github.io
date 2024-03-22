@@ -48,11 +48,14 @@ Suppose $p\in\Nm$ and $f\colon [p]\rightarrow\omega_1$. Then there is some $\alp
 \end{lemm}
 
 \begin{proof}
-Observe that for $T\subseteq\omega_2^{<\omega}$ a tree, there is $q\in\Nm$ with $q\subseteq T$ iff player I has a winning strategy in the following game $\mathcal G^{\Nm}_T$: The game consists of $\leq\omega$-many innings. In inning $n$, player I plays some ordinal $\gamma_n<\omega_2$ and player II replies with some $t_n\in T$ properly extending the previously played $t_0,\dots,t_{n-1}$  so that the top ordinal of $t_n$ is ${>}\gamma_n$. Player I wins if player II has no valid moves, but loses in case II manages to survive through $\omega$-many rounds.
+For a tree $T\subseteq\omega_2^{<\omega}$ consider the game $\mathcal G^{\Nm}_T$: At most $\omega$-many rounds are played. In round $n$, player I plays some ordinal $\gamma_n<\omega_2$ and player II replies with some $t_n\in T$ properly extending the previously played $t_0,\dots,t_{n-1}$  so that the top ordinal of $t_n$ is $\geq\gamma_n$. Player I wins if player II has no valid moves, but loses in case II manages to survive through $\omega$-many rounds.
+Observe that $T$ contains a Namba subtree iff player II has a winning strategy in $\mathcal G^{\Nm}_T$. For the more difficult direction, note that if $\tau$ is a winning strategy for II then the tree of plays by II consistent with $\tau$ that come up in a run of the game is a Namba tree.
 
-For $\alpha<\omega$, let $\mathcal G_\alpha$ be $\mathcal G^{\Nm}_{\bigcup f^{-1}[\{\alpha\}]}$. We are done if we can show that player II has a winning strategy in $\mathcal G_\alpha$ for some $\alpha<\omega_1$. So suppose toward a contradiction that this is not the case. As all games $\mathcal G^{\Nm}_T$ are open, this means that player I has a winning strategy $\sigma_\alpha$ in each game $\mathcal G_\alpha$. 
+For $\alpha<\omega$, let $\mathcal G_\alpha$ be $\mathcal G^{\Nm}_{\bigcup f^{-1}[\{\alpha\}]}$. We are done if we can show that player II has a winning strategy in $\mathcal G_\alpha$ for some $\alpha<\omega_1$. 
 
-We will now take on the role of player II and play against all $\sigma_\alpha$ simultaneously. In inning $n$, let $\Gamma_n$ be the supremum over all responses of $\sigma_\alpha$ to our moves so that we did not yet lose against $\sigma_\alpha$. We now properly extend our previously played $t_0,\dots, t_{n-1}$ to some $t_n\in p$ so that the top ordinal of $t_n$ is ${>}\Gamma_n$ which is possible as $p\in\Nm$ and $\Gamma_n<\omega_2$. 
+So suppose toward a contradiction that this is not the case. As all games $\mathcal G^{\Nm}_T$ are open, this means that player I has a winning strategy $\sigma_\alpha$ in each game $\mathcal G_\alpha$. 
+
+We will now take on the role of player II and play against all $\sigma_\alpha$ simultaneously. In round $n$, let $\Gamma_n$ be the supremum over all responses of $\sigma_\alpha$ to our moves so that we did not yet lose against $\sigma_\alpha$. We now properly extend our previously played $t_0,\dots, t_{n-1}$ to some $t_n\in p$ so that the top ordinal of $t_n$ is $\geq\Gamma_n$ which is possible as $p\in\Nm$ and $\Gamma_n<\omega_2$. 
 
 After $\omega$-many rounds, we have constructed a cofinal branch $b$ through $p$, namely the downwards closure of 
 $$\{t_n\mid n<\omega\}.$$
