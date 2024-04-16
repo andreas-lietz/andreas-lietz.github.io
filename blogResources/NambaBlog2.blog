@@ -1,0 +1,96 @@
+\newcommand{\Nm}{\mathsf{Nm}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\forces}{\Vdash}
+\newcommand{\SCC}{\mathrm{SCC}_{\mathrm{cof}}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\ran}{\mathrm{ran}}
+\newcommand{\res}{\upharpoonright}
+\title{The Basics of Namba Forcing II}
+\subtitle{An attempt at more minimal proofs.}
+\date{???, 2024}
+
+\begin{tldr}
+We give a simplified proof of a result due to Jensen and use it to improve a theorem of Magidor-Shelah by dropping their $\CH$ assumption.
+\end{tldr}
+
+In a <a href="NambaBlog.html">prior post</a> we tried to give a concise proof of some basic facts about Namba forcing, culminating in a proof that Namba forcing preserves stationary subsets of $\omega_1$.
+
+Here, I will continue my quest to find and present more simple proofs for nice facts about Namba forcing. We will proof a result due to Jensen: If $G$ is $\Nm$-generic and $\vec\alpha=\langle\alpha_n\mid n<\omega\rangle\in V[G]$ is cofinal in $\omega_2^V$ then, considered as a branch through $(\omega_2^V)^{<\omega}$, $\vec \alpha$ is a $\Nm$-generic branch over $V$. Moreover, $V[\vec\alpha]=V[G]$. 
+
+Assuming $\CH$, this is also a consequence of a general result due to Bukovsky. 
+
+Recall that a Namba tree is a subtree $p\subseteq\omega_2^{<\omega}$ so that for each $t\in p$, $\{s\in p\mid t\subseteq s\}$ has size $\omega_2$. There is another version of Namba forcing: A Namba' tree is a subtree $p\subseteq \omega_2^{<\omega}$ so that every node above the stem of $p$ has $\omega_2$-many immediate successors (i.e. is a splitting node). 
+
+Every Namba' tree is a Namba tree but not vice versa. $\Nm, \Nm'$ are the collection of Namba, Namba' trees resprectively ordered by inclusion. Both $\Nm, \Nm'$ have the same basic properties covered in the first blog post. However, Magidor-Shelah have shown that under $\CH$, $\Nm$ and $\Nm'$ are not forcing equivalent in a strong sense: A $\Nm$-generic extension does not contain a $\Nm'$-generic and vice versa. We will improve their result here by dropping the $\CH$ assumption.
+
+
+\begin{thm}(Jensen) Suppose that $G$ is $\Nm$-generic and $c\in V[G]$ is a branch through $(\omega_2^V)^{<\omega}$ so that $\ran(c)$ is cofinal in $\omega_2^V$. Then $c$ is a $\Nm$-generic branch over $V$ and $V[c]=V[G]$.
+\end{thm}
+
+\begin{proof}
+We will show that $H_c=\{q\in\Nm\mid c\in[q]\}$ is a $V$-generic filter with $G\in V[H_c]$. 
+
+We leave it to the reader to show that $H_c$ is a filter and only show the genericity part. So let us work in $V$ and let $\dot c, \dot H_c$ be a $\Nm$-names for $c, \dot H_c$ and let $p\in\Nm$ force the relevant properties of $\dot c$.
+
+We will find some $q\leq p$ with the following property:
+
+If $s, t\in q$ are incompatible then $s, t$ disagree about $\dot c$. More precisely, there are incompatible $u,v\in\omega_2^{<\omega}$ so that both $q\res s\forces\check u\subseteq\dot c$ and $q\res t\forces \check v\in\dot c$.
+
+We build $q\leq p$ via a fusion argument. simultaneously, we define a partial map $\mu\colon \omega_2^{<\omega}\rightarrow\omega_2^{<\omega}$. So let us construct a fusion sequence $(p_n)_{n<\omega}$ starting with $p_0=p$ as follows: 
+
+Suppose $p_n$ is already defined and $t\in p_n$ is a $n$-splitting node of $p_n$. We describe how to define $p_{n+1}\res t$. Let 
+$$\langle s_i\mid i<\omega_2\rangle$$
+enumerate all immediate successors of $t$ in $p_n$. By induction on $i<\omega_2$, we define a sequences $\langle r_i\mid i<\omega_2\rangle$ and $\langle u_i\mid i<\omega_2\rangle$ so that 
+\begin{enumerate}
+\item $r_i\leq p_n\res s_i$, $u_i\in \omega_2^{<\omega}$,
+\item $r_i\forces \check u_i\subseteq \dot c$ and
+\item $u_i$ is different from every $u_j$, $j\neq i$ (but not necessarily incompatible with all those).
+\end{enumerate}
+The construction is simple: if these objects are defined for $j < i$ then we pick any $r_i, u_i$ so that $(1), (2)$ hold and $u_i$ is different from all $u_j$ with $j < i$. Such $r_i$, $u_i$ must exist, otherwise $p_n\res s_i\forces\dot c\subseteq \{u_i\mid i<\omega_2\}^{\check{}}$. But then $p_n\res s_i$ forces $\ran(\dot c)$ to be bounded below $\omega_2$, contradiction.
+
+Next, there must be some $m < \omega$ so that 
+$$X=\{i<\omega_2\mid \mathrm{len}(u_i)=m\}$$
+is of size $\omega_2$. It follows that $u_i, u_j$ are incompatible if $i\neq j$ are both in $X$. We then define
+$$p_{n+1}\res t = \bigcup_{i\in X} r_i.$$
+Also, for $i\in X$ we put $s_i$ into the domain of $\mu$ and let $\mu(s_i)=u_i$.
+
+This concludes the construction of the fusion sequence and of $\mu$. We then let $q$ be stronger than the fusion along $(p_n)_{n<\omega}$ so that every node of $q$ either splits or has a unique successor. It should be clear that $q$ has the desired property.
+
+For convenienve, we extend $\mu$ to all of $q$. Note that $\mu$ is defined for each immediate successor of a splitting node in $q$. For $t$ an initial segment of the stem of $q$, let $\mu(t)=\emptyset$. For other $t\in q$ let $s\leq_q t$ be the largest initial segment of $t$ which is an immediate successor of a splitting node of $q$ and set $\mu(t)=\mu(s)$. 
+
+The map $\mu$ has the following convenient properties:
+
+\begin{enumerate}
+\item If $s, t\in q$ are incompatible then $\mu(s),\mu(t)$ are incompatible as well. 
+\item For $t\in q$, we have $q\res t\forces \mu(t)\subseteq\dot c$.
+\end{enumerate}
+It follows from $(1)$ that the tree
+$$r=\{s\in\omega_2^{<\omega}\mid\exists t\in q\ s\subseteq \mu(t)\}$$
+is a Namba tree and from $(2)$ that $q\forces\check r\in \dot H_c$.
+
+\begin{claim}
+There is an isomorphism $\pi\colon \Nm\res r\rightarrow \Nm\res q$ so that $\pi(r')\forces \check r'\in\dot H_c$ for all $r'\leq r$.
+\end{claim}
+\begin{proof}
+Define $\pi$ via $\pi(r')=\mu^{-1}[r']$. Note that any $s\in r'$ can be extended to some $s\in r'$ which is in the range of $\mu$: find a maximal initial segment of $t$ of the form $\mu(u)$. Then by construction of $q$, there is some $m<\omega$ so that all extension of $\mu(u)$ in $r$ of length $m$ are in the range of $\mu$ and hence $t$ is below one of those. This easily implies that $\pi(r')\in\Nm$ and that $\pi$ is injective. The remaining properties we ask of $\pi$ are straightforward to check.
+\end{proof}
+
+It follows that if $G$ is $\Nm$-generic with $q\in G$ and $c=\dot c^G$ then $H_c$ is the upwards closure of $\pi[\{q'\in G\mid q\leq q\}]$. In particular, $H_c$ is $\Nm$-generic over $V$. Similarly, $G$ is the upwards closure of $\pi^{-1}[\{r'\in H_c\mid r\leq r\}]$ so $G\in V[H_c]$ and consequently $V[G]=V[c]$.
+\end{proof}
+
+A similar argument shows that the theorem above is valid for $\Nm'$ as well.
+
+\begin{cor}
+If $G$ is $\Nm$-generic then there is no $\Nm'$-filter generic over $V$ in $V[G]$ and vice versa. In particular, $\Nm$, $\Nm'$ are not forcing equivalent and neither forcing embeds regularly into the other.
+\end{cor}
+
+\begin{proof}
+This follows from Jensen's theorem above and the following observation: If $G$ is $\Nm$-generic and $b$ is the resulting generic branch then there is a function $F\colon(\omega_2^V)^{<\omega}\rightarrow(\omega_2^V)^{<\omega}$ so that
+\begin{itemize}
+\item $F\in V$ and
+\item there are unboundedly many $n<\omega$ so that $F(b\res n) = b\res (n+1)$.
+\end{itemize}
+So in essence, $F\in V$ is somewhat successful in predicting the generic branch. This is seen as follows: simply find some $p\in G$ so that any $t\in p$ can be extended to some $s\in p$ which has a unique immediate successor in $p$. Such conditions form a dense open subset of $\Nm$ so such $p$ exists in $G$. We then define $F(u)$ as the immediate successor of $u$ in $p$ if both $u\in p$ and $u$ has such a unique immediate successor in $p$. Otherwise, define $F(u)$ arbitrarily. It should be clear that $p$ forces $F$ to witness the above.
+
+On the other hand, for a branch $b'$ generic for $\Nm'$ over $V$, such an $F$ similarly predicting $b'$ cannot exist in $V$ by a simple density argument. But if $c$ existed in a $\Nm$-extension of $V$ then $c$ would be $\Nm$-generic over $V$ as well, so such an $F$ exists nontheless, contradiction. Vice versa, a symmetric argument shows that $b$ cannot exist in a $\Nm'$-generic extension of $V$ either.
+\end{proof}
