@@ -1,0 +1,66 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Addone}{\mathrm{Add}(\omega_1, 1)}
+\newcommand{\PP}{\mathbb{P}}
+
+\title{Properness After a Cohen Real}
+\subtitle{A weird equivalence of CH}
+\date{July 9th, 2024}
+
+\begin{tldr}
+We look at the canonical forcing to add a subset of $\omega_1$ as defined in $V$ after adding a Cohen real to $V$. We show that it is proper iff $\CH$ holds in $V$.
+\end{tldr}
+
+Proper forcing is an ubiquitous and versatile class of forcings. It contains all c.c.c. and $\sigma$-closed forcings and is closed under countable support iterations. Properness of $\PP$ is equivalent to "$\PP$ preserves stationary subsets of $[\lambda]^\omega$ for all uncountable regular $\lambda$", but the more useful, yet technical, definition is as follows.
+
+\begin{defn}
+Suppose $\PP$ is a forcing and $\theta>2^{\vert\PP\vert}$ is regular. 
+\begin{enumerate}
+    \item For a countable $X\prec H_\theta$, a condition $q\in\PP$ is $(X, \PP)$-generic iff $X[g]\cap V=X$ whenever $g$ is $\PP$-generic with $q\in g$.
+    \item $\PP$ is proper iff for a club of countable $X\prec H_\theta$, whenever $p\in X\cap\PP$ there is some $q\leq p$ which is $(X, \PP)$-generic. (This does not depend on the choice of $\theta$!)
+\end{enumerate}
+\end{defn}
+
+Properness, as most other natural properties of forcings, depends on $V$, e.g. a forcing may be proper in $V$ but not anymore in some forcing extension. The canonical example of a c.c.c. forcing, namely Cohen forcing, will be c.c.c. in any model, but what about the canonical example of a $\sigma$-closed forcing? In my book, this is Cohen forcing at $\omega_1$, denoted $\Addone$, consisting of countable partial functions from $\omega_1$ to $\omega_1$.
+
+Recently, I became interestend in what kind of properties $\Addone^V$ retains after adding a Cohen real $c$ to $V$. As any other atomless $\sigma$-closed forcing, it does not stay $\sigma$-closed in the extension $V[c]$. In fact in $V[c]$, $\Addone^V$ is not forcing equivalent to any $\sigma$-closed or even $\sigma$-stategiacally closed forcing. What about properness?
+
+\begin{thm}
+The following are equivalent:
+\begin{enumerate}
+    \item $\Addone^V$ is proper in $V[c]$.
+    \item $V\models\CH$.
+\end{enumerate}
+\end{thm}
+
+This is probably known, for example I would bet a large amount of money that Shelah knows about this. Yet I've never seen nor heard about this and this is the reason for this post. 
+
+So let's get on with a proof. We will make use of the following result due to Abraham-Shelah.
+
+\begin{fact}
+Suppose $G$ is generic for a c.c.c. forcing which adds a real. Then in $V[G]$, $[\omega_2]^\omega\setminus V$ is stationary in $[\omega_2]^\omega$.
+\end{fact}
+
+\begin{proof}
+First, let us assume $\CH$ fails in $V$ and show that $\Addone^V$ is not proper in $V[c]$. Let $\vec x=\langle x_i\mid i<\omega_2\rangle\in V$ be a sequence of pairwise different reals, which exists as $\CH$ fails. By the above fact, we have that $[\omega_2]^\omega\setminus V$ is stationary in $[\omega_2]^\omega$ in $V[c]$. It follows that there are stationarily many countable $X\prec H_\theta^{V[c]}$ with 
+\begin{itemize}
+    \item $\vec x\in X$ and 
+    \item $X\cap\omega_2\notin V$.
+\end{itemize}
+
+For such $X$, there is no $(X, \Addone^V)$-generic condition! First note that $X\cap\mathcal P(\omega)\cap V\notin V$ as $x_i\in X$ iff $i\in X$ for $i<\omega_2$. If $q$ were a $(X, \Addone^V)$-generic condition then the reals in $X\cap V$ are exactly those which appear as a restriction $q\upharpoonright [\alpha,\alpha+\omega)$ for some $\alpha\in X\cap\omega_1$ and hence we cannot have $q\in V$ either, contradiction. This shows that $\Addone^V$ is not proper.
+
+On the other hand, let us now assume $\CH$ in $V$. So let $X\prec H_\theta^{V[c]}$ be a countable elementary substructure. We may assume that additionally $X\cap V\prec H_\theta^V$ as this is true on a club. Now by elementarity, there is an enumeration 
+$$\langle y_i\mid i<\omega_1\rangle\in X\cap V$$
+of the reals in $V$. This implies that $X\cap\mathcal P(\omega)\cap V=\{y_i\mid i\in X\cap\omega_1\}$. As $X\cap\omega_1\in\omega_1$, it follows that $V$ knows $X\cap\mathcal P(\omega)\cap V$ and hence $V$ knows $\PP_X:=X\cap\Addone^V$ as well. The problem is that in $V$, we do not know about all dense subsets of $\Addone^V$ which exist in $X$, though we may take a sequence of names $(\dot D_n)_{n<\omega}\in V$ for them.   
+
+We can now go on and construct a $(X, \Addone^V)$-generic condition in $V$ as follows: The idea is to construct a descending sequence in $\PP_X$ by guessing how each $\dot D_n$ looks like by asking a condition in Cohen forcing on its opininion about $\dot D_n$. More precisely: The construction lasts $\omega$-many steps. In each step, we have already constructed some $q_k\in\PP_X$ and are handed a pair $(n, p)$ with $n<\omega$, $p$ a condition of Cohen forcing, by some bookkeeping. We then find $q_{k+1}\leq q_{k}$, $q_{k+1}\in\PP_X$ and $\bar p\leq p$ so that $\bar p\Vdash \check q_{k+1}\in\dot D_n$.
+In the end, we set $q=\bigcup_{k<\omega}q_k$.
+
+Since the construction of $q$ takes place in $V$, $q\in V$ is guaranteed so $q$ is really a condition of the forcing. It is then easy to convince oneself that  will be $(X, \Addone^V)$-generic.
+\end{proof}
+
+
+Thanks to Takehiko Gappo for checking the details with me!

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Andreas Lietz's Homepage
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<!-- Katex -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+]})"></script>
+
+</head>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="../css/navStyle.css">
+
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+
+<div class = "w3-padding-32">
+<div class="site-mobile-menu site-navbar-target">
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close mt-3">
+      <span class="icon-close2 js-menu-toggle"></span>
+    </div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
+</div>
+
+
+<header class="site-navbar site-navbar-target" role="banner">
+
+  <div class="w3-container">
+    <div class="row align-items-right position-relative">
+
+      <div class="col-3">
+        <div class="site-logo">
+          <a href="../index.html" class="font-weight-bold"></a>
+        </div>
+      </div>
+
+      <div class="col-9  text-right">
+        
+
+        <span class="d-inline-block d-lg-none"><a href="#" class="text-primary site-menu-toggle js-menu-toggle py-5"><img src="../resources/pictures/menu.svg" ></img></a></span>
+        <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
+          <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
+            <li><a href="../index.html" class="nav-link">Blog</a></li>
+            <li><a href="../research.html" class="nav-link">Research</a></li>
+            <li><a href="../CV.html" class="nav-link">CV</a></li>
+            <li><a href="../sequentcalculus.html" class="nav-link">Sequent Calculus App</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+
+      
+    </div>
+  </div>
+
+</header>
+</div>
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+    <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+            <!--%%%IMAGE%%%-->
+            <div class="w3-container">
+                <h3><b>Properness After a Cohen Real</b></h3>
+                <h5>A weird equivalence of CH<span class="w3-opacity"> July 9th, 2024</span></h5>
+            </div>
+        <div class="w3-container">
+        <style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style><p></p>
+<p>Proper forcing is an ubiquitous and versatile class of forcings. It contains all c.c.c. and $\sigma$-closed forcings and is closed under countable support iterations. Properness of $\mathbb{P}$ is equivalent to "$\mathbb{P}$ preserves stationary subsets of $[\lambda]^\omega$ for all uncountable regular $\lambda$", but the more useful, yet technical, definition is as follows.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+Suppose $\mathbb{P}$ is a forcing and $\theta>2^{\vert\mathbb{P}\vert}$ is regular. 
+</p>
+<p>$(1)$ For a countable $X\prec H_\theta$, a condition $q\in\mathbb{P}$ is $(X, \mathbb{P})$-generic iff $X[g]\cap V=X$ whenever $g$ is $\mathbb{P}$-generic with $q\in g$.
+    </p>
+<p>$(2)$ $\mathbb{P}$ is proper iff for a club of countable $X\prec H_\theta$, whenever $p\in X\cap\mathbb{P}$ there is some $q\leq p$ which is $(X, \mathbb{P})$-generic. (This does not depend on the choice of $\theta$!)
+</p>
+
+</span></div>
+<p>Properness, as most other natural properties of forcings, depends on $V$, e.g. a forcing may be proper in $V$ but not anymore in some forcing extension. The canonical example of a c.c.c. forcing, namely Cohen forcing, will be c.c.c. in any model, but what about the canonical example of a $\sigma$-closed forcing? In my book, this is Cohen forcing at $\omega_1$, denoted $\mathrm{Add}(\omega_1, 1)$, consisting of countable partial functions from $\omega_1$ to $\omega_1$.</p>
+<p>Recently, I became interestend in what kind of properties $\mathrm{Add}(\omega_1, 1)^V$ retains after adding a Cohen real $c$ to $V$. As any other atomless $\sigma$-closed forcing, it does not stay $\sigma$-closed in the extension $V[c]$. In fact in $V[c]$, $\mathrm{Add}(\omega_1, 1)^V$ is not forcing equivalent to any $\sigma$-closed or even $\sigma$-stategiacally closed forcing. What about properness?</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+The following are equivalent:
+</p>
+<p>$(1)$ $\mathrm{Add}(\omega_1, 1)^V$ is proper in $V[c]$.
+    </p>
+<p>$(2)$ $V\models\mathrm{CH}$.
+</p>
+
+</span></div>
+<p>This is probably known, for example I would bet a large amount of money that Shelah knows about this. Yet I've never seen nor heard about this and this is the reason for this post. </p>
+<p>So let's get on with a proof. We will make use of the following result due to Abraham-Shelah.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Fact</b><span style="flex: 1;"><p>
+Suppose $G$ is generic for a c.c.c. forcing which adds a real. Then in $V[G]$, $[\omega_2]^\omega\setminus V$ is stationary in $[\omega_2]^\omega$.
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+First, let us assume $\mathrm{CH}$ fails in $V$ and show that $\mathrm{Add}(\omega_1, 1)^V$ is not proper in $V[c]$. Let $\vec x=\langle x_i\mid i<\omega_2\rangle\in V$ be a sequence of pairwise different reals, which exists as $\mathrm{CH}$ fails. By the above fact, we have that $[\omega_2]^\omega\setminus V$ is stationary in $[\omega_2]^\omega$ in $V[c]$. It follows that there are stationarily many countable $X\prec H_\theta^{V[c]}$ with 
+</p>
+<p>&bull; $\vec x\in X$ and 
+    </p>
+<p>&bull; $X\cap\omega_2\notin V$.
+</p>
+<p>For such $X$, there is no $(X, \mathrm{Add}(\omega_1, 1)^V)$-generic condition! First note that $X\cap\mathcal P(\omega)\cap V\notin V$ as $x_i\in X$ iff $i\in X$ for $i<\omega_2$. If $q$ were a $(X, \mathrm{Add}(\omega_1, 1)^V)$-generic condition then the reals in $X\cap V$ are exactly those which appear as a restriction $q\upharpoonright [\alpha,\alpha+\omega)$ for some $\alpha\in X\cap\omega_1$ and hence we cannot have $q\in V$ either, contradiction. This shows that $\mathrm{Add}(\omega_1, 1)^V$ is not proper.</p>
+<p>On the other hand, let us now assume $\mathrm{CH}$ in $V$. So let $X\prec H_\theta^{V[c]}$ be a countable elementary substructure. We may assume that additionally $X\cap V\prec H_\theta^V$ as this is true on a club. Now by elementarity, there is an enumeration 
+$$\langle y_i\mid i<\omega_1\rangle\in X\cap V$$
+of the reals in $V$. This implies that $X\cap\mathcal P(\omega)\cap V=\{y_i\mid i\in X\cap\omega_1\}$. As $X\cap\omega_1\in\omega_1$, it follows that $V$ knows $X\cap\mathcal P(\omega)\cap V$ and hence $V$ knows $\mathbb{P}_X:=X\cap\mathrm{Add}(\omega_1, 1)^V$ as well. The problem is that in $V$, we do not know about all dense subsets of $\mathrm{Add}(\omega_1, 1)^V$ which exist in $X$, though we may take a sequence of names $(\dot D_n)_{n<\omega}\in V$ for them.   </p>
+<p>We can now go on and construct a $(X, \mathrm{Add}(\omega_1, 1)^V)$-generic condition in $V$ as follows: The idea is to construct a descending sequence in $\mathbb{P}_X$ by guessing how each $\dot D_n$ looks like by asking a condition in Cohen forcing on its opininion about $\dot D_n$. More precisely: The construction lasts $\omega$-many steps. In each step, we have already constructed some $q_k\in\mathbb{P}_X$ and are handed a pair $(n, p)$ with $n<\omega$, $p$ a condition of Cohen forcing, by some bookkeeping. We then find $q_{k+1}\leq q_{k}$, $q_{k+1}\in\mathbb{P}_X$ and $\bar p\leq p$ so that $\bar p\Vdash \check q_{k+1}\in\dot D_n$.
+In the end, we set $q=\bigcup_{k<\omega}q_k$.</p>
+<p>Since the construction of $q$ takes place in $V$, $q\in V$ is guaranteed so $q$ is really a condition of the forcing. It is then easy to convince oneself that  will be $(X, \mathrm{Add}(\omega_1, 1)^V)$-generic.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>
+Thanks to Takehiko Gappo for checking the details with me!</p>
+
+            </div>
+    </div>
+</div>
+
+  <!-- Introduction menu -->
+<div class="w3-col l3 w3-col m3 show-if-large">
+    <!-- About Card -->
+    <div class="w3-card w3-margin w3-margin-top" media = "max">
+      <div class="w3-container w3-white">
+        <h4><b>TL;DR</b></h4>
+        <p>
+We look at the canonical forcing to add a subset of $\omega_1$ as defined in $V$ after adding a Cohen real to $V$. We show that it is proper iff $\mathrm{CH}$ holds in $V$.
+</p>
+      </div>
+    </div>
+    
+    <!-- Posts -->
+    <!--
+    <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4>Popular Posts</h4>
+      </div>
+      <ul class="w3-ul w3-hoverable w3-white">
+        <li class="w3-padding-16">
+          <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+        <li class="w3-padding-16">
+          <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Dorum</span><br>
+          <span>Ultricies congue</span>
+        </li>   
+        <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+          <img src="/w3images/rock.jpg" alt="Imag  e" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Mingsum</span><br>
+          <span>Lorem ipsum dipsum</span>
+        </li>  
+      </ul>
+    </div>
+    -->
+  
+  
+    
+  <!-- END Introduction Menu -->
+  </div>
+  
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+</footer>
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/navMain.js"></script>
+
+</body>
+</html>
