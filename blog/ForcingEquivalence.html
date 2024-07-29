@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Andreas Lietz's Homepage
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<!-- Katex -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+]})"></script>
+
+</head>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="../css/navStyle.css">
+
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+
+<div class = "w3-padding-32">
+<div class="site-mobile-menu site-navbar-target">
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close mt-3">
+      <span class="icon-close2 js-menu-toggle"></span>
+    </div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
+</div>
+
+
+<header class="site-navbar site-navbar-target" role="banner">
+
+  <div class="w3-container">
+    <div class="row align-items-right position-relative">
+
+      <div class="col-3">
+        <div class="site-logo">
+          <a href="../index.html" class="font-weight-bold"></a>
+        </div>
+      </div>
+
+      <div class="col-9  text-right">
+        
+
+        <span class="d-inline-block d-lg-none"><a href="#" class="text-primary site-menu-toggle js-menu-toggle py-5"><img src="../resources/pictures/menu.svg" ></img></a></span>
+        <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
+          <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
+            <li><a href="../index.html" class="nav-link">Blog</a></li>
+            <li><a href="../research.html" class="nav-link">Research</a></li>
+            <li><a href="../CV.html" class="nav-link">CV</a></li>
+            <li><a href="../sequentcalculus.html" class="nav-link">Sequent Calculus App</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+
+      
+    </div>
+  </div>
+
+</header>
+</div>
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+    <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+            <!--%%%IMAGE%%%-->
+            <div class="w3-container">
+                <h3><b>What exactly is forcing equivalence?</b></h3>
+                <h5>An algebraic perspective<span class="w3-opacity"> July 29th, 2024</span></h5>
+            </div>
+        <div class="w3-container">
+        <style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style><p></p>
+<p>
+The notion of forcing equivalence is frequently used in Set Theoretical practice. Two forcings $\mathbb{P}$ and $\mathbb{Q}$ are forcing equivalent if any forcing extension by $\mathbb{P}$ is also a forcing extension by $\mathbb{Q}$, i.e. whenever $G$ is $\mathbb{P}$-generic there is $H$ a $\mathbb{Q}$-generic filter so that $V[G]=V[H]$, and vice versa. But what does this mean for $\mathbb{P}$ and $\mathbb{Q}$ from an algebraic point of view? We will explore this in this blog post.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+    Suppose $\mathcal C$ is a class of forcings. We say that $\mathcal C$ is closed under forcing equivalence if $\mathbb{P}\in\mathcal C\Leftrightarrow\mathbb{Q}\in\mathcal C$ whenever $\mathbb{P}, \mathbb{Q}$ are forcing equivalent.
+</p>
+</span></div>
+<p>To be precise, a forcing is any preorder for our purposes. We will characterize closure under forcing equivalence through closure under more concrete algebraic operations. </p>
+<p>
+Let me make a disclaimer first that none of what happens here is new, although I have never seen any of the two characterizations below stated like this.
+</p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+    Let $\mathcal C$ be a class of forcings. Then $\mathcal C$ is closed under forcing equivalence iff the following hold:
+    </p>
+<p>&bull; $\mathbb{P}\in\mathcal C\Leftrightarrow\mathbb{Q}\in\mathcal C$ whenever there is a dense embedding $\pi\colon\mathbb{P}\rightarrow\mathbb{Q}$,
+        </p>
+<p>&bull; $\mathbb{P}\in\mathcal C\Leftrightarrow\bigoplus_{i<\kappa}\mathbb{P}\in\mathcal C$ for all forcings $\mathbb{P}$ and $\kappa\neq 0$,
+    </p>
+
+</span></div>
+<p>By $\bigoplus_{i<\kappa}\mathbb{Q}_i$, we denote the direct sum of the posets $\mathbb{Q}_i$, which is just the disjoint union ordered in the obvious way. This is basically the same as the lottery sum, which also adds a maximal element. It does not matter whether we use the direct sum or the lottery sum in the theorem above.</p>
+<p>This characterization above depends on the exact definition of dense embedding! </p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+    Suppose $\mathbb{P},\mathbb{Q}$ are two forcings. A map $\pi\colon\mathbb{P}\rightarrow\mathbb{Q}$ is a dense embedding if 
+    </p>
+<p>&bull; $p\leq_{\mathbb{P}}q$ implies $\pi(p)\leq_{\mathbb{Q}}\pi(q)$,
+        </p>
+<p>&bull; $p\perp_{\mathbb{P}}q$ implies $\pi(p)\perp_{\mathbb{Q}}\pi(q)$ and
+        </p>
+<p>&bull; $\mathrm{ran}(\mathbb{P})$ is dense in $\mathbb{Q}$.
+    </p>
+
+</span></div>
+<p>This is the definition found e.g. in Kunen's Set Theory. However, such a map is not necessarily an embedding in the order theoretic sense as this requires the inverse of the first condition, i.e. $\pi(p)\leq_{\mathbb{Q}}\pi(q)$ implies $p\leq_{\mathbb{P}} q$.  In hindsight, a dense embedding should either be required to have this property or should have been named differently, e.g. dense homomorphism. But I do not make the rules here. To be fair, almost all dense embeddings "in practice" are embeddings in the order theoretical sense.  This happens automatically if $\mathbb{P}$ is separative for example. </p>
+<p>
+The important example of a dense embedding without this property are the natural maps $\pi\colon \mathbb{P}\rightarrow\mathrm{Sep}(\mathbb{P})$, where $\mathbb{P}$ is not separative and $\mathrm{Sep}(\mathbb{P})$ is the separative quotient of $\mathbb{P}$. A forcing is separative if whenever $p\not\leq q$ then there is $r\leq p$ with $r\perp q$. The separative quotient is simply the unique (up to isomorphism) separative preorder $\mathbb{Q}$ together with a dense embedding $\pi\colon\mathbb{P}\rightarrow\mathbb{Q}$ so that for any dense embedding $\mu\colon\mathbb{P}\rightarrow\mathbb R$ there is a unique dense embedding $\eta\colon \mathbb{Q}\rightarrow\mathbb{R}$ so that $\mu=\eta\circ\pi$. It can be constructed as follows: For $p,q\in\mathbb{P}$, say $p\leq_{\mathrm{sep}} q$ if any $r\leq p$ is compatible with $q$ (this is equivalent to "$q$ is in the generic if $p$ is") and $p\sim_{\mathrm{sep}} q$ iff $p\leq_{\mathrm{sep}} q$ and $q\leq_{\mathrm{sep}} p$. Then $\mathrm{Sep}(\mathbb{P})$ is $\mathbb{P}/\sim_{\mathrm{sep}}$ ordered by $[p]\leq [q]$ iff $p\leq_{\mathrm{sep}} q$. The forcing $\mathrm{Sep}(\mathbb{P})$ is then forcing equivalent to $\mathbb{P}$ and is separative. If $\mathbb{P}$ was separative from the get-go then $\leq_{\mathrm{sep}}=\leq$ and $\mathbb{P}, \mathrm{Sep}(\mathbb{P})$ are isomorphic. </p>
+<p>Arguably, embeddings are also supposed to be injective. This also may fail for a dense embedding even if $\pi(p)\leq_{\mathbb{Q}}\pi(q)$ implies $p\leq_{\mathbb{P}}q$, but if this is true then $\pi$ is automatically injective if $\mathbb{P}$ is a partial order, i.e. an antisymmetric forcing. Conveniently, any separative quotient is a partial order. A dense embedding $\pi\colon\mathbb{P}\rightarrow \mathbb{Q}$ with these two additional properties is hence nothing else than an isomorphism of $\mathbb{P}$ with a dense subset of $\mathbb{Q}$. This leads us to the promised second characterization.</p>
+<p></p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+    Let $\mathcal C$ be a class of forcings. Then $\mathcal C$ is closed under forcing equivalence iff the following hold:
+    </p>
+<p>$(1)$ $\mathbb{P}\in\mathcal C\Leftrightarrow\mathbb{Q}\in\mathcal C$ whenever $\mathbb{P}$ is isomorphic to a dense subset of $\mathbb{Q}$,
+        </p>
+<p>$(2)$ $\mathbb{P}\in\mathcal C\Leftrightarrow\bigoplus_{i<\kappa}\mathbb{P}\in\mathcal C$ for all forcings $\mathbb{P}$ and $\kappa\neq 0$,
+        </p>
+<p>$(3)$ $\mathbb{P}\in\mathcal C\Leftrightarrow\mathrm{Sep}(\mathbb{P})\in\mathcal C$ for all forcings $\mathbb{P}$.
+    </p>
+
+</span></div>
+<p>This second version is somewhat more precise than the first, it is not too hard to see that in fact the first version follows from this one. </p>
+<p>
+Before we turn toward a proof, let us make some more remarks on this theorem above. Consider the (undirected) graph $G$ of all forcings with an edge between $\mathbb{P},\mathbb{Q}$ iff one of the relations suggested by conditions $(i)-(iii)$ hold, i.e. there is an edge if $\mathbb{P}$ is isomorphic to a dense subset of $\mathbb{Q}$, etc. Then two forcings $\mathbb{P},\mathbb{Q}$ are forcing equivalent iff there is a path from $\mathbb{P}$ to $\mathbb{Q}$ in $G$. The proof below shows that a path of length 9 exists if there is one at all. That is, every connected component of $G$ has diameter $\leq 9$. This can be optimized to 6 by rearranging the steps. I do not know whether 5 steps always suffice.</p>
+<p>
+Also, none of conditions $(i)-(iii)$ can be removed! It is fun to come up with the counterexamples yourself.  In any case, here are the most simple ones that I could come up with.
+</p>
+<p>&bull; The class of forcings with countably closed separative quotient satisfies $(ii)$ and $(iii)$, but not $(i)$ as no atomless complete Boolean algebra is countably closed.
+    </p>
+<p>&bull; The class of  c.c.c. forcings satisfies $(i)$ and $(iii)$, but not $(ii)$. 
+    </p>
+<p>&bull; The class of countably strategically closed forcings satisfies $(i)$ and $(ii)$, but not $(iii)$. Here, the integers are a counterexample to $(iii)$, the separative quotient is just a point.
+</p>
+<p>Lukas Koschat has found a more elementary example of a class with $(i)$ and $(ii)$, but not $(iii)$: the class of forcings forcings with a dense set of atoms. This is exactly the closure of the point under $(i)$ and $(ii)$. </p>
+<p></p>
+<p>Now let's get on with a proof. It is a nice exercise to show that $(i)-(iii)$ above are necessary for a class $\mathcal C$ to be closed under forcing equivalence, so we will only show that it is sufficient. So start with forcing equivalent $\mathbb{P},\mathbb{Q}$. </p>
+<p>The idea is to replace $\mathbb{P},\mathbb{Q}$ by complete Boolean algebras and then exploit the additional structure. We can do this replacement as we can first go to the separative quotient and then use that any separative partial order is isomorphic to a dense subset of a complete Boolean algebra, a standard fact. So far, we have used conditions $(i)$ and $(iii)$. We are done once we know the following.</p>
+<p></p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $\mathbb{B}$ and $\mathbb{C}$ are forcing equivalent complete Boolean algebras and $\kappa>\vert\mathbb{B}\vert\cdot\vert\mathbb{C}\vert$ is a cardinal. Then $\mathbb{B}_\kappa\cong\mathbb{C}_\kappa$ where $\mathbb{B}_\kappa$ is the Boolean completion of $\bigoplus_{i<\kappa}\mathbb{B}$ and $\mathbb{C}_\kappa$ is defined similarly.
+</p>
+</span></div>
+<p>So with this we can prove the theorem by a further application of conditions $(i)$ and $(ii)$.</p>
+<p>The proof of the above Lemma uses a well-known fact about cBa's.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $\mathbb{B}$, $\mathbb{C}$ are forcing equivalent cBa's. Then for any $b\in\mathbb{B}$ there is $b'\leq b$ and $c\in\mathbb{C}$ so that $\mathbb{B}\upharpoonright b'\cong\mathbb{C}\upharpoonright c$.
+</p>
+</span></div>
+<p>Here is a short sketch: Let $\dot H$ be the $\mathbb{B}$-name so that it is forced that $V[G]=V[\dot H^G]$. So there will always be a $\mathbb{C}$-name $\dot g$ with $G=\dot g^{\dot H^G}$ whenever $G$ is $\mathbb{B}$-generic, but which name $\dot g$ works may depend on $G$. Nonetheless, we can strengthen $b$ to $b_0$ so that $b'$ forces a fixed $\dot g$ to work. Let $c_0=\inf\{q\in\mathbb{C}\mid b'\Vdash\check q\in\dot H\}$. There must be $c\leq c_0$ which forces that $\check b_0\in\dot g$ is $\mathbb{B}$-generic and generates the whole extension. Finally, let $b'\leq b_0$ the minimal condition forced by $c$ to be in $\dot g$. The map $\pi\colon\mathbb{B}\upharpoonright b'\rightarrow \mathbb{C}\upharpoonright c$ given by $\pi(p)=\sup\{q\in\mathbb{C}\mid p\Vdash_{\mathbb{B}}\check q\in\dot H\}$ is then an isomorphism.</p>
+<p>It remains to prove the first Lemma.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    We construct maximal antichains $\mathcal A=\{p_i\mid i<\kappa\}\subseteq\bigoplus_{i<\kappa}\mathbb{B}$ and $\mathcal B=\{q_i\mid i<\kappa\}\subseteq\bigoplus_{i<\kappa}\mathbb{B}$ so that for every $i<\kappa$, $\bigoplus_{i<\kappa}\mathbb{B}\upharpoonright p_i\cong\bigoplus_{i<\kappa}\mathbb{C}\upharpoonright q_i$.
+     
+    As $\mathbb{B},\mathbb{C}$ are forcing equivalent complete Boolean algebras, so are every two summands of $\mathbb{B}_\kappa$, $\mathbb{C}_\kappa$ respectively. Hence for any $p\in\bigoplus_{i<\kappa}\mathbb{B}$ there is $p'\leq p$ and $q\in\bigoplus_{i<\kappa}\mathbb{C}$ (in any desired summand of $\mathbb{C}_\kappa$) so that $\bigoplus_{i<\kappa}\mathbb{B}\upharpoonright p'\cong\bigoplus_{i<\kappa}\mathbb{C}\upharpoonright q$. Also, no antichain of size ${<}\kappa$ is maximal in either $\bigoplus_{i<\kappa}\mathbb{B}$ or $\bigoplus_{i<\kappa}\mathbb{C}$. This makes the construction of $\mathcal A,\mathcal B$ straightforward using a back and forth argument.</p>
+<p>    As $\mathcal A,\mathcal B$ are maximal antichains in $\bigoplus_{i<\kappa}\mathbb{B},\bigoplus_{i<\kappa}\mathbb{C}$, we can glue the local isomorphisms together into a global isomorphism of the Boolean completions $\mathbb{B}_\kappa$ and $\mathbb{C}_\kappa$.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+
+            </div>
+    </div>
+</div>
+
+  <!-- Introduction menu -->
+<div class="w3-col l3 w3-col m3 show-if-large">
+    <!-- About Card -->
+    <div class="w3-card w3-margin w3-margin-top" media = "max">
+      <div class="w3-container w3-white">
+        <h4><b>TL;DR</b></h4>
+        <p>
+We give an algebraic characterization of when exactly two forcing are forcing equivalent. We also argue that dense embedding should be renamed.
+</p>
+      </div>
+    </div>
+    
+    <!-- Posts -->
+    <!--
+    <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4>Popular Posts</h4>
+      </div>
+      <ul class="w3-ul w3-hoverable w3-white">
+        <li class="w3-padding-16">
+          <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+        <li class="w3-padding-16">
+          <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Dorum</span><br>
+          <span>Ultricies congue</span>
+        </li>   
+        <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+          <img src="/w3images/rock.jpg" alt="Imag  e" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Mingsum</span><br>
+          <span>Lorem ipsum dipsum</span>
+        </li>  
+      </ul>
+    </div>
+    -->
+  
+  
+    
+  <!-- END Introduction Menu -->
+  </div>
+  
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+</footer>
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/navMain.js"></script>
+
+</body>
+</html>

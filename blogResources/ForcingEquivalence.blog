@@ -1,0 +1,119 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Addone}{\mathrm{Add}(\omega_1, 1)}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\Sep}{\mathrm{Sep}}
+\newcommand{\leqsep}{\leq_{\mathrm{sep}}}
+\newcommand{\simsep}{\sim_{\mathrm{sep}}}
+\newcommand{\forces}{\Vdash}
+\newcommand{\res}{\upharpoonright}
+
+
+\title{What exactly is forcing equivalence?}
+\subtitle{An algebraic perspective}
+\date{July 29th, 2024}
+
+\begin{tldr}
+We give an algebraic characterization of when exactly two forcing are forcing equivalent. We also argue that dense embedding should be renamed.
+\end{tldr}
+
+The notion of forcing equivalence is frequently used in Set Theoretical practice. Two forcings $\PP$ and $\QQ$ are forcing equivalent if any forcing extension by $\PP$ is also a forcing extension by $\QQ$, i.e. whenever $G$ is $\PP$-generic there is $H$ a $\QQ$-generic filter so that $V[G]=V[H]$, and vice versa. But what does this mean for $\PP$ and $\QQ$ from an algebraic point of view? We will explore this in this blog post.
+
+\begin{defn}
+    Suppose $\mathcal C$ is a class of forcings. We say that $\mathcal C$ is closed under forcing equivalence if $\PP\in\mathcal C\Leftrightarrow\QQ\in\mathcal C$ whenever $\PP, \QQ$ are forcing equivalent.
+\end{defn}
+
+To be precise, a forcing is any preorder for our purposes. We will characterize closure under forcing equivalence through closure under more concrete algebraic operations. 
+
+
+Let me make a disclaimer first that none of what happens here is new, although I have never seen any of the two characterizations below stated like this.
+\begin{thm}
+    Let $\mathcal C$ be a class of forcings. Then $\mathcal C$ is closed under forcing equivalence iff the following hold:
+    \begin{itemize}
+        \item $\PP\in\mathcal C\Leftrightarrow\QQ\in\mathcal C$ whenever there is a dense embedding $\pi\colon\PP\rightarrow\QQ$,
+        \item $\PP\in\mathcal C\Leftrightarrow\bigoplus_{i<\kappa}\PP\in\mathcal C$ for all forcings $\PP$ and $\kappa\neq 0$,
+    \end{itemize}
+\end{thm}
+
+By $\bigoplus_{i<\kappa}\QQ_i$, we denote the direct sum of the posets $\QQ_i$, which is just the disjoint union ordered in the obvious way. This is basically the same as the lottery sum, which also adds a maximal element. It does not matter whether we use the direct sum or the lottery sum in the theorem above.
+
+This characterization above depends on the exact definition of dense embedding! 
+
+\begin{defn}
+    Suppose $\PP,\QQ$ are two forcings. A map $\pi\colon\PP\rightarrow\QQ$ is a dense embedding if 
+    \begin{itemize}
+        \item $p\leq_{\PP}q$ implies $\pi(p)\leq_{\QQ}\pi(q)$,
+        \item $p\perp_{\PP}q$ implies $\pi(p)\perp_{\QQ}\pi(q)$ and
+        \item $\mathrm{ran}(\PP)$ is dense in $\QQ$.
+    \end{itemize}
+\end{defn}
+
+This is the definition found e.g. in Kunen's Set Theory. However, such a map is not necessarily an embedding in the order theoretic sense as this requires the inverse of the first condition, i.e. $\pi(p)\leq_{\QQ}\pi(q)$ implies $p\leq_{\PP} q$.  In hindsight, a dense embedding should either be required to have this property or should have been named differently, e.g. dense homomorphism. But I do not make the rules here. To be fair, almost all dense embeddings "in practice" are embeddings in the order theoretical sense.  This happens automatically if $\PP$ is separative for example. 
+
+
+The important example of a dense embedding without this property are the natural maps $\pi\colon \PP\rightarrow\Sep(\PP)$, where $\PP$ is not separative and $\Sep(\PP)$ is the separative quotient of $\PP$. A forcing is separative if whenever $p\not\leq q$ then there is $r\leq p$ with $r\perp q$. The separative quotient is simply the unique (up to isomorphism) separative preorder $\QQ$ together with a dense embedding $\pi\colon\PP\rightarrow\QQ$ so that for any dense embedding $\mu\colon\PP\rightarrow\mathbb R$ there is a unique dense embedding $\eta\colon \QQ\rightarrow\mathbb{R}$ so that $\mu=\eta\circ\pi$. It can be constructed as follows: For $p,q\in\PP$, say $p\leqsep q$ if any $r\leq p$ is compatible with $q$ (this is equivalent to "$q$ is in the generic if $p$ is") and $p\simsep q$ iff $p\leqsep q$ and $q\leqsep p$. Then $\Sep(\PP)$ is $\PP/\simsep$ ordered by $[p]\leq [q]$ iff $p\leqsep q$. The forcing $\Sep(\PP)$ is then forcing equivalent to $\PP$ and is separative. If $\PP$ was separative from the get-go then $\leqsep=\leq$ and $\PP, \Sep(\PP)$ are isomorphic. 
+
+Arguably, embeddings are also supposed to be injective. This also may fail for a dense embedding even if $\pi(p)\leq_{\QQ}\pi(q)$ implies $p\leq_{\PP}q$, but if this is true then $\pi$ is automatically injective if $\PP$ is a partial order, i.e. an antisymmetric forcing. Conveniently, any separative quotient is a partial order. A dense embedding $\pi\colon\PP\rightarrow \QQ$ with these two additional properties is hence nothing else than an isomorphism of $\PP$ with a dense subset of $\QQ$. This leads us to the promised second characterization.
+
+
+
+\begin{thm}
+    Let $\mathcal C$ be a class of forcings. Then $\mathcal C$ is closed under forcing equivalence iff the following hold:
+    \begin{enumerate}
+        \item $\PP\in\mathcal C\Leftrightarrow\QQ\in\mathcal C$ whenever $\PP$ is isomorphic to a dense subset of $\QQ$,
+        \item $\PP\in\mathcal C\Leftrightarrow\bigoplus_{i<\kappa}\PP\in\mathcal C$ for all forcings $\PP$ and $\kappa\neq 0$,
+        \item $\PP\in\mathcal C\Leftrightarrow\Sep(\PP)\in\mathcal C$ for all forcings $\PP$.
+    \end{enumerate}
+\end{thm}
+
+This second version is somewhat more precise than the first, it is not too hard to see that in fact the first version follows from this one. 
+
+
+Before we turn toward a proof, let us make some more remarks on this theorem above. Consider the (undirected) graph $G$ of all forcings with an edge between $\PP,\QQ$ iff one of the relations suggested by conditions $(i)-(iii)$ hold, i.e. there is an edge if $\PP$ is isomorphic to a dense subset of $\QQ$, etc. Then two forcings $\PP,\QQ$ are forcing equivalent iff there is a path from $\PP$ to $\QQ$ in $G$. The proof below shows that a path of length 9 exists if there is one at all. That is, every connected component of $G$ has diameter $\leq 9$. This can be optimized to 6 by rearranging the steps. I do not know whether 5 steps always suffice.
+
+
+Also, none of conditions $(i)-(iii)$ can be removed! It is fun to come up with the counterexamples yourself.  In any case, here are the most simple ones that I could come up with.
+\begin{itemize}
+    \item The class of forcings with countably closed separative quotient satisfies $(ii)$ and $(iii)$, but not $(i)$ as no atomless complete Boolean algebra is countably closed.
+    \item The class of  c.c.c. forcings satisfies $(i)$ and $(iii)$, but not $(ii)$. 
+    \item The class of countably strategically closed forcings satisfies $(i)$ and $(ii)$, but not $(iii)$. Here, the integers are a counterexample to $(iii)$, the separative quotient is just a point.
+\end{itemize}
+
+Lukas Koschat has found a more elementary example of a class with $(i)$ and $(ii)$, but not $(iii)$: the class of forcings forcings with a dense set of atoms. This is exactly the closure of the point under $(i)$ and $(ii)$. 
+
+
+
+Now let's get on with a proof. It is a nice exercise to show that $(i)-(iii)$ above are necessary for a class $\mathcal C$ to be closed under forcing equivalence, so we will only show that it is sufficient. So start with forcing equivalent $\PP,\QQ$. 
+
+The idea is to replace $\PP,\QQ$ by complete Boolean algebras and then exploit the additional structure. We can do this replacement as we can first go to the separative quotient and then use that any separative partial order is isomorphic to a dense subset of a complete Boolean algebra, a standard fact. So far, we have used conditions $(i)$ and $(iii)$. We are done once we know the following.
+
+
+
+\begin{lemm}
+    Suppose $\BB$ and $\CC$ are forcing equivalent complete Boolean algebras and $\kappa>\vert\BB\vert\cdot\vert\CC\vert$ is a cardinal. Then $\BB_\kappa\cong\CC_\kappa$ where $\BB_\kappa$ is the Boolean completion of $\bigoplus_{i<\kappa}\BB$ and $\CC_\kappa$ is defined similarly.
+\end{lemm}
+
+So with this we can prove the theorem by a further application of conditions $(i)$ and $(ii)$.
+
+The proof of the above Lemma uses a well-known fact about cBa's.
+
+\begin{lemm}
+    Suppose $\BB$, $\CC$ are forcing equivalent cBa's. Then for any $b\in\BB$ there is $b'\leq b$ and $c\in\CC$ so that $\BB\upharpoonright b'\cong\CC\upharpoonright c$.
+\end{lemm}
+
+Here is a short sketch: Let $\dot H$ be the $\BB$-name so that it is forced that $V[G]=V[\dot H^G]$. So there will always be a $\CC$-name $\dot g$ with $G=\dot g^{\dot H^G}$ whenever $G$ is $\BB$-generic, but which name $\dot g$ works may depend on $G$. Nonetheless, we can strengthen $b$ to $b_0$ so that $b'$ forces a fixed $\dot g$ to work. Let $c_0=\inf\{q\in\CC\mid b'\forces\check q\in\dot H\}$. There must be $c\leq c_0$ which forces that $\check b_0\in\dot g$ is $\BB$-generic and generates the whole extension. Finally, let $b'\leq b_0$ the minimal condition forced by $c$ to be in $\dot g$. The map $\pi\colon\BB\res b'\rightarrow \CC\res c$ given by $\pi(p)=\sup\{q\in\CC\mid p\forces_{\BB}\check q\in\dot H\}$ is then an isomorphism.
+
+It remains to prove the first Lemma.
+
+\begin{proof}
+    We construct maximal antichains $\mathcal A=\{p_i\mid i<\kappa\}\subseteq\bigoplus_{i<\kappa}\BB$ and $\mathcal B=\{q_i\mid i<\kappa\}\subseteq\bigoplus_{i<\kappa}\BB$ so that for every $i<\kappa$, $\bigoplus_{i<\kappa}\BB\res p_i\cong\bigoplus_{i<\kappa}\CC\res q_i$.
+     
+    As $\BB,\CC$ are forcing equivalent complete Boolean algebras, so are every two summands of $\BB_\kappa$, $\CC_\kappa$ respectively. Hence for any $p\in\bigoplus_{i<\kappa}\BB$ there is $p'\leq p$ and $q\in\bigoplus_{i<\kappa}\CC$ (in any desired summand of $\CC_\kappa$) so that $\bigoplus_{i<\kappa}\BB\res p'\cong\bigoplus_{i<\kappa}\CC\res q$. Also, no antichain of size ${<}\kappa$ is maximal in either $\bigoplus_{i<\kappa}\BB$ or $\bigoplus_{i<\kappa}\CC$. This makes the construction of $\mathcal A,\mathcal B$ straightforward using a back and forth argument.
+
+    As $\mathcal A,\mathcal B$ are maximal antichains in $\bigoplus_{i<\kappa}\BB,\bigoplus_{i<\kappa}\CC$, we can glue the local isomorphisms together into a global isomorphism of the Boolean completions $\BB_\kappa$ and $\CC_\kappa$.
+\end{proof}
