@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Andreas Lietz's Homepage
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<!-- Katex -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+]})"></script>
+
+</head>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="../css/navStyle.css">
+
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+
+<div class = "w3-padding-32">
+<div class="site-mobile-menu site-navbar-target">
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close mt-3">
+      <span class="icon-close2 js-menu-toggle"></span>
+    </div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
+</div>
+
+
+<header class="site-navbar site-navbar-target" role="banner">
+
+  <div class="w3-container">
+    <div class="row align-items-right position-relative">
+
+      <div class="col-3">
+        <div class="site-logo">
+          <a href="../index.html" class="font-weight-bold"></a>
+        </div>
+      </div>
+
+      <div class="col-9  text-right">
+        
+
+        <span class="d-inline-block d-lg-none"><a href="#" class="text-primary site-menu-toggle js-menu-toggle py-5"><img src="../resources/pictures/menu.svg" ></img></a></span>
+        <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
+          <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
+            <li><a href="../index.html" class="nav-link">Blog</a></li>
+            <li><a href="../research.html" class="nav-link">Research</a></li>
+            <li><a href="../CV.html" class="nav-link">CV</a></li>
+            <li><a href="../sequentcalculus.html" class="nav-link">Sequent Calculus App</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+
+      
+    </div>
+  </div>
+
+</header>
+</div>
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+    <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+            <img src="../resources/pictures/Oberwolfach.jpg" style="width: 100%;">
+            <div class="w3-container">
+                <h1><b>The Mystery of Practical Consistency Strength</b></h1>
+                <h3>And the tremendous power of inner model theory<span class="w3-opacity"> January 14th, 2025</span></h3>
+            </div>
+        <div class="w3-container">
+        <style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style><p></p>
+<p>This week, one of my mathematical dreams became true: I gave a talk at Oberwolfach. I was supposed to go to Oberwolfach already a couple of years ago, but a certain pandemic got in the way.
+During my talk, I discussed the famous problem of the consistency strength of the Proper Forcing Axiom $\mathrm{PFA}$ and introduced the notion of practical consistency strength.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+The practical consistency strength of a statement $\varphi$ is the least large cardinal property $\psi$ so that 
+$$\mathrm{ZFC}+\exists\kappa\ \psi(\kappa)\vdash\exists \text{nice }\mathbb{P}\ \Vdash_{\mathbb{P}} \varphi.$$
+</p>
+</span></div>
+<p>This is, of course, not a fully formal concept in so far as there is no formal definition of what a large cardinal is nor a proof that the large cardinal hierarchy is wellfounded. 
+However, every Set Theorists "knows" a large cardinal on sight and "knows" that the large cardinal hierarchy is indeed wellfounded. In light of this, the notion of practical consistency strength works in, wait for it, practice.</p>
+<p>The predicate "nice" is an optional restriction we can put in place, which will depend on the principle $\varphi$. For example, it is natural to ask only for proper forcings if one wants to force the proper forcing axiom. So, the practical consistency strength may depend on the choice of "nice".</p>
+<p>In the overwhelming amount of cases, the practical consistency strength agrees with the true consistency strength. Here is a bunch of classical examples (with consistency strength in brackets):</p>
+<p></p>
+<p>&bull; Every set of reals is Lebesgue measurable in $L(\mathbb R)$. (Inaccessible cardinal)
+    </p>
+<p>&bull; There is no Kurepa tree. (Inaccessible cardinal)
+    </p>
+<p>&bull; The bounded proper forcing axiom. ($\Sigma_1$-reflecting cardinal)
+    </p>
+<p>&bull; $\neg\Box_{\omega_1}$. (Mahlo cardinal)
+    </p>
+<p>&bull; $\omega_2$ has the tree property. (Weakly compact cardinal)
+    </p>
+<p>&bull; (Co-)analytic determinacy. ($0^\sharp$ exists)
+    </p>
+<p>&bull; There is a precipitous ideal on $\omega_1$. (Measurable cardinal)
+    </p>
+<p>&bull; Every projective set is universally Baire. (Infinitely many strong cardinals)
+    </p>
+<p>&bull; There is a saturated ideal on $\omega_1$. (Woodin cardinal)
+</p>
+
+But this is not always the case!
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+Let us say that a statement $\varphi$ is impractical if 
+</p>
+<p>&bull; There is some large cardinal property $\psi$ so that $\mathrm{ZFC}+\exists\kappa\psi(\kappa)\vdash\exists\mathbb{P}\ \Vdash_{\mathbb P}\varphi$.
+    </p>
+<p>&bull; If $\psi$ is the large cardinal property such that $\mathrm{ZFC}+\exists\kappa\psi(\kappa)$ is equiconsistent to $\mathrm{ZFC}+\varphi$ then $\mathrm{ZFC}+\exist\kappa\psi(\kappa)\not\vdash\exist\mathbb{P}\ \Vdash_\mathbb{P}\varphi$.
+</p>
+
+</span></div>
+
+So, basically, a statement is impractical if it's consistency strength and practical consistency strength disagree. To my knowledge, the first example of an impractical statement is $\mathrm{AD}^{L(\mathbb R)}$. It is known that $\mathrm{ZF}+\mathrm{AD}$ and $\mathrm{ZFC}+$infinitely many Woodin cardinals are equiconsistent. Now, if $\mathrm{AD}$ holds then $L(\mathbb R)\models\mathrm{AD}+\mathrm{DC}$ and thus we can add a wellorder of $\mathbb R$ over $L(\mathbb R)$ via forcing without adding reals. The resulting model is a model of $\mathrm{ZFC}+\mathrm{AD}^{L(\mathbb R)}$. So the consistency strength of $\mathrm{AD}^{L(\mathbb R)}$ (over $\mathrm{ZFC}$) is exactly $\omega$-many Woodin cardinals.<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p><b>(Folklore)</b>
+$\mathrm{AD}^{L(\mathbb R)}$ is impractical.
+</p>
+</span></div>
+
+This is most likely due to Woodin, but this fact seems to be unpublished.<p>The proof is quite short, so let's have a crack at it. We will however use some blackboxes from inner model theory.
+</p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    We have to find a model $M$ with infinitely many Woodin cardinals so that there is no forcing extension of $M$ in which $\mathrm{AD}^{L(\mathbb R)}$ holds. Let $\lambda$ denote the supremum of the first $\omega$-many Woodin cardinals (if it exists). Let $M$ be a transitive model of $\mathrm{ZFC}$ with infinitely many Woodin cardinals with $\lambda^M$ as small as possible. 
+    </p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Claim</b><span style="flex: 1;"><p>
+        $\mathrm{AD}^{L(\mathbb R)}$ fails in all forcing extensions of $M$.
+    </p>
+</span></div>
+
+    <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+        Suppose toward a contradiction that $M[g]$ is a forcing extension of $M$ with $M[g]\models\mathrm{AD}^{L(\mathbb R)}$. Via inner model theory, it is possible to find another model $N$ of $\mathrm{ZFC}$ with infinitely many Woodin cardinals so that, curically, $\lambda^N=\omega_1^{M[g]}$. Thus $\omega_1^{M[g]}\geq\lambda^M$ by our choice of $M$. But $\lambda^M$ is singular in $M$ so $\lambda^M<\omega_1^{M[g]}$. This implies that $x=(V_\lambda)^M$ is countable in $M[g]$. A basic consequence of $\mathrm{AD}^{L(\mathbb R)}$ is that every real has a sharp, so $x^\sharp$ exists in $M[g]$. But sharps cannot be added by forcing, so $x^\sharp\in M$. Using more inner model theory, we see that from the infintely many Woodin cardinals together with $x^\sharp$, $M$ can construct the sharp for the canonical inner model with infinitely many Woodin cardinals, namely $(M_\omega^\sharp)^M$.</p>
+<p>        Now $M_\omega^\sharp$ is always a countable set in the model in which it is constructed, hence $\lambda^{(M_\omega^\sharp)^M}<\lambda^M$, contradiction.
+    </p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>The reader who has not been made familiar with the derived model theorem might wonder how the optimal lower bound for $\mathrm{AD}$ is established. The model is simply $L(\mathbb R^\ast)$ where $\mathbb R^\ast$ is the set of reals appearing in a proper intermediate extension of $V$ by a generic for $\mathrm{Col}(\omega,\lambda)$. It is not hard to see that $\mathbb R^\ast$ is not the set of reals of any forcing extension of $V$, so this might explain some of the mystery here.</p>
+<p>There are indeed more examples, which seem to suggest that impractical statements are a natural phenomenon. The topic of impractical statements is not well explored and surrounded by a couple of metamathematical mysteries. </p>
+<p>While the practical consistency strength of $\mathrm{AD}^{L(\mathbb R)}$ is only an epsilon away from its consistency strength, the gap is significant in other examples.</p>
+<p>For example, consider $\varphi=$"$\mathrm{NS}_{\omega_1}$ is $\omega_1$-dense". The consistency strength of $\varphi$ is the same as the one of $\mathrm{AD}^{L(\mathbb R)}$, infinitely many Woodin cardinals. If we interpret nice as "$\omega_1$-preserving" then Woodin has shown that the practical consistency strength of $\varphi$  is at least a Woodin limit of Woodin cardinals. The main result of my PhD thesis was to establish an upper bound in terms of practical consistency strength, which is (slightly less than) a supercompact limit of supercompact cardinals. </p>
+<p>Another known impractical statment is $\mathrm{MM}(\mathfrak c)$, namely Martin's Maximum for forcings of size continuum. We know of several likely candidates for impracticbility:
+</p>
+<p>&bull; $\neg\Box(\omega_3)\wedge\neg\Box(\omega_4)$.
+    </p>
+<p>&bull; Sealing, i.e. determinacy of all universally Baire sets, closure of universally Baire sets under constructibility and absoluteness of the theory of $L(\mathrm{uB})$ under forcing.
+</p>
+<p>Both of these statments have recently been shown to be of consistency strength strictly below a Woodin limit of Woodin cardinals. The first one has famously been used by Larson-Sargsyan to get a failure of the $K^c$-construction from surprisingly low large cardinal assumptions. The practical consistency strength is likely at least a subcompact cardinal. </p>
+<p>Woodin has shown that Sealing can be forced from a supercompact cardinal. No better upper bound on the practical consistency strength of Sealing is known.</p>
+<p>Personally, I would bet money that both of these statements are impractical.</p>
+<p>Curiously, all known examples of impractical statements are of quite high consistency strength.
+</p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Question</b><span style="flex: 1;"><p>
+    Is there any (natural) impractical Set Theoretical principle of consistency strength strictly below a Woodin cardinal?
+</p>
+</span></div>
+<p>I asked this question in Oberwolfach and after discussing several suggestions, there is apparently no proven example. Woodin has suggested a promising candidate though.
+<h2>The 12th Delfino Problem</h2>
+ Let $\varphi$ be the conjunction of "all projective sets are Lebesgue measurable", "all projective sets have the property of Baire" and projective uniformization. This principle has an intersting history, which I will summarize quickly.</p>
+<p>$\varphi$ is the star of the 12th entry in an influential collection of questions that became to be known as the "Delfino problems". </p>
+<p>The principle $\varphi$ is the conjunction of the three most striking and most useful consequences of projective determinacy. The 12th Delfino problem asks whether $\varphi$ actually fully captures projective determinacy, either in form of an equivalence or at least in terms of large cardinal consistency strength. Based on work of Wooin, Steel gave a negative answer: the consistency strength of $\varphi$ is strictly below infinitely many strong cardinals! This is way below the consistency strength of projective determinacy which is beyond a Woodin cardinal.</p>
+<p>Steel's argument has the interesting feature that it heavily uses the finestructure of a canonical model with (slightly less than)  infinitely many strong cardinals. It is still open whether even only projective uniformization can provably be forced from infinitely many strong cardinals. Likely, the answer is "no". On the other hand, projective determinacy and hence $\varphi$ follows outright from the existence of infinitely many Woodin cardinals and hence $\varphi$ is likely impractical.</p>
+<p>Gabe Goldberg made two other suggestions: the first of which is quite cheeky. The statment "$V=L$ or there is an inaccessible cardinal" is clearly impractical for the simple reason that $V=L$ is not provably forceable from any consistent large cardinal. I took the executive decision and discounted this example as "unnatural". Yes, I believe that the disjunction of two natural statements is not necessarily natural. Sue me.</p>
+<p>His other suggestion is much mathematically much more interesting: $\varphi=$"there is a measurable cardinal and the least such carries a unique normal measure". This holds in all canonical inner models with a measurable cardinal, in particular $\varphi$ has consistency strength equal to a measurable cardinal. It seems likely that there are models with measurable cardinals over which $\varphi$ cannot be forced, but this is not known. Even worse, it is not known whether $\varphi$ can provably be forced from any large cardinal. It should be mentioned that the $\Omega$-conjecture predicts that a proper class of Woodin cardinal should suffice for this. </p>
+<p>So the situation appears to be as follows: impractical principles appear naturally and quite frequently once determinacy kicks in at the level of Woodin cardinals. There is a good chance that there are examples of lower consistency strength, but we have no proof of that. In any case, examples appear to be much rarer at lower consistency strength.</p>
+<p>So why is that? One potential explanation would be a lack of methods by which we could produce examples. Some of the impractical statements beyond Woodin cardinals are related to Woodin's $\mathbb P_{\mathrm{max}}$-method, for example.</p>
+<p>But arguably, this is not really the case: we have a deep understanding of canonical inner models at every large cardinal level below a Woodin cardinal. These models have tremendous structure on them. So one might end up in the following situation: it possible to force a statement $\varphi$ over such a canonical inner model using the additional structure, but the relevant large cardinal property does not impose enough structure on it's own to do so in general. The result is that $\varphi$ is impractical.</p>
+<p>This is exactly what seemingly happens with Woodin's example. In Goldberg's example, the additional structure of canonical models is already built into the statement. </p>
+<p>Why is there not an abundance of such examples? </p>
+<p>If anybody knows of more instances of impracticbility, I am very interested to hear about them! </p>
+
+            </div>
+    </div>
+</div>
+
+  <!-- Introduction menu -->
+<div class="w3-col l3 w3-col m3 show-if-large">
+    <!-- About Card -->
+    <div class="w3-card w3-margin w3-margin-top" media = "max">
+      <div class="w3-container w3-white">
+        <h4><b>TL;DR</b></h4>
+        <p>
+    The pracitcal consistency strength of $\varphi$ is the least large cardinal from which $\varphi$ can provably be forced. In most cases, this agrees with the actual consistency strength of $\varphi$, but not always! We discuss the general picture of consistency strength vs practical consistency strength.
+</p>
+      </div>
+    </div>
+    
+    <!-- Posts -->
+    <!--
+    <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4>Popular Posts</h4>
+      </div>
+      <ul class="w3-ul w3-hoverable w3-white">
+        <li class="w3-padding-16">
+          <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+        <li class="w3-padding-16">
+          <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Dorum</span><br>
+          <span>Ultricies congue</span>
+        </li>   
+        <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+          <img src="/w3images/rock.jpg" alt="Imag  e" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Mingsum</span><br>
+          <span>Lorem ipsum dipsum</span>
+        </li>  
+      </ul>
+    </div>
+    -->
+  
+  
+    
+  <!-- END Introduction Menu -->
+  </div>
+  
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+</footer>
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/navMain.js"></script>
+
+</body>
+</html>

@@ -8,11 +8,13 @@ import BasicParsing
 
 --typedef
 
-data HtmlCode = P HtmlCode | Environment String HtmlCode | Inner String | More [HtmlCode] deriving (Show)
+data HtmlCode = P HtmlCode | Formatting String HtmlCode | Environment String HtmlCode | Inner String | More [HtmlCode] deriving (Show)
 
 --environment parsing
 
-theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("cor", "Corollary"), ("rem", "Remark"), ("fact", "Fact"), ("claim", "Claim"), ("proof", "Proof"), ("tldr", "tldr")]
+theoremEnvironments = M.fromList [("thm", "Theorem"), ("lemm", "Lemma"), ("defn", "Definition"), ("prop", "Proposition"), ("cor", "Corollary"), ("rem", "Remark"), ("fact", "Fact"), ("que", "Question"), ("claim", "Claim"), ("proof", "Proof"), ("tldr", "tldr")]
+
+formats = M.fromList [("textbf", "b"), ("textit", "em"), ("section", "h2"), ("subsection", "h4")]
 
 enumerateP :: Parser HtmlCode
 enumerateP = chainHtmlALAP (ws *> stringP "\\item " *> blogP)
@@ -39,6 +41,14 @@ addParagraphP = Parser $ \input -> do
 newParagraphP :: Parser HtmlCode
 newParagraphP = stringP "\n\n" *> addParagraphP
 
+formatP :: Parser HtmlCode
+formatP = charP '\\' *> (Parser $ \input -> do
+            (afterIdent, identifier) <- runParser (waitForCondP (\str -> "{" `isPrefixOf` str)) input
+            if not $ identifier `M.member` formats then Nothing else do
+                (rest, braces) <- runParser enclosingBracesP afterIdent
+                (nothing, parsedInner) <- runParser blogP (tail $ init braces)
+                if nothing == "" then return (rest, Formatting identifier parsedInner) else Nothing)
+
 notSpecialHtmlP :: Parser HtmlCode
 notSpecialHtmlP  = Inner <$> notSpecialP
 
@@ -52,7 +62,7 @@ noBeginEndOrItem :: String -> Bool
 noBeginEndOrItem s = not $ or $ map (flip isPrefixOf s) ["\\begin{", "\\end{", "\\item"]
 
 oneStepP :: Parser HtmlCode
-oneStepP = (flipP $ stringP "\\end{") *> (newParagraphP <|> (environmentP <|> notSpecialHtmlP <|> (condP noBeginEndOrItem anyHtmlP)))
+oneStepP = (flipP $ stringP "\\end{") *> (newParagraphP <|> formatP <|> (environmentP <|> notSpecialHtmlP <|> (condP noBeginEndOrItem anyHtmlP)))
 
 chainHtmlALAP :: Parser HtmlCode -> Parser HtmlCode
 chainHtmlALAP parser = pure More <*> many parser 
@@ -84,6 +94,7 @@ environmentToHtml (Environment env inEnv)
 
 toHtml :: HtmlCode -> String
 toHtml (P code) = "<p>" ++ toHtml code ++ "</p>\n"
+toHtml (Formatting identifier code) = "<" ++ token ++ ">" ++ toHtml code ++ "</" ++ token ++ ">" where token = formats M.! identifier
 toHtml c@(Environment _ _) = environmentToHtml c
 toHtml (More []) = ""
 toHtml (More (h:hs)) = toHtml h ++ (toHtml (More hs))

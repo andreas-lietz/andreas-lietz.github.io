@@ -92,8 +92,8 @@ and is wrapped around the whole page content, except for the footer in this exam
         <div class="w3-card-4 w3-margin w3-white">
             <!--%%%IMAGE%%%-->
             <div class="w3-container">
-                <h3><b><!--%%%TITLE%%%--></b></h3>
-                <h5><!--%%%SUBTITLE%%%--><span class="w3-opacity"> <!--%%%DATE%%%--></span></h5>
+                <h1><b><!--%%%TITLE%%%--></b></h1>
+                <h3><!--%%%SUBTITLE%%%--><span class="w3-opacity"> <!--%%%DATE%%%--></span></h3>
             </div>
         <div class="w3-container">
         <!--%%%CONTENT%%%-->

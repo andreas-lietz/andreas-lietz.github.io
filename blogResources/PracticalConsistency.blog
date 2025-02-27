@@ -1,0 +1,122 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\AD}{\mathrm{AD}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\PFA}{\mathrm{PFA}}
+
+\title{The Mystery of Practical Consistency Strength}
+\subtitle{And the tremendous power of inner model theory}
+\image{Oberwolfach.jpg}
+\date{January 14th, 2025}
+
+\begin{tldr}
+    The pracitcal consistency strength of $\varphi$ is the least large cardinal from which $\varphi$ can provably be forced. In most cases, this agrees with the actual consistency strength of $\varphi$, but not always! We discuss the general picture of consistency strength vs practical consistency strength.
+\end{tldr}
+
+This week, one of my mathematical dreams became true: I gave a talk at Oberwolfach. I was supposed to go to Oberwolfach already a couple of years ago, but a certain pandemic got in the way.
+During my talk, I discussed the famous problem of the consistency strength of the Proper Forcing Axiom $\PFA$ and introduced the notion of practical consistency strength.
+
+\section{The Notion of Practical Consistency Strength}
+
+\begin{defn}
+The practical consistency strength of a statement $\varphi$ is the least large cardinal property $\psi$ so that 
+$$\ZFC+\exists\kappa\ \psi(\kappa)\vdash\exists \text{nice }\PP\ \Vdash_{\PP} \varphi.$$
+\end{defn}
+
+This is, of course, not a fully formal concept in so far as there is no formal definition of what a large cardinal is nor a proof that the large cardinal hierarchy is wellfounded. 
+However, every Set Theorists "knows" a large cardinal on sight and "knows" that the large cardinal hierarchy is indeed wellfounded. In light of this, the notion of practical consistency strength works in, wait for it, practice.
+
+The predicate "nice" is an optional restriction we can put in place, which will depend on the principle $\varphi$. For example, it is natural to ask only for proper forcings if one wants to force the proper forcing axiom. So, the practical consistency strength may depend on the choice of "nice".
+
+In the overwhelming amount of cases, the practical consistency strength agrees with the true consistency strength. Here is a bunch of classical examples (with consistency strength in brackets):
+
+\begin{itemize}
+    \item Every set of reals is Lebesgue measurable in $L(\mathbb R)$. (Inaccessible cardinal)
+    \item There is no Kurepa tree. (Inaccessible cardinal)
+    \item The bounded proper forcing axiom. ($\Sigma_1$-reflecting cardinal)
+    \item $\neg\Box_{\omega_1}$. (Mahlo cardinal)
+    \item $\omega_2$ has the tree property. (Weakly compact cardinal)
+    \item (Co-)analytic determinacy. ($0^\sharp$ exists)
+    \item There is a precipitous ideal on $\omega_1$. (Measurable cardinal)
+    \item Every projective set is universally Baire. (Infinitely many strong cardinals)
+    \item There is a saturated ideal on $\omega_1$. (Woodin cardinal)
+\end{itemize}
+But this is not always the case!
+\begin{defn}
+Let us say that a statement $\varphi$ is impractical if 
+\begin{itemize}
+    \item There is some large cardinal property $\psi$ so that $\ZFC+\exists\kappa\psi(\kappa)\vdash\exists\PP\ \Vdash_{\mathbb P}\varphi$.
+    \item If $\psi$ is the large cardinal property such that $\ZFC+\exists\kappa\psi(\kappa)$ is equiconsistent to $\ZFC+\varphi$ then $\ZFC+\exist\kappa\psi(\kappa)\not\vdash\exist\PP\ \Vdash_\PP\varphi$.
+\end{itemize}
+\end{defn}
+So, basically, a statement is impractical if it's consistency strength and practical consistency strength disagree. To my knowledge, the first example of an impractical statement is $\AD^{L(\mathbb R)}$. It is known that $\mathrm{ZF}+\AD$ and $\ZFC+$infinitely many Woodin cardinals are equiconsistent. Now, if $\AD$ holds then $L(\mathbb R)\models\AD+\mathrm{DC}$ and thus we can add a wellorder of $\mathbb R$ over $L(\mathbb R)$ via forcing without adding reals. The resulting model is a model of $\ZFC+\AD^{L(\mathbb R)}$. So the consistency strength of $\AD^{L(\mathbb R)}$ (over $\ZFC$) is exactly $\omega$-many Woodin cardinals.
+
+\begin{lemm}\textbf{(Folklore)}
+$\AD^{L(\mathbb R)}$ is impractical.
+\end{lemm}
+This is most likely due to Woodin, but this fact seems to be unpublished.
+
+The proof is quite short, so let's have a crack at it. We will however use some blackboxes from inner model theory.
+\begin{proof}
+    We have to find a model $M$ with infinitely many Woodin cardinals so that there is no forcing extension of $M$ in which $\AD^{L(\mathbb R)}$ holds. Let $\lambda$ denote the supremum of the first $\omega$-many Woodin cardinals (if it exists). Let $M$ be a transitive model of $\ZFC$ with infinitely many Woodin cardinals with $\lambda^M$ as small as possible. 
+    \begin{claim}
+        $\AD^{L(\mathbb R)}$ fails in all forcing extensions of $M$.
+    \end{claim}
+    \begin{proof}
+        Suppose toward a contradiction that $M[g]$ is a forcing extension of $M$ with $M[g]\models\AD^{L(\mathbb R)}$. Via inner model theory, it is possible to find another model $N$ of $\ZFC$ with infinitely many Woodin cardinals so that, curically, $\lambda^N=\omega_1^{M[g]}$. Thus $\omega_1^{M[g]}\geq\lambda^M$ by our choice of $M$. But $\lambda^M$ is singular in $M$ so $\lambda^M<\omega_1^{M[g]}$. This implies that $x=(V_\lambda)^M$ is countable in $M[g]$. A basic consequence of $\AD^{L(\mathbb R)}$ is that every real has a sharp, so $x^\sharp$ exists in $M[g]$. But sharps cannot be added by forcing, so $x^\sharp\in M$. Using more inner model theory, we see that from the infintely many Woodin cardinals together with $x^\sharp$, $M$ can construct the sharp for the canonical inner model with infinitely many Woodin cardinals, namely $(M_\omega^\sharp)^M$.
+
+        Now $M_\omega^\sharp$ is always a countable set in the model in which it is constructed, hence $\lambda^{(M_\omega^\sharp)^M}<\lambda^M$, contradiction.
+    \end{proof}
+\end{proof}
+
+The reader who has not been made familiar with the derived model theorem might wonder how the optimal lower bound for $\AD$ is established. The model is simply $L(\mathbb R^\ast)$ where $\mathbb R^\ast$ is the set of reals appearing in a proper intermediate extension of $V$ by a generic for $\mathrm{Col}(\omega,\lambda)$. It is not hard to see that $\mathbb R^\ast$ is not the set of reals of any forcing extension of $V$, so this might explain some of the mystery here.
+
+There are indeed more examples, which seem to suggest that impractical statements are a natural phenomenon. The topic of impractical statements is not well explored and surrounded by a couple of metamathematical mysteries. 
+
+While the practical consistency strength of $\AD^{L(\mathbb R)}$ is only an epsilon away from its consistency strength, the gap is significant in other examples.
+
+For example, consider $\varphi=$"$\mathrm{NS}_{\omega_1}$ is $\omega_1$-dense". The consistency strength of $\varphi$ is the same as the one of $\AD^{L(\mathbb R)}$, infinitely many Woodin cardinals. If we interpret nice as "$\omega_1$-preserving" then Woodin has shown that the practical consistency strength of $\varphi$  is at least a Woodin limit of Woodin cardinals. The main result of my PhD thesis was to establish an upper bound in terms of practical consistency strength, which is (slightly less than) a supercompact limit of supercompact cardinals. 
+
+Another known impractical statment is $\mathrm{MM}(\mathfrak c)$, namely Martin's Maximum for forcings of size continuum. We know of several likely candidates for impracticbility:
+\begin{itemize}
+    \item $\neg\Box(\omega_3)\wedge\neg\Box(\omega_4)$.
+    \item Sealing, i.e. determinacy of all universally Baire sets, closure of universally Baire sets under constructibility and absoluteness of the theory of $L(\mathrm{uB})$ under forcing.
+\end{itemize}
+
+Both of these statments have recently been shown to be of consistency strength strictly below a Woodin limit of Woodin cardinals. The first one has famously been used by Larson-Sargsyan to get a failure of the $K^c$-construction from surprisingly low large cardinal assumptions. The practical consistency strength is likely at least a subcompact cardinal. 
+
+Woodin has shown that Sealing can be forced from a supercompact cardinal. No better upper bound on the practical consistency strength of Sealing is known.
+
+Personally, I would bet money that both of these statements are impractical.
+
+Curiously, all known examples of impractical statements are of quite high consistency strength.
+\begin{que}
+    Is there any (natural) impractical Set Theoretical principle of consistency strength strictly below a Woodin cardinal?
+\end{que}
+
+I asked this question in Oberwolfach and after discussing several suggestions, there is apparently no proven example. Woodin has suggested a promising candidate though.
+\section{The 12th Delfino Problem}
+ Let $\varphi$ be the conjunction of "all projective sets are Lebesgue measurable", "all projective sets have the property of Baire" and projective uniformization. This principle has an intersting history, which I will summarize quickly.
+
+$\varphi$ is the star of the 12th entry in an influential collection of questions that became to be known as the "Delfino problems". 
+
+The principle $\varphi$ is the conjunction of the three most striking and most useful consequences of projective determinacy. The 12th Delfino problem asks whether $\varphi$ actually fully captures projective determinacy, either in form of an equivalence or at least in terms of large cardinal consistency strength. Based on work of Wooin, Steel gave a negative answer: the consistency strength of $\varphi$ is strictly below infinitely many strong cardinals! This is way below the consistency strength of projective determinacy which is beyond a Woodin cardinal.
+
+Steel's argument has the interesting feature that it heavily uses the finestructure of a canonical model with (slightly less than)  infinitely many strong cardinals. It is still open whether even only projective uniformization can provably be forced from infinitely many strong cardinals. Likely, the answer is "no". On the other hand, projective determinacy and hence $\varphi$ follows outright from the existence of infinitely many Woodin cardinals and hence $\varphi$ is likely impractical.
+
+Gabe Goldberg made two other suggestions: the first of which is quite cheeky. The statment "$V=L$ or there is an inaccessible cardinal" is clearly impractical for the simple reason that $V=L$ is not provably forceable from any consistent large cardinal. I took the executive decision and discounted this example as "unnatural". Yes, I believe that the disjunction of two natural statements is not necessarily natural. Sue me.
+
+His other suggestion is much mathematically much more interesting: $\varphi=$"there is a measurable cardinal and the least such carries a unique normal measure". This holds in all canonical inner models with a measurable cardinal, in particular $\varphi$ has consistency strength equal to a measurable cardinal. It seems likely that there are models with measurable cardinals over which $\varphi$ cannot be forced, but this is not known. Even worse, it is not known whether $\varphi$ can provably be forced from any large cardinal. It should be mentioned that the $\Omega$-conjecture predicts that a proper class of Woodin cardinal should suffice for this. 
+
+So the situation appears to be as follows: impractical principles appear naturally and quite frequently once determinacy kicks in at the level of Woodin cardinals. There is a good chance that there are examples of lower consistency strength, but we have no proof of that. In any case, examples appear to be much rarer at lower consistency strength.
+
+So why is that? One potential explanation would be a lack of methods by which we could produce examples. Some of the impractical statements beyond Woodin cardinals are related to Woodin's $\mathbb P_{\mathrm{max}}$-method, for example.
+
+But arguably, this is not really the case: we have a deep understanding of canonical inner models at every large cardinal level below a Woodin cardinal. These models have tremendous structure on them. So one might end up in the following situation: it possible to force a statement $\varphi$ over such a canonical inner model using the additional structure, but the relevant large cardinal property does not impose enough structure on it's own to do so in general. The result is that $\varphi$ is impractical.
+
+This is exactly what seemingly happens with Woodin's example. In Goldberg's example, the additional structure of canonical models is already built into the statement. 
+
+Why is there not an abundance of such examples? 
+
+If anybody knows of more instances of impracticbility, I am very interested to hear about them! 
