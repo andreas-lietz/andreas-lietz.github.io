@@ -1,0 +1,74 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\BB}{\mathbb{B}}
+
+\title{Dense embeddings are misnamed}
+\subtitle{My gripes with notation in Set Theory}
+\date{May 2nd, 2025}
+
+\begin{tldr}
+Dense embeddings are not embeddings and hence should be renamed.
+\end{tldr}
+
+
+There is the odd hiccup with notation in Set Theory. The classic highlight here is that $q\leq p$ means either "$p$ is stronger than $q$" or "$q$ is stronger than $p$" depending on whether the paper was written in Israel or not.
+
+Another example is that we as a community never decided what one of the most important notions actually means precisely, namely forcing. A forcing is sometimes a partial order, sometimes a preorder or a partial order with a maximal element or even a preorder with a maximal element. I have even seen definitions which require that there are no minimal elements (while I understand this morally, I do not know why one would require this explicitly). By the way - Paul Cohen has no horse in this race as for him, forcing refers to the forcing method and is defined only through the forcing relation.
+
+
+
+But now I want to focus on my personal (least) favourite: dense embeddings.
+
+\section{Dense embeddings are not embeddings}
+
+Let's focus on the positives first, namely there is a generally accepted standard definition of what a dense embedding is. 
+
+A map $\pi\colon \PP\rightarrow \QQ$ is a dense embedding if for all $p,q\in\PP$
+\begin{enumerate}
+    \item $q\leq_\PP p$ implies $\pi(q)\leq_{\QQ} \pi(p)$,
+    \item $q \perp_{\PP} p$ implies $\pi(q)\perp_{\QQ}\pi(p)$ and
+    \item $\mathrm{ran}(\pi)$ is dense in $\QQ$.
+\end{enumerate}
+
+This is a lot of words to say that 
+$$\pi\colon (\PP,\leq_{\PP}, \perp_{\PP})\rightarrow (\QQ,\leq_{\QQ},\perp_{\QQ})$$
+ is a homomorphism with dense image. And this is also where the problem lies: this is not sufficient to qualify for an embedding! An embedding typically also preserves relations backwards. So at the very least, a "dense embedding" should satisfy $\pi(q)\leq_\QQ\pi(p)$ implies $q\leq_\PP p$ (note that $\pi(q)\perp_\QQ\pi(p)$ implies $q\perp_\PP p$ is automatic). In addition to this, an embedding is usually required to be injective which is once again automatic if $\PP$ is a partial order under our additional requirement. So a dense embedding $\PP\rightarrow \QQ$ should essentially be an isomorphism between $\PP$ and a dense subset of $\QQ$.
+
+Personally, I believe that the standard definition of dense embedding, i.e. the weakest one, is the most useful, but it does not qualify to be called embedding and should be renamed. Either dense homomorphism or even just dense map is a fine name as far as I am concerned.
+
+
+\section{Where this problem originates}
+Disclaimer: I am not a historian. However, I have a reasonable guess on how this happened. The first general treatment of the method of forcing was done using complete Boolean algebras. If $\PP$ and $\QQ$ are (the nonzero points of) complete Boolean algebras, or just Boolean algebras, then $\PP$ and $\QQ$ are partial orders and separative, i.e. if $q\not\leq p$ then there is $r\leq q$ with $r\perp p$. In this case, it is easy to see that any homomorphism 
+$$\pi\colon (\PP,\leq_{\PP}, \perp_{\PP})\rightarrow (\QQ,\leq_{\QQ},\perp_{\QQ})$$
+is an embedding in the strongest sense, that is $\pi$ is injective and preserves the order backwards. So in this context, there is no need to make distinctions.
+
+While in theory, it suffices to deal with complete Boolean algebras only as every forcing is forcing equivalent to a complete Boolean algebra, the Set Theoretical practice has quickly moved away from this because most of the forcings we construct are not naturally complete Boolean algebras. Unfortunately, it seems to have been missed to introduce clear distinctions between dense homomorphism and dense embeddings during this transition.
+
+\section{Differences between dense homomorphisms and dense embeddings}
+
+It is not difficult to find forcings $\PP$ and $\QQ$ so that there is a dense homomorphism from $\PP$ into $\QQ$, but no dense embedding. For any partial order $\PP$ there is a dense homomorphism from $\PP$ into a complete Boolean algebra $\QQ$. But if $\PP$ is not separative, then there cannot be any dense embedding $\pi\colon\PP\rightarrow\QQ$ as any dense subset of a separative partial order is separative itself. 
+
+For most arguments, this does not matter at all. But there are some for which this is important and I happen to be interested in some of those arguments. Here is one simple example.
+
+\begin{lemm}
+    Suppose $\pi\colon \PP\rightarrow \QQ$ is dense embedding and $\QQ$ is $\sigma$-closed. Then $\PP$ is $\sigma$-closed. 
+\end{lemm}
+\begin{proof}
+    Let $\langle p_n\mid n<\omega\rangle$ be a descending sequence through $\PP$. Then $\langle \pi(p_n)\mid n<\omega\rangle$ is descending through $\QQ$ and has a lower bound $q_\ast$. As $\pi$ is a dense embedding, there is some $p_\ast$ with $\pi(p_\ast)\leq_{\QQ}q_\ast$ and hence $p_\ast\leq_\PP p_n$ for all $n<\omega$.
+\end{proof}
+
+The very last step in this argument does not work if $\pi$ is only a dense homomorphism as $\pi(p_\ast)\leq_\QQ\pi(p_n)$ does not necessarily imply $p_\ast\leq_\PP p_n$. Indeed, this lemma fails for dense homomorphisms: let $\PP=\omega^\ast$ the reverse order on $\omega$ and $\QQ=\{0\}$ and $\pi\colon \PP\rightarrow \QQ$ the unique map. This is a dense homomorphism and $\QQ$ is trivially $\sigma$-closed while $\PP$ is not.
+
+
+\section{Why this bothers me}
+
+
+Of course it is tempting to always pretend that all forcings are separative partial orders, but there are some pretty important examples which do not have this property. For example, two step iterations $\PP\ast\dot{\QQ}$ are typically not partial orders and the stationary tower forcing is not separative.
+
+As mathematicians, we should strive to be precise and consistent and this definition just does not follow mathematical best practice.
+
+But I am bothered by this misnomer for different reasons. For everyday life, my memory is cooked. I have never been able to memorize any song text in my life. However, for mathematical purposes my memory works quite well! Nonetheless, I was unable to remember the exact definition of a dense embedding for the longest time. It took me a while to figure this out, but the culprit was the name! Calling it a dense embedding is just confusing for people learning about forcing and it has caused a bunch of confusion for myself. Rant over!
+
+
+

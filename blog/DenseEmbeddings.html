@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Andreas Lietz's Homepage
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<!-- Katex -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+]})"></script>
+
+</head>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="../css/navStyle.css">
+
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+
+<div class = "w3-padding-32">
+<div class="site-mobile-menu site-navbar-target">
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close mt-3">
+      <span class="icon-close2 js-menu-toggle"></span>
+    </div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
+</div>
+
+
+<header class="site-navbar site-navbar-target" role="banner">
+
+  <div class="w3-container">
+    <div class="row align-items-right position-relative">
+
+      <div class="col-3">
+        <div class="site-logo">
+          <a href="../index.html" class="font-weight-bold"></a>
+        </div>
+      </div>
+
+      <div class="col-9  text-right">
+        
+
+        <span class="d-inline-block d-lg-none"><a href="#" class="text-primary site-menu-toggle js-menu-toggle py-5"><img src="../resources/pictures/menu.svg" ></img></a></span>
+        <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
+          <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
+            <li><a href="../index.html" class="nav-link">Blog</a></li>
+            <li><a href="../research.html" class="nav-link">Research</a></li>
+            <li><a href="../CV.html" class="nav-link">CV</a></li>
+            <li><a href="../sequentcalculus.html" class="nav-link">Sequent Calculus App</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+
+      
+    </div>
+  </div>
+
+</header>
+</div>
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+    <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+            <!--%%%IMAGE%%%-->
+            <div class="w3-container">
+                <h1><b>Dense embeddings are misnamed</b></h1>
+                <h3>My gripes with notation in Set Theory<span class="w3-opacity"> May 2nd, 2025</span></h3>
+            </div>
+        <div class="w3-container">
+        <style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style><p></p>
+<p>
+There is the odd hiccup with notation in Set Theory. The classic highlight here is that $q\leq p$ means either "$p$ is stronger than $q$" or "$q$ is stronger than $p$" depending on whether the paper was written in Israel or not.</p>
+<p>Another example is that we as a community never decided what one of the most important notions actually means precisely, namely forcing. A forcing is sometimes a partial order, sometimes a preorder or a partial order with a maximal element or even a preorder with a maximal element. I have even seen definitions which require that there are no minimal elements (while I understand this morally, I do not know why one would require this explicitly). By the way - Paul Cohen has no horse in this race as for him, forcing refers to the forcing method and is defined only through the forcing relation.</p>
+<p></p>
+<p>But now I want to focus on my personal (least) favourite: dense embeddings.</p>
+<p><h2>Dense embeddings are not embeddings</h2></p>
+<p>Let's focus on the positives first, namely there is a generally accepted standard definition of what a dense embedding is. </p>
+<p>A map $\pi\colon \mathbb{P}\rightarrow \mathbb{Q}$ is a dense embedding if for all $p,q\in\mathbb{P}$
+</p>
+<p>$(1)$ $q\leq_\mathbb{P} p$ implies $\pi(q)\leq_{\mathbb{Q}} \pi(p)$,
+    </p>
+<p>$(2)$ $q \perp_{\mathbb{P}} p$ implies $\pi(q)\perp_{\mathbb{Q}}\pi(p)$ and
+    </p>
+<p>$(3)$ $\mathrm{ran}(\pi)$ is dense in $\mathbb{Q}$.
+</p>
+<p>This is a lot of words to say that 
+$$\pi\colon (\mathbb{P},\leq_{\mathbb{P}}, \perp_{\mathbb{P}})\rightarrow (\mathbb{Q},\leq_{\mathbb{Q}},\perp_{\mathbb{Q}})$$
+ is a homomorphism with dense image. And this is also where the problem lies: this is not sufficient to qualify for an embedding! An embedding typically also preserves relations backwards. So at the very least, a "dense embedding" should satisfy $\pi(q)\leq_\mathbb{Q}\pi(p)$ implies $q\leq_\mathbb{P} p$ (note that $\pi(q)\perp_\mathbb{Q}\pi(p)$ implies $q\perp_\mathbb{P} p$ is automatic). In addition to this, an embedding is usually required to be injective which is once again automatic if $\mathbb{P}$ is a partial order under our additional requirement. So a dense embedding $\mathbb{P}\rightarrow \mathbb{Q}$ should essentially be an isomorphism between $\mathbb{P}$ and a dense subset of $\mathbb{Q}$.</p>
+<p>Personally, I believe that the standard definition of dense embedding, i.e. the weakest one, is the most useful, but it does not qualify to be called embedding and should be renamed. Either dense homomorphism or even just dense map is a fine name as far as I am concerned.</p>
+<p>
+<h2>Where this problem originates</h2>
+Disclaimer: I am not a historian. However, I have a reasonable guess on how this happened. The first general treatment of the method of forcing was done using complete Boolean algebras. If $\mathbb{P}$ and $\mathbb{Q}$ are (the nonzero points of) complete Boolean algebras, or just Boolean algebras, then $\mathbb{P}$ and $\mathbb{Q}$ are partial orders and separative, i.e. if $q\not\leq p$ then there is $r\leq q$ with $r\perp p$. In this case, it is easy to see that any homomorphism 
+$$\pi\colon (\mathbb{P},\leq_{\mathbb{P}}, \perp_{\mathbb{P}})\rightarrow (\mathbb{Q},\leq_{\mathbb{Q}},\perp_{\mathbb{Q}})$$
+is an embedding in the strongest sense, that is $\pi$ is injective and preserves the order backwards. So in this context, there is no need to make distinctions.</p>
+<p>While in theory, it suffices to deal with complete Boolean algebras only as every forcing is forcing equivalent to a complete Boolean algebra, the Set Theoretical practice has quickly moved away from this because most of the forcings we construct are not naturally complete Boolean algebras. Unfortunately, it seems to have been missed to introduce clear distinctions between dense homomorphism and dense embeddings during this transition.</p>
+<p><h2>Differences between dense homomorphisms and dense embeddings</h2></p>
+<p>It is not difficult to find forcings $\mathbb{P}$ and $\mathbb{Q}$ so that there is a dense homomorphism from $\mathbb{P}$ into $\mathbb{Q}$, but no dense embedding. For any partial order $\mathbb{P}$ there is a dense homomorphism from $\mathbb{P}$ into a complete Boolean algebra $\mathbb{Q}$. But if $\mathbb{P}$ is not separative, then there cannot be any dense embedding $\pi\colon\mathbb{P}\rightarrow\mathbb{Q}$ as any dense subset of a separative partial order is separative itself. </p>
+<p>For most arguments, this does not matter at all. But there are some for which this is important and I happen to be interested in some of those arguments. Here is one simple example.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $\pi\colon \mathbb{P}\rightarrow \mathbb{Q}$ is dense embedding and $\mathbb{Q}$ is $\sigma$-closed. Then $\mathbb{P}$ is $\sigma$-closed. 
+</p>
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    Let $\langle p_n\mid n<\omega\rangle$ be a descending sequence through $\mathbb{P}$. Then $\langle \pi(p_n)\mid n<\omega\rangle$ is descending through $\mathbb{Q}$ and has a lower bound $q_\ast$. As $\pi$ is a dense embedding, there is some $p_\ast$ with $\pi(p_\ast)\leq_{\mathbb{Q}}q_\ast$ and hence $p_\ast\leq_\mathbb{P} p_n$ for all $n<\omega$.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>The very last step in this argument does not work if $\pi$ is only a dense homomorphism as $\pi(p_\ast)\leq_\mathbb{Q}\pi(p_n)$ does not necessarily imply $p_\ast\leq_\mathbb{P} p_n$. Indeed, this lemma fails for dense homomorphisms: let $\mathbb{P}=\omega^\ast$ the reverse order on $\omega$ and $\mathbb{Q}=\{0\}$ and $\pi\colon \mathbb{P}\rightarrow \mathbb{Q}$ the unique map. This is a dense homomorphism and $\mathbb{Q}$ is trivially $\sigma$-closed while $\mathbb{P}$ is not.</p>
+<p>
+<h2>Why this bothers me</h2></p>
+<p>
+Of course it is tempting to always pretend that all forcings are separative partial orders, but there are some pretty important examples which do not have this property. For example, two step iterations $\mathbb{P}\ast\dot{\mathbb{Q}}$ are typically not partial orders and the stationary tower forcing is not separative.</p>
+<p>As mathematicians, we should strive to be precise and consistent and this definition just does not follow mathematical best practice.</p>
+<p>But I am bothered by this misnomer for different reasons. For everyday life, my memory is cooked. I have never been able to memorize any song text in my life. However, for mathematical purposes my memory works quite well! Nonetheless, I was unable to remember the exact definition of a dense embedding for the longest time. It took me a while to figure this out, but the culprit was the name! Calling it a dense embedding is just confusing for people learning about forcing and it has caused a bunch of confusion for myself. Rant over!</p>
+<p></p>
+<p></p>
+
+            </div>
+    </div>
+</div>
+
+  <!-- Introduction menu -->
+<div class="w3-col l3 w3-col m3 show-if-large">
+    <!-- About Card -->
+    <div class="w3-card w3-margin w3-margin-top" media = "max">
+      <div class="w3-container w3-white">
+        <h4><b>TL;DR</b></h4>
+        <p>
+Dense embeddings are not embeddings and hence should be renamed.
+</p>
+      </div>
+    </div>
+    
+    <!-- Posts -->
+    <!--
+    <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4>Popular Posts</h4>
+      </div>
+      <ul class="w3-ul w3-hoverable w3-white">
+        <li class="w3-padding-16">
+          <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+        <li class="w3-padding-16">
+          <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Dorum</span><br>
+          <span>Ultricies congue</span>
+        </li>   
+        <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+          <img src="/w3images/rock.jpg" alt="Imag  e" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Mingsum</span><br>
+          <span>Lorem ipsum dipsum</span>
+        </li>  
+      </ul>
+    </div>
+    -->
+  
+  
+    
+  <!-- END Introduction Menu -->
+  </div>
+  
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+</footer>
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/navMain.js"></script>
+
+</body>
+</html>
