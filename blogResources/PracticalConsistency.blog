@@ -89,8 +89,8 @@ Recent advances in inner model theory show that the consistency strength of all 
 \section{$\mathcal P$-Practical Consistency Strength}
 In practice, it is often not only important that a principle $\varphi$ can be forced in some way, but moreover with a forcing with nice properties. For example, one would ask for a proper forcing if one is in the middle of a countable support iteration of proper forcings. This leads to the following generalization of pracitcal consistency strength.
 \begin{defn}
-    Suppose $\mathcal P$ is a definable class of forcings. The $\mathcal P$-practical consistency strength of a principle $\varphi$ is the least large cardinal property $\varpsi$ so thath
-        $$\ZFC+\exists\kappa\ \psi(\kappa)\vdash\exists \PP'in\mathcal P\ \Vdash_{\PP} \varphi.$$
+    Suppose $\mathcal P$ is a definable class of forcings. The $\mathcal P$-practical consistency strength of a principle $\varphi$ is the least large cardinal property $\psi$ so that
+        $$\ZFC+\exists\kappa\ \psi(\kappa)\vdash\exists \PP'\in\mathcal P\ \Vdash_{\PP} \varphi.$$
 \end{defn}
 
 

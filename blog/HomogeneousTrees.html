@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Andreas Lietz's Homepage
+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<!-- Katex -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+    onload="renderMathInElement(document.body,{delimiters: [
+    {left: '$$', right: '$$', display: true},
+    {left: '$', right: '$', display: false},
+    {left: '\\(', right: '\\)', display: false},
+    {left: '\\[', right: '\\]', display: true}
+]})"></script>
+
+</head>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="../css/navStyle.css">
+
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+
+<div class = "w3-padding-32">
+<div class="site-mobile-menu site-navbar-target">
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close mt-3">
+      <span class="icon-close2 js-menu-toggle"></span>
+    </div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
+</div>
+
+
+<header class="site-navbar site-navbar-target" role="banner">
+
+  <div class="w3-container">
+    <div class="row align-items-right position-relative">
+
+      <div class="col-3">
+        <div class="site-logo">
+          <a href="../index.html" class="font-weight-bold"></a>
+        </div>
+      </div>
+
+      <div class="col-9  text-right">
+        
+
+        <span class="d-inline-block d-lg-none"><a href="#" class="text-primary site-menu-toggle js-menu-toggle py-5"><img src="../resources/pictures/menu.svg" ></img></a></span>
+        <nav class="site-navigation text-left ml-auto d-none d-lg-block" role="navigation">
+          <ul class="site-menu main-menu js-clone-nav ml-auto text-left ">
+            <li><a href="../index.html" class="nav-link">Blog</a></li>
+            <li><a href="../research.html" class="nav-link">Research</a></li>
+            <li><a href="../CV.html" class="nav-link">CV</a></li>
+            <li><a href="../sequentcalculus.html" class="nav-link">Sequent Calculus App</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+
+      
+    </div>
+  </div>
+
+</header>
+</div>
+
+
+
+<!-- Grid -->
+<div class="w3-row">
+    <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+            <!--%%%IMAGE%%%-->
+            <div class="w3-container">
+                <h1><b>The Easiest Proof of Analytic Determinacy</b></h1>
+                <h3>And why homogeneous trees are misnamed<span class="w3-opacity"> March 27nd, 2025</span></h3>
+            </div>
+        <div class="w3-container">
+        
+This time, I will present what I believe to be the most transparent proof of analytic determinacy. But really, this is another rant about misnomers in Set Thoeretic terminology. Last time I complained about "dense embeddings", this time I complain about  "homogeneous trees". 
+
+<h2>The Rant</h2><p>If you only want to see the proof of analytic determinacy, feel free to skip this section.</p>
+<p>Using a term which has a generally agreed upon meaning and using it to describe objects which do not quite fit that meaning is bad notation, in my opinion. The definition of "dense embedding" is to weak to qualify to be an embedding and the definition of a "homogeneous tree" both hides the homogeneity present and is too strong of a property to make this the name of the notion.</p>
+<p>When you see something called "homogeneous (insert your favorite mathematical structure here)" and you know what a (insert your favorite mathematical structure here) is, you should almost be able to guess the definition. At the very least, one should think "Ah that makes sense" after reading the definition. Here is the definition of a homogeneous tree.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+    A tree $T$ on $\omega\times\alpha$ is <b>homogeneous</b> if there is a system of measures $\langle\mu_s\mid s\in\omega^{<\omega}\rangle$ so that
+    </p>
+<p>$(1)$ $\mu_s$ concentrates on $T_s=\{u\in \alpha^{\mathrm{len}(s)}\mid (s, u)\in T\}$,
+        </p>
+<p>$(2)$ if $s\subseteq t$ and $A\in \mu_s$ then $\{v\in T_t\mid v\upharpoonright \mathrm{len}(s)\in A\}\in\mu_t$ and
+        </p>
+<p>$(3)$ if $x\in p[T]:=\{y\in\omega^\omega\mid\exists z\in\alpha^\omega\forall n<\omega (y\upharpoonright n, z\upharpoonright n)\in T\}$ then the natural direct limit along $\mathrm{Ult}(V, \mu_{x\upharpoonright n})$ for $n<\omega$ is wellfounded.
+    </p>
+
+</span></div>
+<p>I would be very surprised if anyone could guess this definition from the name "homogeneous tree". But do not get me wrong, this is a marvelous and very important notion in the theory of determinacy.</p>
+<p>This whole story started when I was ranting about this to my officemate Lukas Koschat. Together, we came up with a definition of what I believe should have been called a homogeneous tree. This notion, while being slightly weaker than homogeneous tree, still guarantees the associated projection $p[T]$ to be determined as well as universally Baire (up to some point).</p>
+<p>
+<h2>Ramsey Trees</h2></p>
+<p>To properly conceptualize the notion of a Ramsey tree we are about to define, it is helpful to recall the definition of a Ramsey cardinal.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+An uncountable cardinal $\kappa$ is <b>Ramsey</b> if for any coloring $c\colon [\kappa]^{<\omega}\rightarrow\omega$ there is a $c$-homogeneous set of size $\kappa$, i.e. there is $H\in[\kappa]^\kappa$ so that for all $s, t\in [H]^{<\omega}$, $\mathrm{len}(s)=\mathrm{len}(t)$ implies $c(s)=c(t)$.
+</p>
+</span></div>
+<p>So at a Ramsey cardinal $\kappa$, every coloring $c$ of $[\kappa]^{<\omega}$ admits a large homogeneous subset for $c$. Moreover, a homogeneous subset for $c$ is a set so that every finite subset has the same $c$-color, modulo the obivous obstruction: it's length. We cannot literally demand each finite subset to have the same color as otherwise the color which maps a sequence to its length could not admit a homogeneous set of size $2$.</p>
+<p>
+We will now define a similar property for a tree $T$ on $\omega\times\alpha$ for an ordinal $\alpha$. </p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+    A tree $T$ on $\omega\times\alpha$ is <b>Ramsey</b> if for every coloring $c\colon T\rightarrow \omega$ there is a subtree $S\subseteq T$ so that 
+    </p>
+<p>$(1)$ $S$ is homogeneous for $c$, i.e. for $(s, u),(t,v)\in S$, $s=t$ implies $c(s, u)=c(t, v)$ and
+        </p>
+<p>$(2)$ $p[S]=p[T]$.
+    </p>
+
+</span></div>
+<p>Once again, we ask that for any coloring, there exists a large homogeneous set. Now in this context, it is natural to demand the homogeneous set to be a subtree and "largeness" is interpreted as projecting to the same set of reals. Homogeneity is also defined naturally: the color of every node is the same modulo the obvious obstruction: the first coordinate.</p>
+<p>Let me mention that this notion is weaker than homogeneity.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+Every homogeneous tree is Ramsey.
+</p>
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    The argument is essentially the same as proving every measurable cardinal to be Ramsey.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>One of the most important properties of a homogeneous tree is that their projections are determined. The same is true for Ramsey trees, but the argument aligns much more with the definition and is thus more transparent in my opinion.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+    Suppose $T$ is a Ramsey tree. Then the game $G$ on $\omega$ with winning set $p[T]$ is determined.
+</p>
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    Consider the auxiliary game $G_{\mathrm{aux}}$ in which player $I$ is addionally asked to play a "proof" that the resulting play is in $p[T]$. That is in round $2k$, $I$ plays $n_{2k}<\omega$ and $\xi_k\in\mathrm{Ord}$ while in round $2k+1$, $II$ only plays a natural number $n_{2k+1}$. Player $I$ wins iff $(n_k, \xi_k)_{k<\omega}$ constitutes a cofinal branch through $T$. 
+    
+    Note that this is a closed game since if player $I$ loses, the game is already lost after only finitely many rounds. By open determinacy, the game $G_{\mathrm{aux}}$ is determined so that one of the players has a winning strategy. We aim to show that the same player has a winning strategy in the game $G$. This is easy if $I$ wins in $G_{\mathrm{aux}}$: we let player $I$ play the game $G$ while imagining a run of the game $G_{\mathrm{aux}}$ and hide the additional moves $\xi_k$.</p>
+<p>    So let us assume that $\sigma$ is a winning strategy for player $II$ in $G_{\mathrm{aux}}$. The argument from before does not work anymore as in a run of the game $G$, player $I$ does not play the additional moves $\xi_k$ that would be required to apply $\sigma$. Instead, we basically make up the $\xi_k$ ourselves and use the Ramseyness of $T$ to do so coherently. </p>
+<p>    Let the coloring $c\colon T\rightarrow\omega$ be defined by 
+    $$c(n_0^\frown\dots^\frown n_{2k}, \xi_0^\frown\dots^\frown\xi_{2k})=m$$
+    where $m$ is the next play by $\sigma$ in the run of $G_{\mathrm{aux}}$ where $(n_0, \xi_0), n_1,\dots, (n_{2k}, \xi_k)$ was played so far. We define $c$ arbitrarily on the even levels.</p>
+<p>    As $T$ is Ramsey, let $S$ be a $c$-homogeneous subtree with $p[S]=p[T]$. We can now define the strategy $\sigma_\ast$ for player $II$ in the game $G$ as follows. If $s=n_0,\dots, n_{2k}$ was played so far, $\sigma_\ast$ responds with $c(s, t)$ where $t$ is any sequence such that $(s, t)\in S$ (if no such $t$ exists, $\sigma_\ast$ plays $0$). The point is that this does not depend on the choice of $t$ by homogeneity of $S$ .</p>
+<p>    Let us verify that this is a winning strategy. If not, there is a run $x=n_0^\frown n_1^\frown\dots$ of the game $G$ in which player $II$ followed $\sigma_\ast$ and has lost, i.e. $x\in p[T]$. As $p[T]=p[S]$ there is an $\omega$-sequence $y=\xi_0^\frown \xi_1^\frown\dots$ so that $(x, y)$ is a cofinal branch through $S$. But then $(n_0, \xi_0), n_1, (n_2,\xi_1), n_3, (n_4, \xi_2), n_4,\dots$ is a run in the game $G_{\mathrm{aux}}$ in which player $II$ follows $\sigma$ and loses, contradiction! 
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p></p>
+<p>
+<h2>A Proof of Analytic Determinacy</h2></p>
+<p>
+We will now apply Ramsey trees to a proof of analytic determinacy. Disclaimer: Under the hood, this is still Martin's original proof of analytic determinacy, altough the presentation is very different. While we could do without it, it is convenient to make use of the following characterization of coanalytic ($=$ complements of analytic) sets. A set $A\subseteq\omega^\omega$ is coanalytic iff there is a map $s\mapsto \leq_s$ defined on $\omega^{<\omega}$ so that 
+</p>
+<p>$(1)$ $\leq_s$ is a linear order on $\mathrm{len}(s)$,
+    </p>
+<p>$(2)$ $s\subseteq t$ implies $\leq_s\subseteq\leq_t$ and
+    </p>
+<p>$(3)$ for $x\in\omega^\omega$, $x\in A$ iff $\leq_x=\bigcup_{n<\omega}\leq_{x\upharpoonright n}$ is a wellorder.
+</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose there is a Ramsey cardinal. Then every coanalytic set is the projection of a Ramsey tree.
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+Let $A$ be coanalytic as witnessed by $s\mapsto \leq_s$ as above. For any set $X$ of ordinals, let $T_X$ be the tree consisting of $(s, t)\in \omega^{<\omega}\times X^{<\omega}$ so that $s, t$ are of the same length (say $k$) and $m\mapsto \xi_m$ is an order embedding of $(k, \leq_s)$ into $(X, \in)$ where $t=\xi_0^\frown\dots^\frown\xi_{k-1}$. </p>
+<p>As any wellorder on $\omega$ has countable ordertype, $p[T_X]=A$ for all uncountable sets of ordinals $X$. </p>
+<p>Let $\kappa$ be a Ramsey cardinal. We will see that $T_\kappa$ is Ramsey. So suppose that $c\colon T_\kappa\rightarrow \omega$ is some coloring. Let $\langle s_n\mid n<\omega\rangle$ be an enumeration of $\omega^{<\omega}$ so that $k_n\coloneqq \mathrm{len}(s_n)\leq n$. Define a coloring $d\colon [\kappa]^{<\omega}\rightarrow \omega$ via $d(\{\xi_0,\dots,\xi_{n-1}\})=c(s_n, u_n)$ where $u_n$ is the unique enumeration of $\{\xi_0,\dots, \xi_{k_{n}-1}\}$  $(s_n, u_n)\in T_\kappa$. As $\kappa$ is Ramsey, there is some $d$-homogeneous set $H\subseteq\kappa$ of size $\kappa$. Chasing definitions, we find that $T_H$ is a $c$-homogeneous subtree of $T_\kappa$ with $p[T_H]=A$.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Corollary</b><span style="flex: 1;"><p>
+    If there is a Ramsey cardinal then all coanalytic sets, and hence all analytic sets, are determined.
+</p>
+</span></div>
+<p>The keen-eyed reader might have noticed that we did not need the $d$-homogeneous set $H$ to be of size $\kappa$, merely uncountable to make sure that $p[T_H]=A$. Thus the weaker assumption of a $\omega_1$-Erdős cardinal suffices for the proof above. This is only slightly more than the exact consistency strength of analytic determinacy, namely $x^\sharp$ exists for all reals $x$. Being so close to perfection makes it tempting to optimize a bit more.</p>
+<p><h2>A Proof From Optimal Assumptions</h2></p>
+<p>The main trick to make the argument go through with less is to weaken the notion of a Ramsey tree ever so slightly so that the proof of determinacy for its projection still goes through.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+    A tree $T$ on $\omega\times\alpha$ is <b>Ramsey over $L$</b> if for any coloring $c\colon T\rightarrow\omega$ with $c\in L[T]$, there is a subtree $S$ of $T$ which is homogeneous for $c$ with $p[S]=p[T]$.
+</p>
+</span></div>
+<p>We do not demand the tree which is homogeneous for the coloring to be in $L[T]$, only the coloring itself.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $T$ is Ramsey over $L$. Then $p[T]$ is determined.
+</p>
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    Follow the previous determinacy proof. Note that the auxiliary game $G_{\mathrm{aux}}$ is in $L[T]$. It follows from absoluteness of wellfoundedness that $V$ and $L[T]$ agree about which players have winning strategies in the closed game $G_{\mathrm{aux}}$ and in fact for strategies in $L[T]$, the two models agree whether the strategy is winning. Hence in the difficult case where player $II$ wins $G_{\mathrm{aux}}$, we may assume that the winning strategy is in $L[T]$. But then the relevant coloring $c$ we construct from $\sigma$ is in $L[T]$ as well and the rest of the argument goes through.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $x^\sharp$ exists for every real $x$. Then every coanalytic set is the projection of a tree which is Ramsey over $L$.
+</p>
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    We slightly modify the argument which assumed a Ramsey cardinal to exist and use the same notation. Let $A$ be coanalytic as witnessed by $s\mapsto \leq_s$. Now let $x$ be a real which codes $s\mapsto \leq_s$ and note that $T_{\omega_1^V}\in L[x]$. We will see that $T_{\omega_1^V}$ is Ramsey over $L$. Let $c\colon T\rightarrow\omega$ be any coloring in $L[T_{\omega_1^V}]\subseteq L[x]$. Then $c$ is definable over $L[x]$ from $x$-indiscernibles $\gamma_0<\dots<\gamma_n<\omega_1^V<\delta_0<\dots<\delta_m$. Let $I\subseteq\omega_1^V$ be the club of $x$-indiscernibles and let $X=I\setminus (\gamma_n+1)$. Then $T_X$ is homogeneous for $c$ and $p[T_X]=A$ as $X$ is uncountable.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Corollary</b><span style="flex: 1;"><p>
+    Suppose $x^\sharp$ exists for every real $x$. Then every analytic set is determined.
+</p>
+</span></div>
+<p>As analytic determinacy is known to be equivalent to the existence of $x^\sharp$ for every real $x$, it is also equivalent to the statement "every coanalytic set is the projection of a tree which is Ramsey over $L$".</p>
+<p><h2>More on Ramsey Trees</h2></p>
+<p>Another officemate of mine, Benny Siskind, noted that the construction of the Martin-Solovay tree relative to a homogeneous tree is an important tool when working with homogeneous tree. He asked me whether such a construction still exists for Ramsey trees. First, let's try to make this question more formal. A homogeneous tree $T$ together with its Martin-Solovay tree $S$ witness $p[T]$ to be universally Baire (up to the least critical point of a measure on the relevant measure system), i.e. $T$ and $S$ project to complements and this still holds true in small forcing extensions. I will show that this is also true for Ramsey trees, although I do not know of a natural construction of a "Martin-Solovay tree" in this context. We will first show that the projections of Ramsey trees are universally Baire up to some point.</p>
+<p>Let us say that a tree $T$ is $\kappa$<b>-Ramsey</b> if for all $\lambda<\kappa$ and colorings $c\colon T\rightarrow \lambda$, there are large subtrees of $T$ homogeneous for $c$ in the obvious sense.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+    Suppose $\kappa$ is a strong limit cardinal and $T$ is a $\kappa$-Ramsey tree. Then $p[T]$ is ${<}\kappa$-universally Baire.
+</p>
+</span></div>
+<p>The proof proceeds by, somewhat surprisingly, verifying the original definition of universally Bairness. Namely, $A\subseteq\omega^\omega$ is ${<}\kappa$-universally Baire if for any $\lambda<\kappa$ and any continuous $f\colon\lambda^\omega\rightarrow\omega^\omega$, $f^{-1}[A]$ has the property of Baire in $\lambda^\omega$.</p>
+<p>To see this, we show that being the projection of a Ramsey tree is preserved under continuous preimages in a certain sense. Also note that the definition of $\kappa$-Ramsey trees on $\omega\times\alpha$ easily generalizes to $\kappa$-Ramsey trees on $\lambda\times\alpha$ (still of height $\omega$, so the projection is a subset of $\lambda^\omega$). We say that a tree on $\lambda\times\alpha$ is Ramsey if it is $\lambda$-Ramsey in this sense.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $\kappa$ is an uncountable strong limit, $\lambda<\kappa$, $A\subseteq\omega^\omega$ is the projection of a $\kappa$-Ramsey tree and $f\colon\lambda^\omega\rightarrow\omega^\omega$ is continuous. Then $f^{-1}[A]$ is the projection of a $\kappa$-Ramsey tree.
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    For notational simplicity, let us assume that $f$ is Lipschitz, so $f$ is induced by a level- and inclusion-preserving map $g\colon \lambda^{<\omega}\rightarrow\omega^{<\omega}$. Let $T$ be a $\kappa$-Ramsey tree on $\omega\times\alpha$ with $p[T]=A$ and define $S$ as the natural tree on $\lambda\times\alpha$ so that a cofinal branch $(x, y)\in[S]$ induces a cofinal branch $(f(x), y)\in [T]$. More precisely, $(s, u)\in S$ iff $(g(s), u)\in T$. Clearly, $p[S]=f^{-1}[A]$, so it suffices to prove that $S$ is $\kappa$-Ramsey. So let $c\colon S\rightarrow \gamma$ be a coloring with $\gamma<\kappa$. This induces a coloring $d$ from $T$ into partial maps $\lambda^{<\omega}\rightarrow\gamma$ by setting 
+    $$d(s, u)\colon g^{-1}(s)\rightarrow \gamma,\ d(s, u)(t)=c(t, u).$$
+    As $\omega\cdot\gamma^\lambda<\kappa$, there is a subtree $T_\ast\subseteq T$ which is homogeneous for $d$ with $p[T_\ast]=p[T]$. Now define $S_\ast$ from $T_\ast$ in the same way we defined $S$ from $T$. It is not hard to verify that $S_\ast$ is homogeneous for $c$ and $p[S_\ast]=p[S]$.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>
+</p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $\lambda\geq\omega$ and $A\subseteq\lambda^\omega$ is the projection of a Ramsey tree. Then $A$ has the property of Baire in $\lambda^\omega$.
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    Recall the usual proof of Baire property from determinacy. For any $s\in\lambda^{<\omega}$, consider the game $G_s$ in which players $I$ and $II$ alternate in playing finite sequences $s_{2n}, s_{2n+1}\in\lambda^{<\omega}$ and player $I$ wins iff $s^\frown s_0^\frown s_1^\frown\dots\in A$. We have that $A$ has the property of Baire iff $G_s$ is determined for all $s\in\lambda^{<\omega}$. Modifying our determinacy proof from the second section slightly, we find that all games $G_s$ are indeed determined.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>The theorem follows immediately from the previous two lemmas. A consequence of this is that there is barely any difference between Ramsey trees and homogeneous trees given enough large cardinals exists.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Corollary</b><span style="flex: 1;"><p>
+    Suppose there is a proper class of Woodin cardinals and $A\subseteq\omega^\omega$. The following are equivalent.
+    </p>
+<p>$(1)$ For every $\kappa$, $A$ is the projection of a $\kappa$-homogeneous tree.
+        </p>
+<p>$(2)$ For every $\kappa$, $A$ is the projection of a $\kappa$-Ramsey tree.
+        </p>
+<p>$(3)$ For every $\kappa$, $A$ is $\kappa$-universally Baire.
+    </p>
+
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    We have shown $(1)\Rightarrow (2)\Rightarrow (3)$. The direction $(3)\Rightarrow (1)$ is due to Woodin and Martin-Steel.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>
+ However, note that we still have not answered Benny's question, that is we have not yet shown that if $T$ is a Ramsey tree then $T$ is part of a pair $(T, S)$ witnessing universally Baireness for $p[T]$. </p>
+<p>
+</p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+    Suppose $\kappa$ is an uncountable strong limit cardinal and $T$ is a $\kappa$-Ramsey tree. Then there is a tree $S$ so that $T$ and $S$ project to complements in all forcing extensions by a forcing of size ${<}\kappa$.
+</p>
+</span></div>
+<p>To see this, we prove that if $S$ is a small tree projecting onto a smaller set then there is a continuous translation of branches through $S$ to branches through $T$.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $\kappa$ is an uncountable cardinal, $T$ is a $\kappa$-Ramsey tree, $\lambda<\kappa$ and $S$ is a tree on $\omega\times\lambda$ with $p[S]\subseteq p[T]$. Then there is a order-preserving map $f\colon S\rightarrow T$ which is the identity on the first coordinate.
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    Consider the following game: as the play proceeds, player $I$ plays an increasing sequence of $(s_n, u_n)\in S_n$ and player $II$ plays an increasing sequence of $(t_n, v_n)\in T_n$. Player $II$ wins iff $s_n=t_n$ for all $n<\omega$. 
+    </p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Claim</b><span style="flex: 1;"><p>
+        Player $I$ does not have a winning strategy.
+    </p>
+</span></div>
+
+    <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+        Suppose $\sigma$ is a winning strategy for $I$. Similarly as in our determinacy proof, we can find a subtree $T_\ast\subseteq T$ with the same projection so that $\sigma$ always plays the same branch $(x, y)\in [S]$ as long as player $II$ sticks to playing any branch through $T_\ast$. We have that
+        $$x\in p[S]\subseteq p[T]=p[T_\ast]$$
+        and hence there is some $z$ with $(x, z)\in [T_\ast]$. But now player $II$ can clearly win against $\sigma$ by playing the branch $(x, z)$, contradiction.
+    </p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+
+    The game is open, hence determined and thus player $II$ must have a winning strategy. Such a strategy induces a function $f\colon S\rightarrow T$ with the desired properties.
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>
+We are now finally ready to produce a positive answer to Benny's question.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    We have already shown that $p[T]$ is ${<}\kappa$-universally Baire by verifying the original definition. Thus for $\lambda<\kappa$, there are trees $(T_\lambda', S_\lambda)$ with $p[T_\lambda']=p[T]$ which project to complements in all forcings extensions by forcings of size $\leq\lambda$. We may assume that $\vert T_\lambda'\vert\leq 2^\lambda<\kappa$. By the previous lemma, there is a continuous translation $f\colon T_\lambda'\rightarrow T$ of cofinal branches. It follows that $p[T_\lambda']\subseteq p[T]$ holds in any(!) outer model of $V$, in particular in a forcing extension $V[G]$ by a forcing of size $\leq\lambda$. Now, as $T$ and $S_\lambda$ have disjoint projection in $V$, this remains true in $V[G]$ (this follows by absoluteness of wellfoundedness, consider the tree looking for cofinal branches in both trees with the same first coordinate). Thus we must have 
+    $$V[G]\models p[T_\lambda']=p[T].$$ 
+    Hence in fact $T$ and $S_\lambda$ project to complements in small forcing extensions. By taking the sum $S=\bigoplus_{\lambda<\kappa} S_\lambda$, we find that $T$ and $S$ project to complements in all forcing extensions by a forcing of size ${<}\kappa$.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p><h2>Open Questions</h2></p>
+<p>Here are some more question, which I do not know the answer to.</p>
+<p></p>
+<p> If $A$ is a non-trivial set of reals which is the projection of a homogeneous tree then there is a measurable cardinal, so true large cardinals exist. This is not so clear for Ramsey trees.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Question</b><span style="flex: 1;"><p>
+    Suppose every coanalytic set is the projection of a Ramsey tree. Is there an inaccessible cardinal? Is there a $\omega_1$-Erdős cardinal?
+</p>
+</span></div>
+<p>Moreover, while we have provided a solution to Benny's question in its <em>mathematical essence</em>, I do not think we have answered it <em>morally</em>.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Question</b><span style="flex: 1;"><p>
+    Suppose $\kappa$ is an uncountable strong limit and $T$ is a $\kappa$-Ramsey tree. Is there a <b>natural construction</b> of a tree $S$ so that $T$ and $S$ project to complements in all forcing extensions by forcings of size ${<}\kappa$?
+</p>
+</span></div>
+<p>Please reach out to me if you have any ideas on how to solve these questions!</p>
+<p><h2>Acknowledgements</h2></p>
+<p>Thanks to all my officemate as well as Peter Holy for interesting discussions about Ramsey trees!</p>
+<p>
+</p>
+
+            </div>
+    </div>
+</div>
+
+  <!-- Introduction menu -->
+<div class="w3-col l3 w3-col m3 show-if-large">
+    <!-- About Card -->
+    <div class="w3-card w3-margin w3-margin-top" media = "max">
+      <div class="w3-container w3-white">
+        <h4><b>TL;DR</b></h4>
+        <p>
+We give a streamlined proof that all analytic sets are determined assuming the existence of a Ramsey cardinal. To do so, we introduce Ramsey trees and show that their projection is determined. This notion would probably have been a better fit for the name "homogeneous tree".
+</p>
+      </div>
+    </div>
+    
+    <!-- Posts -->
+    <!--
+    <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4>Popular Posts</h4>
+      </div>
+      <ul class="w3-ul w3-hoverable w3-white">
+        <li class="w3-padding-16">
+          <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Lorem</span><br>
+          <span>Sed mattis nunc</span>
+        </li>
+        <li class="w3-padding-16">
+          <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Ipsum</span><br>
+          <span>Praes tinci sed</span>
+        </li> 
+        <li class="w3-padding-16">
+          <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Dorum</span><br>
+          <span>Ultricies congue</span>
+        </li>   
+        <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+          <img src="/w3images/rock.jpg" alt="Imag  e" class="w3-left w3-margin-right" style="width:50px">
+          <span class="w3-large">Mingsum</span><br>
+          <span>Lorem ipsum dipsum</span>
+        </li>  
+      </ul>
+    </div>
+    -->
+  
+  
+    
+  <!-- END Introduction Menu -->
+  </div>
+  
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+</footer>
+
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.sticky.js"></script>
+<script src="../js/navMain.js"></script>
+
+</body>
+</html>
