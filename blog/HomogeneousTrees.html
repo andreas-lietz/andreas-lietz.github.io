@@ -307,9 +307,11 @@ Let $A$ be coanalytic as witnessed by $s\mapsto \leq_s$ as above. For any set $X
 </span></div>
 
     <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
-        Suppose $\sigma$ is a winning strategy for $I$. Similarly as in our determinacy proof, we can find a subtree $T_\ast\subseteq T$ with the same projection so that $\sigma$ always plays the same branch $(x, y)\in [S]$ as long as player $II$ sticks to playing any branch through $T_\ast$. We have that
+        Suppose $\sigma$ is any strategy for $I$. Similarly as in our determinacy proof, we can find a subtree $T_\ast\subseteq T$ with the same projection so that $\sigma$ responds in the same way to moves $(s, t_0), (s, t_1)\in T_\ast$ by player $II$. Let $(x, y)\in [S]$ be the unique branch through $S$ so that 
+        $$(x\upharpoonright n+1, y\upharpoonright n+1)=\sigma(x\upharpoonright n, t)$$
+        for all $n<\omega$ and $t$ with $(x\upharpoonright n, t)\in T_\ast$ (and note that such $t$ exists!). We have that
         $$x\in p[S]\subseteq p[T]=p[T_\ast]$$
-        and hence there is some $z$ with $(x, z)\in [T_\ast]$. But now player $II$ can clearly win against $\sigma$ by playing the branch $(x, z)$, contradiction.
+        and hence there is some $z$ with $(x, z)\in [T_\ast]$. Player $II$ can clearly win against $\sigma$ by playing the branch $(x, z)$.
     </p>
 </span><span style="margin-top: auto">$\Box$</span></div>
 
