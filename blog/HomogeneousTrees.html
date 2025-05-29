@@ -146,7 +146,9 @@ Every homogeneous tree is Ramsey.
 </span></div>
 
 <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
-    The argument is essentially the same as proving every measurable cardinal to be Ramsey.
+    Let $\langle \mu_s\mid s\in\omega^{<\omega}\rangle$ witness a tree $T$ to be homogeneous and let $c\colon T\rightarrow \omega$ be a coloring. For every $s\in\omega^{<\omega}$ there is a set $A_s\in\mu_s$ so that $c$ is constant on $A_s$. Let $S$ be the tree of all $(s, u)\in T$ so that for all $(t, v)\leq_T(s, u)$, we have $v\in A_t$. Clearly, $S$ is homogeneous for $c$, so it remains to show that $p[S]=p[T]$. For $x\in p[T]$, the natural direct limit along $\mu_{x\upharpoonright n}$ is wellfounded, which is equivalent to 
+    $$\forall (B_n)_{n<\omega}\in\prod_{n<\omega}\mu_{x\upharpoonright n}\ \exists y\in\mathrm{Ord}^\omega\forall n<\omega\  (x\upharpoonright n, y\upharpoonright n)\in B_n.$$
+    Applying this with $B_n=A_{x\upharpoonright n}$, we find that $x\in p[S]$.
 </p>
 </span><span style="margin-top: auto">$\Box$</span></div>
 <p>One of the most important properties of a homogeneous tree is that their projections are determined. The same is true for Ramsey trees, but the argument aligns much more with the definition and is thus more transparent in my opinion.</p>
@@ -172,7 +174,7 @@ Every homogeneous tree is Ramsey.
 <p>
 <h2>A Proof of Analytic Determinacy</h2></p>
 <p>
-We will now apply Ramsey trees to a proof of analytic determinacy. Disclaimer: Under the hood, this is still Martin's original proof of analytic determinacy, altough the presentation is very different. While we could do without it, it is convenient to make use of the following characterization of coanalytic ($=$ complements of analytic) sets. A set $A\subseteq\omega^\omega$ is coanalytic iff there is a map $s\mapsto \leq_s$ defined on $\omega^{<\omega}$ so that 
+We will now apply Ramsey trees to a proof of analytic determinacy. Disclaimer: Under the hood, this is still Martin's original proof of analytic determinacy, although the presentation is quite different. While we could do without it, it is convenient to make use of the following characterization of coanalytic ($=$ complements of analytic) sets. A set $A\subseteq\omega^\omega$ is coanalytic iff there is a map $s\mapsto \leq_s$ defined on $\omega^{<\omega}$ so that 
 </p>
 <p>$(1)$ $\leq_s$ is a linear order on $\mathrm{len}(s)$,
     </p>
@@ -262,7 +264,7 @@ Let $A$ be coanalytic as witnessed by $s\mapsto \leq_s$ as above. For any set $X
 </span></div>
 <p></p>
 <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
-    Recall the usual proof of Baire property from determinacy. For any $s\in\lambda^{<\omega}$, consider the game $G_s$ in which players $I$ and $II$ alternate in playing finite sequences $s_{2n}, s_{2n+1}\in\lambda^{<\omega}$ and player $I$ wins iff $s^\frown s_0^\frown s_1^\frown\dots\in A$. We have that $A$ has the property of Baire iff $G_s$ is determined for all $s\in\lambda^{<\omega}$. Modifying our determinacy proof from the second section slightly, we find that all games $G_s$ are indeed determined.
+    Recall the usual proof of Baire property from determinacy. For any $s\in\lambda^{<\omega}$, consider the game $G_s$ in which players $I$ and $II$ alternate in playing non-trivial finite sequences $s_{2n}, s_{2n+1}\in\lambda^{<\omega}$ and player $I$ wins iff $s^\frown s_0^\frown s_1^\frown\dots\in A$. We have that $A$ has the property of Baire iff $G_s$ is determined for all $s\in\lambda^{<\omega}$. We show the latter. Let $\lambda^{\geq 1}$ be the set of non-trivial finite sequences in $\lambda$ and let $f\colon (\lambda^{\geq 1})^\omega\rightarrow\lambda^\omega$ be the concatenation map and let $g_s\colon\lambda^\omega\rightarrow\lambda^\omega$ be the map which prepends the finite sequence $s$. As $g_s\circ f$ is continuous, $B\coloneqq (g_s\circ f)^{-1}[A]$ is the projection of a Ramsey tree (we identify $\lambda^{\geq 1}$ with $\lambda$) and hence the game on $\lambda^{\geq 1}$ with winning-set $B$ is determined. This is exactly the game $G_s$.
 </p>
 </span><span style="margin-top: auto">$\Box$</span></div>
 <p>The theorem follows immediately from the previous two lemmas. A consequence of this is that there is barely any difference between Ramsey trees and homogeneous trees given enough large cardinals exists.</p>
