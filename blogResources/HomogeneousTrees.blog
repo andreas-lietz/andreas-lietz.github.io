@@ -64,7 +64,7 @@ Every homogeneous tree is Ramsey.
 \end{lemm}
 \begin{proof}
     Let $\langle \mu_s\mid s\in\omega^{<\omega}\rangle$ witness a tree $T$ to be homogeneous and let $c\colon T\rightarrow \omega$ be a coloring. For every $s\in\omega^{<\omega}$ there is a set $A_s\in\mu_s$ so that $c$ is constant on $A_s$. Let $S$ be the tree of all $(s, u)\in T$ so that for all $(t, v)\leq_T(s, u)$, we have $v\in A_t$. Clearly, $S$ is homogeneous for $c$, so it remains to show that $p[S]=p[T]$. For $x\in p[T]$, the natural direct limit along $\mu_{x\upharpoonright n}$ is wellfounded, which is equivalent to 
-    $$\forall (B_n)_{n<\omega}\in\prod_{n<\omega}\mu_{x\upharpoonright n}\ \exists y\in\mathrm{Ord}^\omega\forall n<\omega\  (x\upharpoonright n, y\upharpoonright n)\in B_n.$$
+    $$\forall (B_n)_{n<\omega}\in\prod_{n<\omega}\mu_{x\upharpoonright n}\ \exists y\in\mathrm{Ord}^\omega\forall n<\omega\  y\upharpoonright n\in B_n.$$
     Applying this with $B_n=A_{x\upharpoonright n}$, we find that $x\in p[S]$.
 \end{proof}
 
