@@ -92,7 +92,7 @@ and is wrapped around the whole page content, except for the footer in this exam
         <div class="w3-card-4 w3-margin w3-white">
             <!--%%%IMAGE%%%-->
             <div class="w3-container">
-                <h1><b>Some Adventures through Computability</b></h1>
+                <h1><b>Some Adventures in Computability</b></h1>
                 <h3>Invariant computations with codes<span class="w3-opacity"> December 5rd, 2025</span></h3>
             </div>
         <div class="w3-container">
@@ -200,12 +200,12 @@ If life were simple the equivalence would be true, but it's not and the equivale
 <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
     We leave prove something stronger than the first part later and instead focus on the second part. </p>
 <p>    Let $\mathbb P$ be the partial order of finite partial functions $p\colon\mathbb N\rightarrow\mathbb N$ ordered by inclusion and let 
-    $$A=\{a_k\mid k\leq n}$$
+    $$A=\{a_k\mid k\leq n\}$$
     be any finite antichain in $\mathbb P$ with $\bigcap_{k\leq n} \mathrm{dom}(a_k)=\emptyset$ and $n>1$. That $A$ is an antichain means that for $i\neq j$ there is some $n\in\mathrm{dom}(a_i)\cap\mathrm{dom}(a_j)$ with $a_i(n)\neq a_j(n)$. </p>
-<p>    Let $f\colon\mathbb N\rightarrow\mathbb$ be defined by $f(\ulcorner T\urcorner)=k$ where $k$ is unique such that $a_k\subseteq \varphi_T$ (if there is such a $k$, otherwise $f$ is undefined on that input). Note that $f$ is indeed recursive and trivially code invariant.</p>
-<p>    We will argue that there is no $g\in\mathbb R_\eta$ so that $f(\ulcorner T\urcorner)=g(\varphi_T)$ for all Turing machines $T$. By the previous proposition, it suffices to show that there is no $h\in\mathbb R_\ast$ with $f(\ulcorner T\urcorner)=h(\varphi_T)$ whenever $\ulcorner T\urcorner\in\mathrm{dom}(f)$. 
+<p>    Let $f\colon\mathbb N\rightarrow\mathbb N$ be defined by $f(\ulcorner T\urcorner)=k$ where $k$ is unique such that $a_k\subseteq \varphi_T$ (if there is such a $k$, otherwise $f$ is undefined on that input). Note that $f$ is indeed recursive and trivially code invariant.</p>
+<p>    We will argue that there is no $g\in\mathcal R_\eta$ so that $f(\ulcorner T\urcorner)=g(\varphi_T)$ for all Turing machines $T$. By the previous proposition, it suffices to show that there is no $h\in\mathcal R_\ast$ with $f(\ulcorner T\urcorner)=h(\varphi_T)$ whenever $\ulcorner T\urcorner\in\mathrm{dom}(f)$. 
     
-    Suppose such an $h$ exists and let's run a $*$-recursive program which induces such an $h$. As $n>1$, whis program must call $\mathrm{apply}$ at some point, say the first instance does so with input $m$. Note that $m$ does not depend on the input function. As $\bigcap_{k\leq n} \mathrm{dom}(a_k)=\emptyset$, there is some $k\leq n$ with $m\notin a_k$. But then $h$ is not defined on $a_k$, yet $f(\ulcorner T\urcorner)$ is defined for any $T$ with $\varphi_T=a_k$, contradiction!
+    Suppose such an $h$ exists and let's run a $*$-recursive program which induces such an $h$. As $n>1$, whis program must call $\mathrm{apply}()$ at some point, say the first instance does so with input $m$. Note that $m$ does not depend on the input function. As $\bigcap_{k\leq n} \mathrm{dom}(a_k)=\emptyset$, there is some $k\leq n$ with $m\notin a_k$. But then $h$ is not defined on $a_k$, yet $f(\ulcorner T\urcorner)$ is defined for any $T$ with $\varphi_T=a_k$, contradiction!
 </p>
 </span><span style="margin-top: auto">$\Box$</span></div>
 <p>Let's take a moment to analyze what goes wrong here and consider how to compute the bad $f$ above. The input is the code $\ulcorner T\urcorner$ of some Turing machine and we begin to compute $\varphi_T(n)$ for all $n$ simultaneously. This will slowly reveal larger and larger finite segments of $\varphi_T$ and each time we get new information we check whether the approximation $\bar\varphi$ of $\varphi_T$ we know at the moment extends one of the $a_k$ and if it does, we return that $k$.</p>
@@ -227,7 +227,7 @@ If life were simple the equivalence would be true, but it's not and the equivale
 </span></div>
 <p>Successive applications of $\tilde{\eta}$ in one computation are understood to be appropriately independent.</p>
 <p>
- $\tilde{\eta}$-recursive function are induced by a program which in addition to the $\mathrm{apply}$ function has access to a private function $\mathrm{random\_point\_in\_domain(n, \vec x)}$. When passed the source code for a $*$-recursive $f$, together with some input $\vec x$, this function returns a random $k\in\mathbb N$ so that $f$ is defined on input $k,\vec x, \varphi$ (where $\varphi$ is the functional input for our program). If there is no such $k$, the program enters an infinite loop.</p>
+ $\tilde{\eta}$-recursive function are induced by a program which in addition to the $\mathrm{apply}$ function has access to a private function $\mathrm{random\_point\_in\_domain(n, \vec x)}$. When passed the code for a $*$-recursive $f$, together with some input $\vec x$, this function returns a random $k\in\mathbb N$ so that $f$ is defined on input $k,\vec x, \varphi$ (where $\varphi$ is the functional input for our program). If there is no such $k$, the program enters an infinite loop.</p>
 <p>
 </p>
 <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
