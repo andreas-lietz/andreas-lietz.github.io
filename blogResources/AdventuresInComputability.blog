@@ -1,0 +1,293 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\AD}{\mathrm{AD}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\PFA}{\mathrm{PFA}}
+
+\title{Some Adventures through Computability}
+\subtitle{Invariant computations with codes}
+\date{December 5rd, 2025}
+
+\begin{tldr}
+    We show that a computation which uses a code for a Turing machine in a way that the result of the compuation only depends on the behaviour of that machine is built up recursively from some specific operations.
+\end{tldr}
+
+
+Suppose a program is given another program $T$ as input (via its sourcecode $\ulcorner T\urcorner$) and uses it in a computation which only depends on the behaviour of $T$ and not $\ulcorner T\urcorner$ itself. In which ways can the code be used? The purpose of this post is to figure out some "atomic" operations from which all such computations are built.
+
+
+\section{The $*$-recursive functions}
+
+ Let's fix some notation. For a Turing machine $T$, let $\varphi_T\colon\mathbb N\rightarrow\mathbb N$ be the (partial) recursive function induced by $T$. 
+\begin{defn}
+    A partial function $f\colon\mathbb N^2\rightarrow \mathbb N$ is \textbf{code invariant} if 
+    $$\forall n\in\mathbb N\forall \text{Turing machines }T_0, T_1 (\varphi_{T_0}=\varphi_{T_1}\rightarrow f(n, \ulcorner T_0\urcorner)=f(n, \ulcorner T_1\urcorner)).$$
+    We denote the set of (partial) recursive code invariant functions by $\mathcal I$. 
+\end{defn}
+
+There is one obvious non-trivial code invariant function: the application $a(n, \ulcorner T\urcorner)=\varphi_T(n)$. This is recursive by the existence of a universal Turing machine. Are all other recursive code invariant functions in some way built from application? To make this precise, consider the blueprints for recursive functions with an oracle. Let $\mathcal R$ be the set of all recursive (partial) functions $f\colon \mathbb N\rightarrow\mathbb N$.
+
+
+\begin{defn}
+The $*$-recursive functions are the smallest family $\mathcal F$ of partial functions $f\colon \mathbb N^k\times\mathcal R\rightarrow \mathbb N$ so that
+\begin{enumerate}
+    \item $g(\vec x, \varphi)=h(\vec x)$ is in $\mathcal F$ for any recursive $h$,
+    \item the application function $a(n, \varphi)=\varphi(n)$ is in $\mathcal F$,
+    \item $\mathcal F$ is closed under the usual recursive operations in which the last argument is simply passed through. For example, if $h_0,\dots, h_n\colon\mathbb N^k\times\mathcal R\rightarrow\mathbb N$ and $g\colon\mathbb N^{n+1}\times\mathcal R\rightarrow\mathbb N$ are in $\mathcal F$ then the composition 
+    $$(\vec x, \varphi)\mapsto g(h_0(\vec x, \varphi),\dots, h_n(\vec x, \varphi),\varphi)$$
+    (defined whenever possible) is in $\mathcal F$.  
+\end{enumerate}
+The collection of $*$-recursive functions is $\mathcal R_\ast$.
+\end{defn}
+
+So a $*$-recursive function gets access to the output of a recursive function, but crucially not to any code which computes that function.
+
+We can now ask wheter every function in $\mathcal I$ is induced by a function in $\mathcal R_\ast$.
+
+\begin{defn}
+    Suppose $\mathcal F$ is a set of partial functions of type $\mathbb N^2\rightarrow \mathbb N$ and $\mathcal G$ is a set of functions of type $\mathbb N\times\mathcal R\rightarrow\mathbb N$. 
+    \begin{enumerate}
+        \item $\mathcal F$ is \textbf{reducible} to $\mathcal G$ (resp. $\mathcal G$ is reducible to $\mathcal F$) if there is a function $F\colon\mathcal F\rightarrow \mathcal G$ (resp. $G\colon\mathcal G\rightarrow\mathcal F$) so that whenever $F(f)=g$ (resp. $G(g)=f$) then 
+        $$\forall n\in\mathbb N\forall \text{ Turing machines }T\ f(n, \ulcorner T\urcorner) = g(n, \varphi_T).$$
+        This is supposed to be interpreted in the strong sense that also $f(n,\ulcorner T\urcorner)$ is defined iff $g(n, \varphi_T)$ is defined.
+        \item $\mathcal F$ and $\mathcal G$ are \textbf{equivalent} if each of them is reducible to the other.
+    \end{enumerate}
+\end{defn}
+
+\begin{que}
+    Is $\mathcal I$ equivalent to $\mathcal R_\ast$?
+\end{que}
+
+It is a nice exercise to figure this out for yourself! Informally, the question asks whether there is a code invariant recursive function which does something inherently different from application. I will admit that it took me a bit to figure this out, but I promise that this is not a difficult problem. 
+
+Last spoiler warning before the reveal!
+
+
+
+\begin{lemm}
+$\mathcal R_\ast$ is reducible to $\mathcal I$, but $\mathcal I$ is not reducible to $\mathcal G$.
+\end{lemm}
+
+\begin{proof}
+    A $\ast$-recursive $g$ is essentially a program which has access to an additional private function $\mathrm{apply}(k)$ which returns $f(k)$, where $f$ is the second argument of $g$. However, invoking $\mathrm{apply}$ is dangerous since if $f$ is not defined on the input we are passing to $\mathrm{apply}$, we immediately get stuck in an infinite loop.  We can produce a program which on input $n, \ulcorner T\urcorner$ simulates $g(n, \varphi_T)$: we simply follow the program which induces $g$ and whenever $\mathrm{apply}$ is invoked with input $k$, we simulate $T$ with input $k$. This program holds iff $g(n, \varphi_T)$ is defined and in case it is defined outputs $g(n, \varphi_T)$.
+
+
+    To see that $\mathcal I$ is not reducible to $\mathcal G$, note that there is a recursive function $d\colon\mathcal R\rightarrow \{0\}$ which semi-decides whether a Turing machine $T$ halts on some input. That is $d(\ulcorner T\urcorner)$ is defined iff $\mathrm{dom}(\varphi_T)\neq\emptyset$. This function is not induced by any $*$-recursive function: If $g\colon\mathcal R\rightarrow\mathbb N$ is in $\mathcal R_\ast$ and non-trivial then there will be a first instance where $g$ invokes $\mathrm{apply}$ with input $k$ (no matter the input of $g$!). Let $\varphi$ be any finite function which is defined on $k+1$, but not on $k$. Then $g(\varphi)$ is not defined.
+\end{proof}
+
+
+So checking that a program halts on some input is an instance of code invariance which is inherently different from application. Of course we can build more complicated versions of this by, for example, checking whether there are twin primes $p,q$ so that the given program halts on both $p$ and $q$. Once again, we may ask whether all functions in $\mathcal I$ are built up from application and such a check.
+
+\section{The $\eta$-recurisve functions}
+
+
+\begin{defn}
+ Suppose $g\colon \mathbb N^{k+1}\times\mathcal R\rightarrow \mathbb N$ is a partial function. Then $\eta(g)\colon\mathbb N^k\times\mathcal R$ is the partial function which is defined on $x_1,\dots, x_k,f$ iff $\exists x_0\ (x_0,\dots, x_k, \varphi)\in\mathrm{dom}(g)$ in which case $\eta(x_1,\dots, x_k, \varphi)=0$.
+
+
+ The $\eta$-recursive functions are the smallest collection $\mathcal F$ of partial functions of type $\mathbb N^k\times\mathcal R\rightarrow\mathbb N$ which satisfies $(1)-(3)$ from the definition of $*$-recursive functions and is closed under the $\eta$-operation. That is, whenever $g\in\mathcal F$ is of type $\mathbb N^{k+1}\times\mathcal R\rightarrow\mathbb N$ then $\eta(g)\in\mathcal F$. 
+
+ $\mathcal R_{\eta}$ denotes the collection of $\eta$-recursive functions.
+\end{defn}
+
+\begin{que}
+    Is $\mathcal I$ equivalent to $\mathcal R_\eta$?
+\end{que}
+
+The reader who is still with us is encouraged to guess the truth value of the equivalence. This time it is more tricky then last time.
+
+
+If life were simple the equivalence would be true, but it's not and the equivalence fails. We will make use of the following simple observation.
+
+\begin{prop}
+    For any $f\in\mathcal R_\eta$ there is $g\in\mathcal R_\ast$ with $f\subseteq g$.
+\end{prop}
+
+\begin{proof}
+    Any $f\in\mathcal R_\eta$ is induced by a program $T$ which has access to $\mathrm{apply}$ and another private function $\mathrm{halts\_on\_some\_input}(n, \vec x)$, which when passed the source code of another $\mathcal R_\eta$-program returns $0$ iff it halts on some input with further arguments $\vec x$ (and loops infintely otherwise). 
+
+    Let $T_\ast$ be the computation in which calls to $\mathrm{halts\_on\_some\_input}()$ are replaced with calls to $\mathrm{returns_zero}()$ which always returns $0$. If $T$ halts on input $\vec x, \varphi$ then $T_\ast$ halts on input $\vec x,\varphi$ and returns the same value.
+\end{proof}
+
+\begin{lemm}
+    $\mathcal R_\eta$ is reducible to $\mathcal I$, but $\mathcal I$ is not reducible to $\mathcal R_\eta$.
+\end{lemm}
+
+\begin{proof}
+    We leave prove something stronger than the first part later and instead focus on the second part. 
+
+    Let $\mathbb P$ be the partial order of finite partial functions $p\colon\mathbb N\rightarrow\mathbb N$ ordered by inclusion and let 
+    $$A=\{a_k\mid k\leq n}$$
+    be any finite antichain in $\mathbb P$ with $\bigcap_{k\leq n} \mathrm{dom}(a_k)=\emptyset$ and $n>1$. That $A$ is an antichain means that for $i\neq j$ there is some $n\in\mathrm{dom}(a_i)\cap\mathrm{dom}(a_j)$ with $a_i(n)\neq a_j(n)$. 
+
+    Let $f\colon\mathbb N\rightarrow\mathbb$ be defined by $f(\ulcorner T\urcorner)=k$ where $k$ is unique such that $a_k\subseteq \varphi_T$ (if there is such a $k$, otherwise $f$ is undefined on that input). Note that $f$ is indeed recursive and trivially code invariant.
+
+    We will argue that there is no $g\in\mathbb R_\eta$ so that $f(\ulcorner T\urcorner)=g(\varphi_T)$ for all Turing machines $T$. By the previous proposition, it suffices to show that there is no $h\in\mathbb R_\ast$ with $f(\ulcorner T\urcorner)=h(\varphi_T)$ whenever $\ulcorner T\urcorner\in\mathrm{dom}(f)$. 
+    
+    Suppose such an $h$ exists and let's run a $*$-recursive program which induces such an $h$. As $n>1$, whis program must call $\mathrm{apply}$ at some point, say the first instance does so with input $m$. Note that $m$ does not depend on the input function. As $\bigcap_{k\leq n} \mathrm{dom}(a_k)=\emptyset$, there is some $k\leq n$ with $m\notin a_k$. But then $h$ is not defined on $a_k$, yet $f(\ulcorner T\urcorner)$ is defined for any $T$ with $\varphi_T=a_k$, contradiction!
+\end{proof}
+
+Let's take a moment to analyze what goes wrong here and consider how to compute the bad $f$ above. The input is the code $\ulcorner T\urcorner$ of some Turing machine and we begin to compute $\varphi_T(n)$ for all $n$ simultaneously. This will slowly reveal larger and larger finite segments of $\varphi_T$ and each time we get new information we check whether the approximation $\bar\varphi$ of $\varphi_T$ we know at the moment extends one of the $a_k$ and if it does, we return that $k$.
+
+That finite approximation $\bar\varphi$ we compute which finally extends one of the $a_k$ will depend on the choice of code $\ulcorner T\urcorner$ which induces $\varphi_T$, but crucially the $k$ does not.
+
+Looking back at the $\eta$-operation, when computing whether a given $T$ halts on some input, it is sometimes possible to use the particular input $k$ in a productive manner which depends only on $T$ halting on $k$. 
+
+This is the final piece of the puzzle that we need to find an extension of $\mathcal R_\eta$ that is equivalent to $\mathcal I$.
+
+
+\section{The $\tilde{\eta}$-recurisve functions}
+
+ I will be quite sloppy in the next definition.
+
+\begin{defn}
+    Let $\lambda$ be some probability measure on $\mathbb N$ with $\lambda(\{n\})>0$ for all $n$. 
+    
+    The (random) $\tilde{\eta}$-recursive functions are the smallest family $\mathcal F$ satisfying $(1)-(3)$ of the definition of $*$-recursiive functions functions and further contain all the (random) functions $\tilde{\eta}(g)$ for $g\in\mathcal R_\ast$, $g\colon \mathbb N^{k+1}\times\mathcal R\rightarrow\mathbb N$.
+    
+    
+    $\tilde{\eta}(g)(x_1,\dots, x_k, \varphi)$ is a random $x_0$ so that $g(x_0,\dots, x_k, \varphi)$ is defined, picked via $\lambda$. If there is no such $x_0$ then it is undefined. 
+\end{defn}
+
+Successive applications of $\tilde{\eta}$ in one computation are understood to be appropriately independent.
+
+
+ $\tilde{\eta}$-recursive function are induced by a program which in addition to the $\mathrm{apply}$ function has access to a private function $\mathrm{random\_point\_in\_domain(n, \vec x)}$. When passed the source code for a $*$-recursive $f$, together with some input $\vec x$, this function returns a random $k\in\mathbb N$ so that $f$ is defined on input $k,\vec x, \varphi$ (where $\varphi$ is the functional input for our program). If there is no such $k$, the program enters an infinite loop.
+
+
+\begin{defn}
+    A (partial) function $g\colon\mathbb N^k\times\mathcal R\rightarrow \mathbb N$ is \textbf{deterministic} $\tilde{\eta}$-recursive if for some $\tilde{\eta}$-recursive $h$ 
+    $$\mathbb P[(\vec x, \varphi)\in\mathrm{dom}(h)\wedge h(\vec x, \varphi)=g(\vec x, \varphi)]=1$$
+    for all $(\vec x, \varphi)\in\mathrm{dom}(g)$ and 
+    $$\mathbb P[(\vec x, \varphi)\notin \mathrm{dom}(h)]=1$$
+    for all $(\vec x, \varphi)\notin\mathrm{dom}(g)$.
+    for all $\vec x, \varphi$ and $n$. Note that all of these events are measurable.
+
+    The collecion of all deterministic $\tilde{\eta}$-recursive functions is $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$.
+\end{defn}
+
+Technically, $\mathcal R_{\tilde{\eta}}$ depends on $\lambda$, but $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ does not.
+
+An argument which we shall dive in later will show that any deterministic $\tilde{\eta}$-recursive function is induced by a computation which calls the $\mathrm{random\_point\_in\_domain}()$ function at most once on any input. This eliminates the need of making the appropriate independence for application of $\tilde{\eta}$ precise. It is also true that $\mathcal R_\eta\subseteq\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$.
+
+\begin{thm}
+ $\mathcal I$ is equivalent to $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$.
+\end{thm}
+
+
+The proof of this uses the Rice-Shapiro theorem, which in our context we may phrase as follows.
+
+\begin{thm}
+ (Rice-Shapiro) Suppose $g\in \mathcal I$ and $g(n,\ulcorner T\urcorner)=m$. 
+ \begin{enumerate}
+    \item If $T'$ is any Turing machine with $\varphi_T\subseteq\varphi_{T'}$ then $g(n, \ulcorner T'\urcorner)=m$.
+    \item There is some $T'$ so that $\varphi_{T'}$ is finite, $\varphi_{T'}\subseteq\varphi_T$ and $g(n, \ulcorner T'\urcorner)=m$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+    We first prove $(1)$, so assume $\varphi_T\subseteq\varphi_{T'}$. By the recursion theorem, there is a Turing machine $S$ so that given input $k$,
+    \begin{itemize}
+        \item $S$ starts by simultaneously computing $g(n, \ulcorner S\urcorner)$ and $\varphi_T(k)$.
+        \item If the computation of $\varphi_T(k)$ halts first, return $\varphi_T(k)$.
+        \item Otherwise if $g(n, \ulcorner S\urcorner)$ halts with output $l$ then return $\varphi_T(k)$ if $l\neq m$ and return $\varphi_{T'}(k)$ if $l=m$.
+    \end{itemize}
+    If $g(n, \ulcorner S\urcorner)$ is not defined or $\neq m$ then it should be clear that $\varphi_S=\varphi_T$. But this contradicts the code invariance of $g$, so $g(n, \ulcorner S\urcorner)=m$. But then $\varphi_S=\varphi_{T'}$ and thus $g(n,\varphi_{T'})=m$ by code invariance of $g$.
+
+
+    For $(2)$, let $S$ be the Turing machine which on input $k$ first simulates the first $k$ steps of the computation of $g(n, \ulcorner S\urcorner)$. If this halted with output $m$ then loop indefinitely. Otherwise, return $\varphi_T(k)$. Once again, such a $S$ exists by the recursion theorem. 
+
+    If $g(n, \ulcorner S\urcorner)$ is not defined or $\neq m$ then $\varphi_S=\varphi_T$, contradiction. So $g(n, \ulcorner S\urcorner)=m$ and $\varphi_S$ is a finite subfunction of $\varphi_T$. 
+\end{proof}
+
+
+We can now prove the equivalence.
+
+\begin{proof}
+    Let's start with the easier direction, namely that $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ is reducible to $\mathcal I$. Let $g\in \mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ and let $h\in\mathcal R_{\tilde{\eta}}$ induce $g$. As before we will simulate a computation of $h$ and we will do an exhaustive search rather than dealing with randomness. We only explain how to simulate the $\mathrm{random\_point\_in\_domain}()$-function calls. Whenever $h$ performs such a call with input the code for some $z\in\mathcal R_\ast$ and $\vec x\in\mathbb N^k$, we start searching for some $y_0$ so that $z(y,\vec x, \varphi_T)$ is defined. But crucially, we don't stop once we find such $y_0$. Instead, we pass on $y_0$ to the further simulation and simultaneously search for a further $y_1$. If we find $y_1$ we pass this on further and so on.
+
+    This program halts on input $n, \ulcorner T\urcorner$ iff there is some possible behaviour of $\mathrm{random\_point\_in\_domain}()$ which results in $h(n, \varphi_T)$ being defined and outputs some $m$ which is a possible value of $h(n,\varphi_T)$. As this involves only finitely many calls to $\mathrm{random\_point\_in\_domain}()$, this implies that
+    $$\mathbb P[(n,\varphi_T)\in\mathrm{dom}(h)\wedge h(n, \varphi_T)=m]>0.$$
+    But then $g(n,\varphi_T)=m$, so we successfully simulate $g$ in this way.
+
+
+    Now for the more interesting direction. Let $f$ be code invariant, we will find some $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ so that $f(n, \ulcorner T\urcorner)=g(n, \varphi_T)$ for all $n, T$. 
+
+    Consider the following function $h\colon\mathbb N^2\times\mathcal R\rightarrow\mathbb N$. On input $k, n, \varphi$, the computation proceeds as follows.
+    \begin{itemize}
+        \item First compute the $k$-th finite subset $s_k\subseteq\mathbb N$ (by some fixed recursion).  
+        \item Then try to figure out $\varphi(l)$ for all $l\in s_k$. 
+        \item If this succeeds, we know $\varphi\upharpoonright s_k$. Then construct a Turing machine $S$ with $\varphi_{S}=\varphi\upharpoonright s_k$.
+        \item Finally, compute $f(n, \ulcorner S\urcorner)$ and return the output. 
+    \end{itemize}
+    Note that $h$ is $*$-recursive.
+
+    We then let 
+    $$g(n, \varphi)=h(\tilde{\eta}(h)(n, \varphi), n, \varphi).$$
+    Let's see that this works. Suppose $f(n,\ulcorner T\urcorner)=m$. Then by $(1)$ of Rice-Shapiro, if $h(k, n, \varphi_T)$ is defined with output $m$ then $f(n, \ulcorner T\urcorner)=m$ and, by $(2)$ of Rice-Shapiro, there is some $k$ so that $h(k, n,\varphi_T)$ is defined. It follows that 
+    $$\mathbb P[(n, \varphi_T)\in\mathrm{dom}(g)\wedge g(n, \varphi_T)=m]=1.$$
+    Similarly, if $g(n, \varphi_T)=m$ with positive probability then $f(n,\ulcorner T\urcorner)=m$. 
+    This also shows that $g$ is deterministic.
+\end{proof}
+
+\section{Conclusion}
+
+In any case, morally speaking, all code invariant functions are built via recursion from the basic building blocks of 
+\begin{itemize}
+    \item application $a(n,\ulcorner T\urcorner)= \varphi_T(n)$,
+    \item semideciding whether some $\mathcal R_\ast$-function is defined on some input with functional input $\varphi_T$,
+    \item if it is safe to do so, further use a spcific $k$ so that the $\mathcal R_\ast$-function in question is defined on $k$.
+\end{itemize}
+
+While the proof of the Rice-Shapiro theorem is elegant and short, it does not exactly offer an intuitive explanation of why it is true. However, on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side, there is an intuitive direct proof the analogous theorem. 
+
+\begin{thm}
+    (Rice-Shapiro for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$) Suppose $g\in \mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ and $g(n,\varphi)=m$.
+    \begin{enumerate}
+        \item If $\varphi\subseteq\psi$ then $g(n, \psi)=m$.
+        \item There is some finite $\varphi'\subseteq\varphi$ with $g(n,\varphi')=m$.
+    \end{enumerate}
+\end{thm}
+
+Of course this follows from the usual Rice-Shapiro theorem plus the equivalence theorem. The point is we can prove it without the use of the usual Rice-Shapiro theorem or any kind of recursion theorem.
+
+The theorem is a consequence of the more general result for $\mathcal R_{\tilde{\eta}}$.
+
+\begin{lemm}
+    Suppose $g\in \mathcal R_{\tilde{\eta}}$ and $\mathbb P[g(n,\varphi)=m]>0$.
+    \begin{enumerate}
+        \item If $\varphi\subseteq\psi$ then $\mathbb P[g(n, \psi)=m]>0$.
+        \item There is some finite $\varphi'\subseteq\varphi$ with $\mathbb P[g(n,\varphi')=m]>0$.
+    \end{enumerate}
+\end{lemm}
+
+\begin{proof}
+    We prove this by induction on the complexity of $g$. This is trivial for $g$ a standard recursive function and easy for the application function.
+
+    Suppose $(1)+(2)$ hold for $g$. We show that it holds for $\tilde{\eta}(g)$. Say,    
+    $$\mathbb P[\tilde{\eta}(g)(n,\varphi)=m]>0.$$
+    Note that this implies 
+    $$\mathbb P[(n,m,\varphi)\in\mathrm{dom}(g)]>0.$$
+    To see that $(1)$ holds, by induction, $\mathbb P[(n,m,\psi)\in\mathrm{dom}(g)]>0$ and hence by definition of $\tilde{\eta}$, 
+    $$\mathbb P[\tilde{\eta}(g)(n,\psi)=m]>0.$$ 
+
+    Let's prove $(2)$. By induction, there is some finite $\varphi'\subseteq\varphi$ so that $\mathbb P[(n,m,\varphi')\in\mathrm{dom}(g)]>0$. But then once again $\mathbb P[\tilde{\eta}(g)(n,\varphi')=m]>0$.
+
+    We leave the remaining cases to the reader.
+\end{proof}
+
+
+If one is willing to accept that $\mathcal I$ is reducible to $\mathcal R_{\eta}^{\mathrm{det}}$, this might offer an intuitive explanation of why Rice-Shapiro is true.
+
+Of course, also get Rice's theorem for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$.
+
+\begin{cor}
+(Rice's theorem for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$)
+Suppose $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ is total. Then $g$ only depends on the first coordinate, i.e. $g(n,\varphi)=g(n,\psi)$ for all $\varphi,\psi$.
+\end{cor}
+\begin{proof}
+    By $(1)$ of Rice-Shapiro, $g(n,\varphi)=g(n,\emptyset)=g(n,\psi)$.
+\end{proof}
+
+
