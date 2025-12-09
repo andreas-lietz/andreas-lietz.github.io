@@ -149,7 +149,7 @@ The definition of the associated class of functions is straightforward but a lit
     The $\tilde{\eta}$-recursive functions are the smallest family $\mathcal F$ of (total) functions of type $\mathbb N^k\times\mathcal P\rightarrow\mathcal P(\mathbb N)$ satisfying the following conditions.
     \begin{enumerate}
         \item for any recursive $g$, $f\in\mathcal F$ where $f(\vec x, \varphi)=\{g(\vec x)\}$.
-        \item $a\in\mathcal F$ where $a(n,\varphi)=\{\varphi(n)\}.
+        \item $a\in\mathcal F$ where $a(n,\varphi)=\{\varphi(n)\}$.
         \item $\mathcal F$ is closed under the usual recursive operations in the approriate sense, e.g. whenever $g_0,\dots, g_k, h\in\mathcal F$ then 
         $$(\vec x_0,\dots, \vec x_k, \varphi)\mapsto\{g(n_0,\dots, n_k,\varphi)\mid\forall i\leq k\ n_i\in g(\vec x_i,\varphi)\}$$
         is in $\mathcal F$.
