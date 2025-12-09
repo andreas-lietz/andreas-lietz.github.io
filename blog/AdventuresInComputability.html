@@ -317,7 +317,7 @@ We can now prove the equivalence.</p>
 <p></p>
 <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
     Let's start with the easier direction, namely that $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ is reducible to $\mathcal I$. Let $g\in \mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ and let $h\in\mathcal R_{\tilde{\eta}}$ induce $g$. As before we will simulate a computation of $h$ and we will do an exhaustive search for a legal behaviour of that program which terminates. We only explain how to simulate the $\mathrm{random\_point\_in\_domain}()$-function calls. Whenever $h$ performs such a call with input the code for some $z\in\mathcal R_{\tilde{\eta}}$ and $\vec x\in\mathbb N^k$, we start searching for some $y_0$ so that $z(y,\vec x, \varphi_T)\neq\emptyset$ (by induction on $h$, we already know how to do that). But crucially, we don't stop once we find such $y_0$. Instead, we pass on $y_0$ to the further simulation and simultaneously search for a further $y_1$. If we find $y_1$ we pass this on further and so on.</p>
-<p>    This program halts on input $n, \ulcorner T\urcorner$ with output $m$ iff there is some possible behaviour of $\mathrm{random\_point\_in\_domain}()$ which results in $T$ halting with output $m$. Equivalently, $m\in h(n,\varphi)$. But then $g(n,\varphi_T)=m$, so we successfully simulate $g$ in this way.</p>
+<p>    If this program halts on input $n, \ulcorner T\urcorner$ with output $m$ then there is some possible behaviour of $\mathrm{random\_point\_in\_domain}()$ which results in $T$ halting with output $m$. Equivalently, $m\in h(n,\varphi)$. But then $g(n,\varphi_T)=m$. Also, this program halts iff $h(n,\varphi_T)\neq\emptyset$, or equivalently, $(n,\varphi_T)\in\mathrm{dom}(g)$. So we successfully simulate $g$ in this way.</p>
 <p>
     Now for the more interesting direction. Let $f$ be code invariant, we will find some $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ so that $f(n, \ulcorner T\urcorner)=g(n, \varphi_T)$ for all $n, T$. </p>
 <p>    Consider the following function $h\colon\mathbb N^2\times\mathcal P\rightarrow\mathbb N$. On input $k, n, \varphi$, the computation proceeds as follows.
@@ -349,7 +349,7 @@ We can now prove the equivalence.</p>
     </p>
 <p>&bull; semideciding whether some $\mathcal R_\ast$-function is defined on some input with functional input $\varphi_T$,
     </p>
-<p>&bull; if it is safe to do so, further use a spe cific $k$ so that the $\mathcal R_\ast$-function in question is defined on $k$.
+<p>&bull; if it is safe to do so, further use a specific $k$ so that the $\mathcal R_\ast$-function in question is defined on $k$.
 </p>
 <p>While the proof of the usual Rice-Shapiro theorem is elegant and short, it does not exactly offer an intuitive explanation of why it is true. However, on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side, the analogous theorem admits a straightforward proof by induction on the complexity of the function.</p>
 <p>If one is willing to accept that $\mathcal I$ is reducible to $\mathcal R_{\eta}^{\mathrm{det}}$, this might offer an intuitive explanation of why Rice-Shapiro is true.</p>
