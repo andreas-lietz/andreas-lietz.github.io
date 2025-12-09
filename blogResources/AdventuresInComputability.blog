@@ -107,7 +107,7 @@ If life were simple the equivalence would be true, but it's not and the equivale
 \begin{proof}
     Any $f\in\mathcal R_\eta$ is induced by a program $T$ which has access to $\mathrm{apply}$ and another private function $\mathrm{halts\_on\_some\_input}(n, \vec x)$, which when passed the source code of another $\mathcal R_\eta$-program returns $0$ iff it halts on some input with further arguments $\vec x$ (and loops infintely otherwise). 
 
-    Let $T_\ast$ be the computation in which calls to $\mathrm{halts\_on\_some\_input}()$ are replaced with calls to $\mathrm{returns_zero}()$ which always returns $0$. If $T$ halts on input $\vec x, \varphi$ then $T_\ast$ halts on input $\vec x,\varphi$ and returns the same value.
+    Let $T_\ast$ be the computation in which calls to $\mathrm{halts\_on\_some\_input}()$ are replaced with calls to $\mathrm{returns\_zero}()$ which always returns $0$. If $T$ halts on input $\vec x, \varphi$ then $T_\ast$ halts on input $\vec x,\varphi$ and returns the same value.
 \end{proof}
 
 \begin{lemm}
@@ -139,9 +139,9 @@ This is the final piece of the puzzle that we need to find an extension of $\mat
 
 \section{The $\tilde{\eta}$-recurisve functions}
 
-Consider the following model of computation: on input $m, \varphi$, run a program which in addition to the $\mathrm{apply}$ function has access to a private function $\mathrm{random\_point\_in\_domain(n, \vec x)}$. When passed the code for another such program $T$, together with some input $\vec x$, this function returns a random $k\in\mathbb N$ so that $T$ can halt on input $k,\vec x, \varphi$. If there is no such $k$, the program enters an infinite loop.
+Consider the following model of computation: on input $m, \varphi$, run a program which in addition to the $\mathrm{apply}$ function has access to a private function $\mathrm{random\_halting\_point(n, \vec x)}$. When passed the code for another such program $T$, together with some input $\vec x$, this function returns a random $k\in\mathbb N$ so that $T$ can halt on input $k,\vec x, \varphi$. If there is no such $k$, the program enters an infinite loop.
 
-Such a program may exhibit different kinds of behaviour any time its run depending on what values $\mathrm{random\_point\_in\_domain(n, \vec x)}$ returns. Such a computation induces a function $f\colon\mathbb N\times\mathcal P \rightarrow\mathcal P(\mathbb N)$ where $n\in f(m, \varphi)$ iff it is possible that the program halts on input $m,\varphi$ with output $n$.
+Such a program may exhibit different kinds of behaviour any time its run depending on what values $\mathrm{random\_halting\_point(n, \vec x)}$ returns. Such a computation induces a function $f\colon\mathbb N\times\mathcal P \rightarrow\mathcal P(\mathbb N)$ where $n\in f(m, \varphi)$ iff it is possible that the program halts on input $m,\varphi$ with output $n$.
 
 The definition of the associated class of functions is straightforward but a little tedious. A function defined via $f(\vec x)=\{g(\vec x)\}$ is supposed to mean that this equality holds whenever $\vec x\in\mathrm{dom}(g)$ and $f(\vec x)=\emptyset$ otherwise.
 
@@ -239,9 +239,9 @@ It will also be helpful to know the version of Rice-Shapiro for $\mathcal R_{\ti
 We can now prove the equivalence.
 
 \begin{proof}
-    Let's start with the easier direction, namely that $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ is reducible to $\mathcal I$. Let $g\in \mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ and let $h\in\mathcal R_{\tilde{\eta}}$ induce $g$. As before we will simulate a computation of $h$ and we will do an exhaustive search for a legal behaviour of that program which terminates. We only explain how to simulate the $\mathrm{random\_point\_in\_domain}()$-function calls. Whenever $h$ performs such a call with input the code for some $z\in\mathcal R_{\tilde{\eta}}$ and $\vec x\in\mathbb N^k$, we start searching for some $y_0$ so that $z(y,\vec x, \varphi_T)\neq\emptyset$ (by induction on $h$, we already know how to do that). But crucially, we don't stop once we find such $y_0$. Instead, we pass on $y_0$ to the further simulation and simultaneously search for a further $y_1$. If we find $y_1$ we pass this on further and so on.
+    Let's start with the easier direction, namely that $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ is reducible to $\mathcal I$. Let $g\in \mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ and let $h\in\mathcal R_{\tilde{\eta}}$ induce $g$. As before we will simulate a computation of $h$ and we will do an exhaustive search for a legal behaviour of that program which terminates. We only explain how to simulate the $\mathrm{random\_halting\_point}()$-function calls. Whenever $h$ performs such a call with input the code for some $z\in\mathcal R_{\tilde{\eta}}$ and $\vec x\in\mathbb N^k$, we start searching for some $y_0$ so that $z(y,\vec x, \varphi_T)\neq\emptyset$ (by induction on $h$, we already know how to do that). But crucially, we don't stop once we find such $y_0$. Instead, we pass on $y_0$ to the further simulation and simultaneously search for a further $y_1$. If we find $y_1$ we pass this on further and so on.
 
-    If this program halts on input $n, \ulcorner T\urcorner$ with output $m$ then there is some possible behaviour of $\mathrm{random\_point\_in\_domain}()$ which results in $T$ halting with output $m$. Equivalently, $m\in h(n,\varphi)$. But then $g(n,\varphi_T)=m$. Also, this program halts iff $h(n,\varphi_T)\neq\emptyset$, or equivalently, $(n,\varphi_T)\in\mathrm{dom}(g)$. So we successfully simulate $g$ in this way.
+    If this program halts on input $n, \ulcorner T\urcorner$ with output $m$ then there is some possible behaviour of $\mathrm{random\_halting\_point}()$ which results in $T$ halting with output $m$. Equivalently, $m\in h(n,\varphi)$. But then $g(n,\varphi_T)=m$. Also, this program halts iff $h(n,\varphi_T)\neq\emptyset$, or equivalently, $(n,\varphi_T)\in\mathrm{dom}(g)$. So we successfully simulate $g$ in this way.
 
 
     Now for the more interesting direction. Let $f$ be code invariant, we will find some $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$ so that $f(n, \ulcorner T\urcorner)=g(n, \varphi_T)$ for all $n, T$. 
@@ -268,7 +268,7 @@ We can now prove the equivalence.
     This shows that $\tilde{g}(n,\varphi)$ has size at most $1$ for any recursive $\varphi$, in particular any finite $\varphi$. By Rice-Shapiro for $\mathcal R_{\tilde{\eta}}$, this is true for any $\varphi\in\mathcal P$. Hence $\tilde{g}$ indeed induces a deterministic $g$.
 \end{proof}
 
-This proof shows that any determinstic $\tilde{\eta}$-recursive function is induced by a computation which calls the $\mathrm{random\_point\_in\_domain}()$-function at most once on any input and in fact does so with the code for a $*$-recursive program.
+This proof shows that any determinstic $\tilde{\eta}$-recursive function is induced by a computation which calls the $\mathrm{random\_halting\_point}()$-function at most once on any input and in fact does so with the code for a $*$-recursive program.
 
 \section{Conclusion}
 
