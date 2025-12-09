@@ -287,7 +287,7 @@ Of course, we can easily proof results on the $\mathcal R_{\eta}^{\mathrm{det}}$
 
 \begin{cor}
 (The halting problem for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$)
-There is no total $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, $g\colon\mathcal P\rightarrow\mathbb N$ so that $g(\varphi)=0$ iff $0\in\,mathrm{dom}(\varphi)$.
+There is no total $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, $g\colon\mathcal P\rightarrow\mathbb N$ so that $g(\varphi)=0$ iff $0\in\mathrm{dom}(\varphi)$.
 \end{cor}
 \begin{proof}
     By $(1)$ of Rice-Shapiro for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, $g(\emptyset)=g(\varphi)$ for all $\varphi\in\mathcal P$.
