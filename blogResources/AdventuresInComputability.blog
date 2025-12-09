@@ -281,9 +281,9 @@ In any case, morally speaking, all code invariant functions are built via recurs
 
 While the proof of the usual Rice-Shapiro theorem is elegant and short, it does not exactly offer an intuitive explanation of why it is true. However, on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side, the analogous theorem admits a straightforward proof by induction on the complexity of the function.
 
-If one is willing to accept that $\mathcal I$ is reducible to $\mathcal R_{\eta}^{\mathrm{det}}$, this might offer an intuitive explanation of why Rice-Shapiro is true.
+If one is willing to accept that $\mathcal I$ is reducible to $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, this might offer an intuitive explanation of why Rice-Shapiro is true.
 
-Of course, we can easily proof results on the $\mathcal R_{\eta}^{\mathrm{det}}$-side which usually require tricky self-referential arguments on the standard recursion side, such as the halting problem.
+Of course, we can easily proof results on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side which usually require tricky self-referential arguments on the standard recursion side, such as the halting problem.
 
 \begin{cor}
 (The halting problem for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$)
