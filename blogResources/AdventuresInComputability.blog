@@ -151,7 +151,7 @@ The definition of the associated class of functions is straightforward but a lit
         \item for any recursive $g$, $f\in\mathcal F$ where $f(\vec x, \varphi)=\{g(\vec x)\}$.
         \item $a\in\mathcal F$ where $a(n,\varphi)=\{\varphi(n)\}$.
         \item $\mathcal F$ is closed under the usual recursive operations in the approriate sense, e.g. whenever $g_0,\dots, g_k, h\in\mathcal F$ then 
-        $$(\vec x_0,\dots, \vec x_k, \varphi)\mapsto\{g(n_0,\dots, n_k,\varphi)\mid\forall i\leq k\ n_i\in g(\vec x_i,\varphi)\}$$
+        $$(\vec x_0,\dots, \vec x_k, \varphi)\mapsto\{h(n_0,\dots, n_k,\varphi)\mid\forall i\leq k\ n_i\in g_i(\vec x_i,\varphi)\}$$
         is in $\mathcal F$.
         \item whenever $f\in\mathcal F$ is of type $\mathbb N^{k+1}\times\mathcal P\rightarrow\mathcal P(\mathbb N)$ then $\tilde{\eta}(f)\in\mathcal F$ where 
         $$\tilde{\eta}(f)(x_1,\dots, x_k,\varphi)=\{n\in\mathbb N\mid f(n,x_1,\dots, x_k,\varphi)\neq\emptyset\}.$$
