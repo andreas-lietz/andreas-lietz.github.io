@@ -109,7 +109,10 @@ Suppose a program is given another program $T$ as input (via its sourcecode $\ul
     We denote the set of (partial) recursive code invariant functions by $\mathcal I$. 
 </p>
 </span></div>
-<p>There is one obvious non-trivial code invariant function: the application $a(n, \ulcorner T\urcorner)=\varphi_T(n)$. This is recursive by the existence of a universal Turing machine. Are all other recursive code invariant functions in some way built from application? To make this precise, consider the blueprints for recursive functions with an oracle. Let $\mathcal P$ be the set of all partial functions $f\colon \mathbb N\rightarrow\mathbb N$.</p>
+<p> Any code invariant $f\colon\mathbb N^2\rightarrow\mathbb N$ naturally induces a function $\hat f\colon \mathbb N\times \mathcal R\rightarrow \mathbb N$, where $\mathcal R$ is the set of recursive functions. The goal is to identify the collection 
+ $$\{\hat f\mid f\text{ is recursive and code invariant}\}.$$
+ It turns out that such an $f$ can infact be lifted to a function canonically to some $\hat{\hat{f}}\colon\mathbb N\times\mathcal P\rigtharrow\mathbb N$ where $\mathcal P$ is the set of partial functions $\mathbb N\rightarrow\mathbb N$, so we will look at such functions instead.</p>
+<p>There is one obvious non-trivial code invariant function: the application $a(n, \ulcorner T\urcorner)=\varphi_T(n)$. This is recursive by the existence of a universal Turing machine. Are all other recursive code invariant functions in some way built from application? Consider the blueprints for recursive functions with an oracle. </p>
 <p>
 </p>
 <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
@@ -127,7 +130,7 @@ The $*$-recursive functions are the smallest family $\mathcal F$ of partial func
 The collection of $*$-recursive functions is $\mathcal R_\ast$.
 </span></div>
 <p>So a $*$-recursive function may get access to the output of a recursive function, but crucially not to a code to compute that function.</p>
-<p>We can now ask wheter every function in $\mathcal I$ is induced by a function in $\mathcal R_\ast$.</p>
+<p>We can now ask whether every function in $\mathcal I$ is induced by a function in $\mathcal R_\ast$.</p>
 <p></p>
 <div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
     Suppose $\mathcal F$ is a set of partial functions of type $\mathbb N^2\rightarrow \mathbb N$ and $\mathcal G$ is a set of functions of type $\mathbb N\times\mathcal P\rightarrow\mathbb N$. 
@@ -162,6 +165,8 @@ $\mathcal R_\ast$ is reducible to $\mathcal I$, but $\mathcal I$ is not reducibl
 </span><span style="margin-top: auto">$\Box$</span></div>
 <p>
 So checking that a program halts on some input is an instance of code invariance which is inherently different from application. Of course we can build more complicated versions of this by, for example, checking whether there are twin primes $p,q$ so that the given program halts on both $p$ and $q$. Once again, we may ask whether all functions in $\mathcal I$ are built up from application and such a check.</p>
+<p>
+We remark however, that application is sufficient if weare only interested in computations on codes for total functions. We will get back to this later.</p>
 <p><h2>The $\eta$-recurisve functions</h2></p>
 <p>
 </p>
@@ -342,32 +347,8 @@ We can now prove the equivalence.</p>
 </p>
 </span><span style="margin-top: auto">$\Box$</span></div>
 <p>This proof shows that any determinstic $\tilde{\eta}$-recursive function is induced by a computation which calls the $\mathrm{random\_halting\_point}()$-function at most once on any input and in fact does so with the code for a $*$-recursive program.</p>
-<p><h2>Conclusion</h2></p>
-<p>In any case, morally speaking, all code invariant functions are built via recursion from the basic building blocks of 
-</p>
-<p>&bull; application $a(n,\ulcorner T\urcorner)= \varphi_T(n)$,
-    </p>
-<p>&bull; semideciding whether some $\mathcal R_\ast$-function is defined on some input with functional input $\varphi_T$,
-    </p>
-<p>&bull; if it is safe to do so, further use a specific $k$ so that the $\mathcal R_\ast$-function in question is defined on $k$.
-</p>
-<p>While the proof of the usual Rice-Shapiro theorem is elegant and short, it does not exactly offer an intuitive explanation of why it is true. However, on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side, the analogous theorem admits a straightforward proof by induction on the complexity of the function.</p>
-<p>If one is willing to accept that $\mathcal I$ is reducible to $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, this might offer an intuitive explanation of why Rice-Shapiro is true.</p>
-<p>Of course, we can easily proof results on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side which usually require tricky self-referential arguments on the standard recursion side, such as the halting problem.</p>
 <p></p>
-<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Corollary</b><span style="flex: 1;"><p>
-(The halting problem for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$)
-There is no total $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, $g\colon\mathcal P\rightarrow\mathbb N$ so that $g(\varphi)=0$ iff $0\in\mathrm{dom}(\varphi)$.
-</p>
-</span></div>
-
-<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
-    By $(1)$ of Rice-Shapiro for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, $g(\emptyset)=g(\varphi)$ for all $\varphi\in\mathcal P$.
-</p>
-</span><span style="margin-top: auto">$\Box$</span></div>
-<p>
-</p>
-
+The blog did not fully parse!
             </div>
     </div>
 </div>

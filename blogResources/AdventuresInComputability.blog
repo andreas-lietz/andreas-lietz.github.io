@@ -26,7 +26,11 @@ Suppose a program is given another program $T$ as input (via its sourcecode $\ul
     We denote the set of (partial) recursive code invariant functions by $\mathcal I$. 
 \end{defn}
 
-There is one obvious non-trivial code invariant function: the application $a(n, \ulcorner T\urcorner)=\varphi_T(n)$. This is recursive by the existence of a universal Turing machine. Are all other recursive code invariant functions in some way built from application? To make this precise, consider the blueprints for recursive functions with an oracle. Let $\mathcal P$ be the set of all partial functions $f\colon \mathbb N\rightarrow\mathbb N$.
+ Any code invariant $f\colon\mathbb N^2\rightarrow\mathbb N$ naturally induces a function $\hat f\colon \mathbb N\times \mathcal R\rightarrow \mathbb N$, where $\mathcal R$ is the set of recursive functions. The goal is to identify the collection 
+ $$\{\hat f\mid f\text{ is recursive and code invariant}\}.$$
+ It turns out that such an $f$ can infact be lifted to a function canonically to some $\hat{\hat{f}}\colon\mathbb N\times\mathcal P\rigtharrow\mathbb N$ where $\mathcal P$ is the set of partial functions $\mathbb N\rightarrow\mathbb N$, so we will look at such functions instead.
+
+There is one obvious non-trivial code invariant function: the application $a(n, \ulcorner T\urcorner)=\varphi_T(n)$. This is recursive by the existence of a universal Turing machine. Are all other recursive code invariant functions in some way built from application? Consider the blueprints for recursive functions with an oracle. 
 
 
 \begin{defn}
@@ -43,7 +47,7 @@ The collection of $*$-recursive functions is $\mathcal R_\ast$.
 
 So a $*$-recursive function may get access to the output of a recursive function, but crucially not to a code to compute that function.
 
-We can now ask wheter every function in $\mathcal I$ is induced by a function in $\mathcal R_\ast$.
+We can now ask whether every function in $\mathcal I$ is induced by a function in $\mathcal R_\ast$.
 
 \begin{defn}
     Suppose $\mathcal F$ is a set of partial functions of type $\mathbb N^2\rightarrow \mathbb N$ and $\mathcal G$ is a set of functions of type $\mathbb N\times\mathcal P\rightarrow\mathbb N$. 
@@ -78,6 +82,9 @@ $\mathcal R_\ast$ is reducible to $\mathcal I$, but $\mathcal I$ is not reducibl
 
 
 So checking that a program halts on some input is an instance of code invariance which is inherently different from application. Of course we can build more complicated versions of this by, for example, checking whether there are twin primes $p,q$ so that the given program halts on both $p$ and $q$. Once again, we may ask whether all functions in $\mathcal I$ are built up from application and such a check.
+
+
+We remark however, that application is sufficient if weare only interested in computations on codes for total functions. We will get back to this later.
 
 \section{The $\eta$-recurisve functions}
 
@@ -269,6 +276,31 @@ We can now prove the equivalence.
 \end{proof}
 
 This proof shows that any determinstic $\tilde{\eta}$-recursive function is induced by a computation which calls the $\mathrm{random\_halting\_point}()$-function at most once on any input and in fact does so with the code for a $*$-recursive program.
+
+\begin{section}{Restricting to total functions}
+
+As mentioned earlier, the $\eta$- and $\tilde{\eta}$-operations are not necessary to capture invariant functions restricted to codes for total functions. In this context, it is not natural to consider only the invariant functions. Instead, say a function $f\colon\mathbb N^2\rightarrow\mathbb N$ is \textbf{code invariant for total functions} if whenever $T_0, T_1$ are Turing machines so that $\varphi_{T_0},\varphi_{T_1}$ are total functions then $f(n,\ulcorner T_0\urcorner)=f(n,\ulcorner T_1\urcorner)$ for all $n$.
+
+\begin{thm}
+    Suppose $f\colon\mathbb N^2\rightarrow\mathbb N$ is recursive and code invariant for total functions. Then there is some $g\in\mathbb R_\ast$ so that 
+    $$f(n,\ulcorner T\urcorner)=g(n,\varphi_T)$$
+    for all $n$ and Turing machines $T$ so that $\varphi_T$ is total.
+\end{thm}
+
+We mention the following without proof.
+
+\begin{lemm}
+    Suppose $f\colon \mathbb N^2\rightarrow N$ is recursive and code invariant for total functions. Then there is a fully code invariant recursive $g\colon\mathbb N^2\rightarrow\mathbb N$ so that 
+    $$f(n,\ulcorner T\urcorner)=g(n,\ulcorner T\urcorner)$$
+    for all $n$ and Turing machines $T$ so that $\varphi_T$ is total.
+\end{lemm}
+
+This can be proven using some ideas from the proof of the Kreisel-Lacombe-Shoenfield-Tseitin theorem. Let's give a quick sketch of the equivalence.
+
+\begin{proof}
+    We may assume that $f$ is fully code invariant. We can now argue as in the proof of equilaence of $\mathcal I$ and $\mathrm{R}_{\tilde{\eta}}^{\mathrm{det}}$ and, borrowing some notation from that proof, replace the use of the $\tilde{\eta}$-operation with a standard $\mu$-recursion and simply search for some $k$ so that $h(k, n,\varphi)$ halts.  Given the promise that $\varphi$ is total, this works as intended: the only reason $h(k, n, \varphi)$ may not halt is that $f(n, \ulcorner S\urcorner)$ is not defined (where $S$ is the Turing machine constructed from $k$ and $\varphi$). But we can simulate that computation step-by-step. 
+\end{proof}
+
 
 \section{Conclusion}
 
