@@ -19,7 +19,6 @@
     {left: '\\[', right: '\\]', display: true}
 ]})"></script>
 
-</head>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">

@@ -13,7 +13,6 @@
     We show that a computation which uses a code for a Turing machine in a way that the result of the compuation only depends on the behaviour of that machine is built up recursively from some specific operations.
 \end{tldr}
 
-
 Suppose a program is given another program $T$ as input (via its sourcecode $\ulcorner T\urcorner$) and uses it in a computation which only depends on the behaviour of $T$ and not $\ulcorner T\urcorner$ itself. In which ways can the code be used? The purpose of this post is to figure out some "atomic" operations from which all such computations are built.
 
 
@@ -298,7 +297,7 @@ We mention the following without proof.
 This can be proven using some ideas from the proof of the Kreisel-Lacombe-Shoenfield-Tseitin theorem. Let's give a quick sketch of the equivalence.
 
 \begin{proof}
-    We may assume that $f$ is fully code invariant. We can now argue as in the proof of equilaence of $\mathcal I$ and $\mathrm{R}_{\tilde{\eta}}^{\mathrm{det}}$ and, borrowing some notation from that proof, replace the use of the $\tilde{\eta}$-operation with a standard $\mu$-recursion and simply search for some $k$ so that $h(k, n,\varphi)$ halts.  Given the promise that $\varphi$ is total, this works as intended: the only reason $h(k, n, \varphi)$ may not halt is that $f(n, \ulcorner S\urcorner)$ is not defined (where $S$ is the Turing machine constructed from $k$ and $\varphi$). But we can simulate that computation step-by-step. 
+    We may assume that $f$ is fully code invariant. We can now argue as in the proof of equivalence of $\mathcal I$ and $\mathrm{R}_{\tilde{\eta}}^{\mathrm{det}}$ and, borrowing some notation from that proof, replace the use of the $\tilde{\eta}$-operation with a standard $\mu$-recursion and simply search for some $k$ so that $h(k, n,\varphi)$ halts.  Given the promise that $\varphi$ is total, this works as intended: the only reason $h(k, n, \varphi)$ may not halt is that $f(n, \ulcorner S\urcorner)$ is not defined (where $S$ is the Turing machine constructed from $k$ and $\varphi$). But we can simulate that computation step-by-step. 
 \end{proof}
 
 

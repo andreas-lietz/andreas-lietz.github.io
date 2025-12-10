@@ -19,7 +19,6 @@
     {left: '\\[', right: '\\]', display: true}
 ]})"></script>
 
-</head>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -97,8 +96,7 @@ and is wrapped around the whole page content, except for the footer in this exam
             </div>
         <div class="w3-container">
         <style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style><p></p>
-<p>
-Suppose a program is given another program $T$ as input (via its sourcecode $\ulcorner T\urcorner$) and uses it in a computation which only depends on the behaviour of $T$ and not $\ulcorner T\urcorner$ itself. In which ways can the code be used? The purpose of this post is to figure out some "atomic" operations from which all such computations are built.</p>
+<p>Suppose a program is given another program $T$ as input (via its sourcecode $\ulcorner T\urcorner$) and uses it in a computation which only depends on the behaviour of $T$ and not $\ulcorner T\urcorner$ itself. In which ways can the code be used? The purpose of this post is to figure out some "atomic" operations from which all such computations are built.</p>
 <p>
 <h2>The $*$-recursive functions</h2></p>
 <p> Let's fix some notation. For a Turing machine $T$, let $\varphi_T\colon\mathbb N\rightarrow\mathbb N$ be the (partial) recursive function induced by $T$. 
