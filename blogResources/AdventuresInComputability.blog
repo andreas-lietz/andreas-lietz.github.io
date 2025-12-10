@@ -28,7 +28,7 @@ Suppose a program is given another program $T$ as input (via its sourcecode $\ul
 
  Any code invariant $f\colon\mathbb N^2\rightarrow\mathbb N$ naturally induces a function $\hat f\colon \mathbb N\times \mathcal R\rightarrow \mathbb N$, where $\mathcal R$ is the set of recursive functions. The goal is to identify the collection 
  $$\{\hat f\mid f\text{ is recursive and code invariant}\}.$$
- It turns out that such an $f$ can infact be lifted to a function canonically to some $\hat{\hat{f}}\colon\mathbb N\times\mathcal P\rigtharrow\mathbb N$ where $\mathcal P$ is the set of partial functions $\mathbb N\rightarrow\mathbb N$, so we will look at such functions instead.
+ It turns out that such an $f$ can in fact be lifted to a function canonically to some $\hat{f}^+\colon\mathbb N\times\mathcal P\rightarrow\mathbb N$ where $\mathcal P$ is the set of partial functions $\mathbb N\rightarrow\mathbb N$, so we will look at such functions instead.
 
 There is one obvious non-trivial code invariant function: the application $a(n, \ulcorner T\urcorner)=\varphi_T(n)$. This is recursive by the existence of a universal Turing machine. Are all other recursive code invariant functions in some way built from application? Consider the blueprints for recursive functions with an oracle. 
 
