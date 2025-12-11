@@ -276,7 +276,7 @@ We can now prove the equivalence.
 
 This proof shows that any determinstic $\tilde{\eta}$-recursive function is induced by a computation which calls the $\mathrm{random\_halting\_point}()$-function at most once on any input and in fact does so with the code for a $*$-recursive program.
 
-\begin{section}{Restricting to total functions}
+\section{Restricting to total functions}
 
 As mentioned earlier, the $\eta$- and $\tilde{\eta}$-operations are not necessary to capture invariant functions restricted to codes for total functions. In this context, it is not natural to consider only the invariant functions. Instead, say a function $f\colon\mathbb N^2\rightarrow\mathbb N$ is \textbf{code invariant for total functions} if whenever $T_0, T_1$ are Turing machines so that $\varphi_{T_0},\varphi_{T_1}$ are total functions then $f(n,\ulcorner T_0\urcorner)=f(n,\ulcorner T_1\urcorner)$ for all $n$.
 
@@ -301,6 +301,73 @@ This can be proven using some ideas from the proof of the Kreisel-Lacombe-Shoenf
 \end{proof}
 
 
+\section{A universal code invariant recursion}
+
+Let's say that a \textbf{universal function} for a family $\mathcal F$ of partial functions of type $\mathbb N^k\rightarrow\mathbb N$ is a partial function $U\colon\mathbb N^{k+1}\rightarrow\mathbb N$ so that for $U_n=\lambda x_1,\dots, x_k U(n, x_1, x_k)$, 
+\begin{itemize}
+    \item $U_n\in \mathcal F$ for all $n$ and 
+    \item for all $f\in\mathcal F$, there is some $n$ with $f=U_n$.
+\end{itemize}
+
+Of course, there is a recursive universal function for the recursive functions, the one induced by the universal Turing machine. For a subset $\mathcal F$ of the recursive functions, the naive attempt to define a universal function $U$ for $f$ is to define $U_{\ulcorner T\urcorner}=\varphi_T$ if $\varphi_T\in \mathcal F$ and $U_{\ulcorner T\urcorner}=\varphi_\ast$ otherwise for some fixed $\varphi_\ast\in\mathcal F$. This produces a universal function (as long as $\mathcal F\neq\emptyset$), but $U$ is usually not recursive: by Rice's theorem (or the stronger Rice-Shapiro), we can decide whether $\varphi_T\in\mathcal F$ only iff $\mathcal F$ is empty or all recursive functions.
+
+However, there are non-trivial $\mathcal F$ which admit a recursive universal function. This usually involves analyzing the behaviour of functions in $\mathcal F$ and then define $U$ by making educated guesses.
+
+
+Here is a toy example.
+
+\begin{lemm}
+    Let $\mathcal F_0$ be the collection of partial recursive $f\colon\mathbb N\rightarrow\mathbb N$ with $0\in\mathrm{dom}(f)$. There is a recursive universal function for $\mathcal F_0$.
+\end{lemm}
+
+\begin{proof}
+    Given $n$, split $n$ reasonably into $k, l\in\mathbb N$. Then define $U_n(0)=k$ and $U_n(m+1)=\varphi_l(m)$ where $\varphi_l$ is the $l$-th recursive function.
+\end{proof}
+
+We will now show that, maybe surprisingly, the code invariant functions $\mathcal I$ admit a recursive universal function. This follows from a more concrete description of $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$.
+
+Fix a Lipschitz bijection 
+$$L\colon\mathbb N^{<\mathbb N}\rightarrow \mathcal A$$
+where $\mathbb N^{<\mathbb N}$ is the set of finite sequences in $\mathbb N$ and $\mathcal A$ is the set of finite $1-1$ seqeunces $\langle a_k\mid k < n\rangle$ so that $\{a_k\mid k<n\}$ is an antichain in $\mathbb P$. Also assume that $L$ is recursive (in the codes).
+
+For example, fix a computable enumeration $(s_k)_{k\in\mathbb N}$ of all finite partial functions of type $\mathbb N\rightarrow\mathbb N$ and let $L(t^\frown n)=s_m$ where $m$ is the $n$-th $l$ so that $L(t)\cup\{s_l\}$ is an antichain.
+
+This allows us to produce an effective enumeration $\langle \vec a^n\mid n\in\mathbb N\rangle$ of all computably enumerable indexed antichains in $\mathbb P$. For example let $\vec a^{\ulcorner T\urcorner}=L(\varphi_T\upharpoonright n)$ where $n$ is least so that $\varphi_T(n)$ is not defined and $\vec a^{\ulcorner T\urcorner}=\bigcup_{n\in\mathbb N}L(\varphi_T\upharpoonright n)$ if $\varphi_T$ is total. 
+
+We can now define the  master (partial) function for our purposes. Let $M\colon\mathbb N\times\mathcal P\rightarrow\mathbb N$ be defined via $M(n, \varphi)=k$ where $k$ is unique such that $\vec a^n_k\subseteq\varphi$. If there is no such $k$ then $M(n,\varphi)$ is undefined.
+
+\begin{defn}
+    $\mathcal R_M$ is the smallest family $\mathcal F$ satisfying $(1)+(3)$ from the definition of $\mathcal R_\ast$ with $M\in\mathcal F$.
+\end{defn}
+
+Note that the application function $a$ can be recovered from $M$.
+
+\begin{thm}
+    $\mathcal I$ is equivalent to $\mathcal R_M$.
+\end{thm}
+
+\begin{proof}
+    We will only argue that $\mathcal I$ is reducible to $\mathcal R_M$. So let $f\in\mathcal I$. Fix a recursive map $k\mapsto T_k$ so that $\varphi_{T_k}=s_k$. Run a program which on input $n$, computes $f(n, \ulcorner T_m\urcorner)$ for all $m$ simultaneously. Let $g(n, m)$ be the first $k$ which is found so that $f(n, \ulcorner T_k\urcorner)$ is defined and $\{s_{g(n, 0)},\dots, s_{g(n, m-1)}, s_k\}$ is an antichain. So $\lambda m. g(n, m)$ enumerates some antichain $\vec a^{h(n)}$. If done carefully, we can assume that $h$ is recursive.
+
+    We will now define a computation $F$ within $\mathcal R_M$. To figure out $F(n, \varphi)$, first compute $k=M(h(n), \varphi)$. Then return $f(n, T_{\vec a^{h(n)}_k})$. Similarly as before, we see that 
+    $$f(n, \ulcorner T\urcorner)=F(n, \varphi_T)$$
+    for all $n$ and Turing machines $T$ using the Rice-Shapiro theorem.
+
+\end{proof}
+
+\begin{cor}
+    There is a recursive universal function for $\mathcal I$. 
+\end{cor}
+
+\begin{proof}
+    Construct a Turing machine which on input $k, n, \ulcorner T\urcorner$ simulates the $k$-th computation in $\mathcal R_M$ with input $n, \varphi_T$.
+\end{proof}
+
+
+
+
+
+
 \section{Conclusion}
 
 In any case, morally speaking, all code invariant functions are built via recursion from the basic building blocks of 
@@ -309,6 +376,8 @@ In any case, morally speaking, all code invariant functions are built via recurs
     \item semideciding whether some $\mathcal R_\ast$-function is defined on some input with functional input $\varphi_T$,
     \item if it is safe to do so, further use a specific $k$ so that the $\mathcal R_\ast$-function in question is defined on $k$.
 \end{itemize}
+
+Equivalently, the only thing one can do is apply $M$.
 
 While the proof of the usual Rice-Shapiro theorem is elegant and short, it does not exactly offer an intuitive explanation of why it is true. However, on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side, the analogous theorem admits a straightforward proof by induction on the complexity of the function.
 

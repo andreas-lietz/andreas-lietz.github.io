@@ -345,8 +345,117 @@ We can now prove the equivalence.</p>
 </p>
 </span><span style="margin-top: auto">$\Box$</span></div>
 <p>This proof shows that any determinstic $\tilde{\eta}$-recursive function is induced by a computation which calls the $\mathrm{random\_halting\_point}()$-function at most once on any input and in fact does so with the code for a $*$-recursive program.</p>
+<p><h2>Restricting to total functions</h2></p>
+<p>As mentioned earlier, the $\eta$- and $\tilde{\eta}$-operations are not necessary to capture invariant functions restricted to codes for total functions. In this context, it is not natural to consider only the invariant functions. Instead, say a function $f\colon\mathbb N^2\rightarrow\mathbb N$ is <b>code invariant for total functions</b> if whenever $T_0, T_1$ are Turing machines so that $\varphi_{T_0},\varphi_{T_1}$ are total functions then $f(n,\ulcorner T_0\urcorner)=f(n,\ulcorner T_1\urcorner)$ for all $n$.</p>
 <p></p>
-The blog did not fully parse!
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+    Suppose $f\colon\mathbb N^2\rightarrow\mathbb N$ is recursive and code invariant for total functions. Then there is some $g\in\mathbb R_\ast$ so that 
+    $$f(n,\ulcorner T\urcorner)=g(n,\varphi_T)$$
+    for all $n$ and Turing machines $T$ so that $\varphi_T$ is total.
+</p>
+</span></div>
+<p>We mention the following without proof.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Suppose $f\colon \mathbb N^2\rightarrow N$ is recursive and code invariant for total functions. Then there is a fully code invariant recursive $g\colon\mathbb N^2\rightarrow\mathbb N$ so that 
+    $$f(n,\ulcorner T\urcorner)=g(n,\ulcorner T\urcorner)$$
+    for all $n$ and Turing machines $T$ so that $\varphi_T$ is total.
+</p>
+</span></div>
+<p>This can be proven using some ideas from the proof of the Kreisel-Lacombe-Shoenfield-Tseitin theorem. Let's give a quick sketch of the equivalence.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    We may assume that $f$ is fully code invariant. We can now argue as in the proof of equivalence of $\mathcal I$ and $\mathrm{R}_{\tilde{\eta}}^{\mathrm{det}}$ and, borrowing some notation from that proof, replace the use of the $\tilde{\eta}$-operation with a standard $\mu$-recursion and simply search for some $k$ so that $h(k, n,\varphi)$ halts.  Given the promise that $\varphi$ is total, this works as intended: the only reason $h(k, n, \varphi)$ may not halt is that $f(n, \ulcorner S\urcorner)$ is not defined (where $S$ is the Turing machine constructed from $k$ and $\varphi$). But we can simulate that computation step-by-step. 
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>
+<h2>A universal code invariant recursion</h2></p>
+<p>Let's say that a <b>universal function</b> for a family $\mathcal F$ of partial functions of type $\mathbb N^k\rightarrow\mathbb N$ is a partial function $U\colon\mathbb N^{k+1}\rightarrow\mathbb N$ so that for $U_n=\lambda x_1,\dots, x_k U(n, x_1, x_k)$, 
+</p>
+<p>&bull; $U_n\in \mathcal F$ for all $n$ and 
+    </p>
+<p>&bull; for all $f\in\mathcal F$, there is some $n$ with $f=U_n$.
+</p>
+<p>Of course, there is a recursive universal function for the recursive functions, the one induced by the universal Turing machine. For a subset $\mathcal F$ of the recursive functions, the naive attempt to define a universal function $U$ for $f$ is to define $U_{\ulcorner T\urcorner}=\varphi_T$ if $\varphi_T\in \mathcal F$ and $U_{\ulcorner T\urcorner}=\varphi_\ast$ otherwise for some fixed $\varphi_\ast\in\mathcal F$. This produces a universal function (as long as $\mathcal F\neq\emptyset$), but $U$ is usually not recursive: by Rice's theorem (or the stronger Rice-Shapiro), we can decide whether $\varphi_T\in\mathcal F$ only iff $\mathcal F$ is empty or all recursive functions.</p>
+<p>However, there are non-trivial $\mathcal F$ which admit a recursive universal function. This usually involves analyzing the behaviour of functions in $\mathcal F$ and then define $U$ by making educated guesses.</p>
+<p>
+Here is a toy example.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Lemma</b><span style="flex: 1;"><p>
+    Let $\mathcal F_0$ be the collection of partial recursive $f\colon\mathbb N\rightarrow\mathbb N$ with $0\in\mathrm{dom}(f)$. There is a recursive universal function for $\mathcal F_0$.
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    Given $n$, split $n$ reasonably into $k, l\in\mathbb N$. Then define $U_n(0)=k$ and $U_n(m+1)=\varphi_l(m)$ where $\varphi_l$ is the $l$-th recursive function.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>We will now show that, maybe surprisingly, the code invariant functions $\mathcal I$ admit a recursive universal function. This follows from a more concrete description of $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$.</p>
+<p>Fix a Lipschitz bijection 
+$$L\colon\mathbb N^{<\mathbb N}\rightarrow \mathcal A$$
+where $\mathbb N^{<\mathbb N}$ is the set of finite sequences in $\mathbb N$ and $\mathcal A$ is the set of finite $1-1$ seqeunces $\langle a_k\mid k < n\rangle$ so that $\{a_k\mid k<n\}$ is an antichain in $\mathbb P$. Also assume that $L$ is recursive (in the codes).</p>
+<p>For example, fix a computable enumeration $(s_k)_{k\in\mathbb N}$ of all finite partial functions of type $\mathbb N\rightarrow\mathbb N$ and let $L(t^\frown n)=s_m$ where $m$ is the $n$-th $l$ so that $L(t)\cup\{s_l\}$ is an antichain.</p>
+<p>This allows us to produce an effective enumeration $\langle \vec a^n\mid n\in\mathbb N\rangle$ of all computably enumerable indexed antichains in $\mathbb P$. For example let $\vec a^{\ulcorner T\urcorner}=L(\varphi_T\upharpoonright n)$ where $n$ is least so that $\varphi_T(n)$ is not defined and $\vec a^{\ulcorner T\urcorner}=\bigcup_{n\in\mathbb N}L(\varphi_T\upharpoonright n)$ if $\varphi_T$ is total. </p>
+<p>We can now define the  master (partial) function for our purposes. Let $M\colon\mathbb N\times\mathcal P\rightarrow\mathbb N$ be defined via $M(n, \varphi)=k$ where $k$ is unique such that $\vec a^n_k\subseteq\varphi$. If there is no such $k$ then $M(n,\varphi)$ is undefined.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Definition</b><span style="flex: 1;"><p>
+    $\mathcal R_M$ is the smallest family $\mathcal F$ satisfying $(1)+(3)$ from the definition of $\mathcal R_\ast$ with $M\in\mathcal F$.
+</p>
+</span></div>
+<p>Note that the application function $a$ can be recovered from $M$.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Theorem</b><span style="flex: 1;"><p>
+    $\mathcal I$ is equivalent to $\mathcal R_M$.
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    We will only argue that $\mathcal I$ is reducible to $\mathcal R_M$. So let $f\in\mathcal I$. Fix a recursive map $k\mapsto T_k$ so that $\varphi_{T_k}=s_k$. Run a program which on input $n$, computes $f(n, \ulcorner T_m\urcorner)$ for all $m$ simultaneously. Let $g(n, m)$ be the first $k$ which is found so that $f(n, \ulcorner T_k\urcorner)$ is defined and $\{s_{g(n, 0)},\dots, s_{g(n, m-1)}, s_k\}$ is an antichain. So $\lambda m. g(n, m)$ enumerates some antichain $\vec a^{h(n)}$. If done carefully, we can assume that $h$ is recursive.</p>
+<p>    We will now define a computation $F$ within $\mathcal R_M$. To figure out $F(n, \varphi)$, first compute $k=M(h(n), \varphi)$. Then return $f(n, T_{\vec a^{h(n)}_k})$. Similarly as before, we see that 
+    $$f(n, \ulcorner T\urcorner)=F(n, \varphi_T)$$
+    for all $n$ and Turing machines $T$ using the Rice-Shapiro theorem.</p>
+<p></p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Corollary</b><span style="flex: 1;"><p>
+    There is a recursive universal function for $\mathcal I$. 
+</p>
+</span></div>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    Construct a Turing machine which on input $k, n, \ulcorner T\urcorner$ simulates the $k$-th computation in $\mathcal R_M$ with input $n, \varphi_T$.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p></p>
+<p></p>
+<p>
+<h2>Conclusion</h2></p>
+<p>In any case, morally speaking, all code invariant functions are built via recursion from the basic building blocks of 
+</p>
+<p>&bull; application $a(n,\ulcorner T\urcorner)= \varphi_T(n)$,
+    </p>
+<p>&bull; semideciding whether some $\mathcal R_\ast$-function is defined on some input with functional input $\varphi_T$,
+    </p>
+<p>&bull; if it is safe to do so, further use a specific $k$ so that the $\mathcal R_\ast$-function in question is defined on $k$.
+</p>
+<p>Equivalently, the only thing one can do is apply $M$.</p>
+<p>While the proof of the usual Rice-Shapiro theorem is elegant and short, it does not exactly offer an intuitive explanation of why it is true. However, on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side, the analogous theorem admits a straightforward proof by induction on the complexity of the function.</p>
+<p>If one is willing to accept that $\mathcal I$ is reducible to $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, this might offer an intuitive explanation of why Rice-Shapiro is true.</p>
+<p>Of course, we can easily proof results on the $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$-side which usually require tricky self-referential arguments on the standard recursion side, such as the halting problem.</p>
+<p></p>
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Corollary</b><span style="flex: 1;"><p>
+(The halting problem for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$)
+There is no total $g\in\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, $g\colon\mathcal P\rightarrow\mathbb N$ so that $g(\varphi)=0$ iff $0\in\mathrm{dom}(\varphi)$.
+</p>
+</span></div>
+
+<div style="display: flex; justify-content: flex-start;"><b style="padding: 0 4px;flex: 0;">Proof</b><span style="flex: 1;"><p>
+    By $(1)$ of Rice-Shapiro for $\mathcal R_{\tilde{\eta}}^{\mathrm{det}}$, $g(\emptyset)=g(\varphi)$ for all $\varphi\in\mathcal P$.
+</p>
+</span><span style="margin-top: auto">$\Box$</span></div>
+<p>
+</p>
+
             </div>
     </div>
 </div>
