@@ -1,0 +1,87 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\AD}{\mathrm{AD}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\PFA}{\mathrm{PFA}}
+\newcommand{\BFSigma}{\mathbf{\Sigma}}
+\newcommand{\BFPi}{\mathbf{\Pi}}
+
+\title{The Easiest Proof of $\BFSigma_0^3$-Determinacy}
+\subtitle{Reproving the Theorems of Wolfe and Davis}
+\date{December 5rd, 2025}
+
+\begin{tldr}
+    We use the notion of Ramsey trees introduced in an earlier blog post to prove that all $\BFSigma^0_3$-sets of reals are determined in a weak theory.
+\end{tldr}
+
+Tomorrow, I will present the proof of analytic determinacy using what I call "Ramsey trees" in a lecture to Set Theory students here at TU Wien. This got me thinking again whether these trees can be used to prove some other famous determinacy results. It turns out that this indeed works nicely for the famous result of Davis:
+
+\begin{thm}
+(Davis) All $\BFSigma^0_3$ (also known as $G_{\delta\simga}$) sets are determined.
+\end{thm}
+
+This was essentially the best result known before Martin's proof of Borel Determinacy in $\ZFC$. Davis's result goes through in a much weaker theory, like $\mathrm{ZC}^{-}+\Sigma_1$-replacement, which does not proof Borel determinacy. Our argument here works in this weak theory, too.
+
+For the convenience of the reader, here is the definition of a Ramsey tree and the fundamental result about them.
+
+
+\begin{defn}
+    A tree $T$ on $\omega\times\alpha$ is \textbf{Ramsey} if for every coloring $c\colon T\rightarrow \omega$ there is a subtree $S\subseteq T$ so that 
+    \begin{enumerate}
+        \item $S$ is homogeneous for $c$, i.e. for $(s, u),(t,v)\in S$, $s=t$ implies $c(s, u)=c(t, v)$ and
+        \item $p[S]=p[T]$.
+    \end{enumerate}
+\end{defn}
+
+\begin{thm}
+    For any Ramsey tree $T$, the game on $\omega$ with winning set $p[T]$ is determined.
+\end{thm}
+
+The strategy is simply to show that any $\Sigma^0_3$-set is the projection of a Ramsey tree. The first small step is to observe that it suffices to be Ramsey for colorings using only two colors.
+
+\begin{lemm}
+    Suppose $T$ is a tree on $\omega\times\alpha$ so that for any $c\colon T\rightarrow 2$, there is a subtree $S\subseteq T$ so that $S$ is homogeneous for $c$ and $p[S]=p[T]$. Then $T$ is a Ramsey tree.
+\end{lemm}
+
+\begin{proof}
+    Let $c\colon T\rightarrow\omega$ be any coloring. The trick is to define a coloring $d\colon T\rightarrow 2$ so that any pruned subtree of $T$ which is homogeneous for $d$ is also homogeneous for $c$. Recall the coding $h\colon\omega^\omega\rightarrow 2^\omega$ which replaces any natural number $k$ by the sequence consisting of $k$ $1$'s terminated by a single $0$. Define $d$ so that if $x\in [T]$ then 
+    $$h(\langle c(x\res n)\mid n<\omega\rangle)=\langle d(x\res n)\mid n<\omega\rangle.$$
+    We leave it to the reader to check the remaining details.
+\end{proof}
+
+\begin{lemm}
+    Any $\BFPi^0_2$-set is the projection of a Ramsey tree.
+\end{lemm}
+\begin{proof}
+    Let $(O_n)_{n<\omega}$ be a sequence of open sets and assume $O_0=\omega^\omega$. We will construct a Ramsey tree $T$ on $\omega\times\omega$ so that $p[T]=\bigcap_{n<\omega} O_n$. 
+
+    For any $n$, let $X_n=\{s\in\omega^{<\omega}\mid \forall x\in\omega^\omega\ (s\subseteq x\rightarrow x\in O_n)}$. We describe the tree $T$ by describing its cofinal branches. We have $(x, y)\in p[T] iff the following holds for all $n$:
+
+    \begin{enumerate}
+        \item $y(n)\neq 0$ iff $\Sum_{i<n} y(i)=n$ (in particular $y(0)\neq 0) and
+        \item if $y(n)\neq 0$ then $x\res n\in X_k$ where $k=\vert\{i<n\mid y(i)\neq 0\}\vert$.
+    \end{enumerate}
+    The idea is that the second component makes promises about how much longer it will take for the first component to reach the next $X_n$. So $y(0)=n$ means that $x\res n\in O_1$. The next promise only happens at level $n$, when $x$ has fulfilled this promise. So $y(i)= 0$ for $0<i<n$ and $y(n)=m\neq 0$. This promises $x(n+m)\in O_2$ and so on.
+
+    We call $(s, t)\in T$ a splitting node if, for $n$ the length of $(s, t)$,
+    
+    \begin{itemize}
+        \item $\Sum_{i<n} t(i)=n$ and
+        \item $s\in O_k$ where $k=\vert\{i<n\mid t(i)\neq 0\}\vert$.
+    \end{itemize}
+    That is, $(s, t)$ is not maximal in $T$ and any proper extension $(s', t')$ has $t'(n)\neq 0$.  
+
+    It should be clear that $p[T]=\bigcap_{n<\omega} O_n$, so we are done once we establish that $T$ is Ramsey.
+
+    Let $c\colon T\rightarrow 2$ be a coloring of $T$. Let $s\in\omega^{<\omega}$. Let $S_s=\{t\in\omega^{<\omega}\mid (s, t^\frown 1)\in T}$. Choose an infinite $A_s\subseteq\omega$ so that for $i, j\in A_s$,
+    $$\forall t\in S_s\ c((s, t^\frown i))=c((s, t^\frown j)).$$
+    Finally, the subtree $S$ consists of all $(s, t)\in T$ so that if $t(n)\neq 0$ then $t(n)\in A_{s\res n+1}$.
+    
+    
+    
+    
+     We define a subtree $S$ of $T$ by induction by explaining how $S$ splits at the splitting nodes. 
+
+\end{proof}
+

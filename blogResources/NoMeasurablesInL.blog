@@ -1,0 +1,160 @@
+<style> .katex-display { overflow-y: auto; overflow-y: hidden; } </style>
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\AD}{\mathrm{AD}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\PFA}{\mathrm{PFA}}
+
+\title{Did the atom bomb hold up Inner Model Theory?}
+\subtitle{How measurables could have been disporved in $L$ much earlier}
+
+\date{May 27th, 2026}
+
+\begin{tldr}
+    Scott's famous result on the nonexistence of measurables in $L$ is a landmark result for Inner Model Theory. We argue that it could have been proven more than 20 years ealier.
+\end{tldr}
+
+
+It is a celebrated result due to Dana Scott that there are no measurable cardinals in $L$. While Gödel constructed the first canonical inner model and this theorem made sure it would not be the last. Scott's proof is very elegant and is taught in many Set Theory lectures: Suppose that $\kappa$ is the least measurable cardinal in $L$ and let $j\colon L\rightarrow M$ be an elementary embedding with critical point $\kappa$ and $M$ transitive. By elementarity, $M=L$ and hence $j(\kappa)$ is the least measurable cardinal in $L$, contradiction.
+
+While it is second nature nowadays that measurable cardinals are the critical point of such embeddings, Scott was the first to realize this and it was this very paper which introduced the ultrapower method to Set Theory. In this regard, the nonexistence of measurables in $L$ is often thought of as a corollary to the ultrapower construction.
+
+However, there is an elementary combinatorial argument which, in my opinion, could reasonably have been figured out already in the 1930s after Gödels famous paper on $L$. Let us use the definitions for measurability which are closer to what 1920s mathematicians were working with.
+
+\begin{defn}
+    A cardinal $\kappa$ is Banach-measurable (or just B-measurable) if there is a ($\sigma$-additive) measure $\mu\colon\mathcal P(\kappa)\rightarrow \mathbb R$ which vanishes on points.
+
+    A cardinal $\kappa$ is Ulam-measurable (or just U-measurable) if there is a ($\sigma$-additive) two valued measure $\mu\colon\mathcal P(\kappa)\rightarrow\{0, 1\}$ which vanishes on points.
+\end{defn}
+
+\section{Some history on B- and U-measurability}
+
+Originally, the motivation behind these definitions came from measure theory, more concretely the measure problem. Famously, Lebesgue defined a translation invariant measure on a big subset of $\mathcal P(\mathbb R)$ and Vitali showed (using choice) that such a measure cannot be defined on the full $\mathcal P(\mathbb R)$. Banach-Kuratowski asked whether such a total measure exists when translation invariance is weakened to vanishing on points. 
+
+\begin{thm}(Banach-Kuratowski, 1929)
+Assume $\mathrm{CH}$. Then there is no total $\sigma$-additive measure defined on all subsets of $\mathbb R$.
+\end{thm}
+
+That is, the continuum is not B-measurable. 
+
+To my knowledge, Banach was the first to studied the existence of such measures on larger cardinals.
+\begin{thm}(Banach, 1930)
+    Assume $\mathrm{GCH}$. If there is a B-measurable cardinal then there is an inaccessible cardinal. In fact, the additivity of any measure witnessing B-measurability is inaccessible.
+\end{thm}
+
+At the time, it was not yet known whether inaccessible cardinals or even weakly inaccessible cardinals necessarily exist. This was before Von Neumann's construction of the $V_\alpha$-hierarchy and Gödels incompleteness theorems. 
+
+ A little later, Ulam was able to remove the $\mathrm{GCH}$-assumption in Banach's theorem (with the conclusion weakened to weakly inaccessible cardinal). Further, he connected B-measurability to U-measurabilty.
+ 
+ \begin{thm}(Ulam, 1930)
+    If $2^\omega$ is not B-measurable then any B-measurable cardinal is U-measurable.
+ \end{thm} 
+
+ Thanks to this result, Ulam is nowadays credited with the discovery of measurable cardinals. In fact his proof shows the following:
+
+ \begin{thm}(Ulam, 1930)
+    If $2^\omega$ is not B-measurable and then the least B-measurable cardinal is measurable.
+ \end{thm}
+This is not an immedaite consequence of his previous theorem as measurability requires a $\kappa$-complete nonprincipal ultrafilter on $\kappa$, whereas U-measurability only demands a countably complete nonprincipal ultrafilter on $\kappa$ to exist.
+
+\begin{rem} As a consequence to the proofs, the relation of B- and U-measurability to the modern ones is: a cardinal is $B$-measurable iff it is above a real-valued measurable cardinal and $U$-measurable iff it is above a measurable cardinal. 
+\end{rem}
+
+
+
+\section{No measurables in $L$ using methods from the 1930s}
+
+The arguments we will use are folklore. We record the key consequence of condensation we use in the next lemma.
+
+\begin{lemm}
+   Assume $V=L$. If $\theta>\omega_1$ is a cardinal and $X\prec L_\theta$ is an uncountable elementary substructure then $\omega_1\subseteq X$.
+\end{lemm}
+
+\begin{proof}
+    Let $\pi\colon M\rightarrow X$ be the anticollapse map. By the condensation lemma, $M=L_\alpha$ for some (necessarily uncountable) $\alpha$.  By Gödels proof of $\mathrm{CH}$ in $L$, we have 
+    $$\mathbb R\subseteq L_{\omega_1}\subseteq L_\alpha=M,$$
+    and hence $\omega_1^{M}=\omega_1$. As $\pi\upharpoonright\omega_1^M$ is the identity, $\omega_1\subseteq X$.
+\end{proof}
+
+\begin{thm}
+    Assume $V=L$. There is no B-measurable cardinal.
+\end{thm}
+\begin{proof}
+    As $\mathrm{CH}$ holds, $2^\omega$ is not B-measurable by the Banach-Kuratowski theorem. Thus, if there is a B-measurable cardinal then there is a U-measurable cardinal by Ulam's theorem. Suppose towards a contradiction that $\kappa$ is U-measurable.
+
+    Let $X_0\prec L_{\kappa^{++}}$ be a countable elementary substructre containing a countably complete nonprincipal ultrafilter $U$ on $\kappa$. Let $\alpha\in \bigcap U\cap X_0$ and let 
+    
+    $$X_1=\mathrm{Hull}^{L_{\kappa^{++}}}(X_0\cup\{\alpha\})$$
+    
+     be the elementary substructure of $L_{\kappa^{++}}$ generated by $X_0$ and $\alpha$. 
+
+    \begin{claim}
+        $X_0\cap\omega_1=X_1\cap\omega_1$.
+    \end{claim}
+    \begin{proof}
+        Assume $\beta\in\omega_1\cap X_1$. So there is a term $\tau$ and $p\in X_0$ so that $\beta=\tau^{L_{\kappa^++}}(p,\alpha)$. By varying $\alpha$ in $\kappa\in X_0$, we find a function $f\colon\kappa\rightarrow L_{\kappa^{++}}$ with $f\in X_0$ and $\beta=f(\alpha)$.
+        
+         Then $\langle f^{-1}[\{\gamma\}]\mid\gamma<\omega_1\rangle$ is a partition of $\kappa$. By Banach's (or Ulam's) theorem, $U$ is $\omega_1$-complete. Hence there is a unique $\gamma$ with $f^{-1}[\{\gamma\}]\in U$ and clearly, $\gamma\in X_0$. Now $\alpha\in\bigcap U\cap X_0\subseteq f^{-1}[\{\gamma\}]$, so $\beta=f(\alpha)=\gamma\in X_0$. 
+    \end{proof}
+    We can now continue to define $X_\xi\prec V_\alpha$ for all $\xi\leq\omega_1$, by taking unions at limits and performing the above construction at successors. We find that $X_{\omega_1}\prec L_{\kappa^{++}}$ is uncountable and $X_{\omega_1}\cap\omega_1=X_0\cap\omega_1$ is countable. This contradicts the previous lemma!
+\end{proof}
+
+\section{On randomness in mathematical discovery}
+
+It is well documented that scientific disocovery is heavily influeced by random events. Penicilin was discovered when Sir Alexander Fleming did not clean a petri dish properly before going on a vacation. Marie Curie decided to study whats now known as radioactivity when one of the expirements of her advisor Henri Becquerel on X-rays was hindered by bad wheather.
+
+The same is true for mathematics. The discovery of mathematics can be interpreted as a random variable that we can only ever witness one instantiation of. If we were to go back in time and rerun history, the order in which theorems are proved would almost certainly change.
+
+For example, it is entirely plausible to me that the consistency of the failure of choice might have been discovered before the invention of forcing. Consider a world where ultrapowers and iterated ultrapowers were studied before Cohen's discovery. In such a world, Dehornoy's theorem of the failure of choice in the intersection 
+$$N_{\omega^2}=\bigcap_{\alpha<\omega^2} M_n$$
+of the first $\omega^2$-many iterated ultrapowers $M_\alpha$ of $V$ might have been discovered earlier. Or Kunens theorem on the failure of choice in the Chang models assuming uncountably many measurable cardinals, for that matter.
+
+The analysis of interesction modles might have even lead to the discovery of forcing itself: naturally, the first intersection model to look at is 
+$$N_\omega=\bigcap_{n<\omega} M_n$$
+and it is a result of Bukovsky that $N_\omega=M_\omega[\vec \kappa]$ is a forcing extension of $M_\omega$ by the critial sequence $\langle\kappa_n\mid n<\omega\rangle$. The equality $N_\omega=M_\omega[\vec\kappa]$ itself can be proven by elementary methods without the knowledge of forcing. This could have lead to the following analysis:
+
+The partial order given by Prikry forcing is a natural structure which approximates such a sequence in $M_\omega$ and $N_\omega=M_\omega[G]$ for the filter given by $\langle \kappa_n\mid n<\omega\rangle$. It might have been realized that this filter is indeed generic over $M_\omega$ through the proof of Mathias' characterization of Prikry generics. This, undoubtedly, would have required an ingenious idea to work out. But this route would naturaly lead to the notion of a generic filter and then further to the forcing theorem. 
+
+In this world, Prikry forcing would have been the original forcing instead of Cohen forcing.
+
+In fact, going back a step, the argument presented above for the nonexistence of measurable in $L$ could have been the inspiration for ultrapowers and iterated ultrapowers: a keen eye might notice that $X_1$ is simply (isomorphic to) an ultrapower of $X_0$ and $X_{\omega_1}$ is (isomorphic to) an iterated ultrapower of $X_0$. 
+
+I gladly conceed that this is highly speculative.
+
+
+On the other hand, it is almost certain that forcing is discovered before the consistency of $\neg\mathrm{CH}$ with $\mathrm{ZFC}$, given that, as far as I know, there is still no forcing-free proof of this consistency.
+
+
+\section{Gödel and Ulam}
+While there never was a joint publication of Gödel and Ulam, the two exchanged a couple of letters, first throughout the early and late 40s and later in the 60s after the Cohen's work on forcing. Kanamori wrote a wonderful article about this. In the late 1930s and ealry 1940s, Ulam and Gödel corresponded about a number of questions related to the measure problem and the continuum hypothesis. This resulted in a "joint remark".
+
+\begin{rem}[Gödel-Ulam]
+Assume $V=L$. There is no ($\sigma$-additive) measure defined on all projective sets which vanishes on points.
+\end{rem}
+\begin{proof}\textit{(Sketch)}
+The point is that there is a projective wellorder of the reals in $L$ which enables the construction of a Ulam matrix which is projective in the codes.
+\end{proof}
+
+Ulam asked Gödel whether he thinks this result is worth publishing. In a later letter, he asked whether Gödel has published it yet. Gödel never explicitly expressed interest in doing so.
+
+ Interestingly, there is some controversy about who first noticed that there is a $\Delta^1_2$-wellorder and hence $\Delta^1_2$ non-Lebesgue-measurable of the reals in $L$. This already appears in Gödel's 1938 announcment of his results, without credit to another mathematician. Kreisel claims in his memoirs on Gödel (from 1980) that this fact is really due to Ulam "acording to Gödel's notes", without giving further details. Kanamori argues that the known letters between Gödel and Ulam strongly indicate that it was indeed Gödel's own discovery.
+
+ \section{The holocaust and the atomic bomb}
+
+Less than two weeks before the Nazi's attacked Poland, Ulam travelled on a boat to the US together with his then 17 year old brother. Both his father and his sister, as well as more family members of his were killed by the Nazis. Hausdorff, who publicized the measure problem through his book "Grundzüge der Mengenlehre" was another victim of the holocaust. Gödel emigrated to the US five months later in response to the Anschluss in order to avoid being drafted by the Nazis. 
+
+After the US joined the second world war, Ulam eventually became dissatisfied with his own contributions to the war effort. He felt he could do more than just teach war related courses. Thus, in early 1944, he made use of his close friendship with Von Neumann to get recruited to the Manhattan project, where Ulam helped deveolp the first atomic bomb. Ulam together with Teller, would later make a breakthrough which led to the design of the first fusion bomb. Before this, many scientist believed and hoped that such a bomb could not exist. He would not return to academics full time before 1967.
+
+As far as we know, Ulam has never asked Gödel about the existence of measurable cardinals in $L$. After his joint publications with Oxtoby in the Annals of Mathematics in 1939 and 1941, Ulam would never publish another paper about measure theory.
+
+\section{Addendum: Another argument?}
+
+I want to briefly mention another argument which shows that measurable cardinals do not exist in $L$. First show that any measurable cardinal is Ramsey. Now if $\kappa$ is Ramsey, it is not hard to see, using condenstation once more, that $L_\kappa$ is generated by a set $I$ of indiscernibles for the structure $(L_\kappa;\in)$. In particular, any constructible real is definable over $L_\kappa$ from finitely many indiscernibles from $I$. It is now easy to show that it does not matter which indiscernibles the definition uses, that is if $\tau^{L_\kappa}(v_0,\dots, v_n)$ is a term for a real number and $\alpha^i_0<\dots<\alpha^i_n$ belong to $I$ for $i<2$ then 
+$$\tau^{L_\kappa}(\alpha_0^0,\dots,\alpha_n^0)=\tau^{L_\kappa}(\alpha_0^1,\dots,\alpha_n^1).$$
+
+It follows that there are only countably many construcible reals, so $V\neq L$. I belive that this argument is due to Silver.
+
+However, not all the methods we used here were readily available in the 1930s. E.g. the proof showing that measurable cardinals are Ramsey that I know first establishes the existence of a normal measure. This is explained by the fact that every Ramsey measure is equivalent to a normal measure. Now, to construct a normal measure, while it is not required to do the full ultrapower construction, all arguments I am aware of use some ideas which are already quite close to the ultrapower method. Further, the notion of normality first appeared implicitly in Fodor's paper proving Fodor's lemma from 1956. 
+
+
+

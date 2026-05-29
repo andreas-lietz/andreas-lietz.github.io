@@ -1,0 +1,19 @@
+It is my great honour to be the first solver of a problem a list published and administrated by Ralf Schindler, the Schindler's List. A solution to such a problem grants an invitation to give a talk about it in Münster, as well as the right to add a new problem to the list.
+
+\section{The problem I solved}
+
+Ralf Schindler and his PhD student Xiuyuan Sun showed that if Martin's Maximum holds then the nonstationary ideal $\mathrm{NS}_{\omega_1} on $\omega_1$ is not $\Pi_1$-definable from any parameter $A\subseteq\omega_1$. This naturally motivated the following question:
+\begin{que}
+    Assume Martin's Maximum. Is $\mathrm{NS}_{\omega_1}$ $\Sigma_1$-complete in the generalized Baire space on $\omega_1$? That is, is any $\mathcal A\subseteq\omega_1^{\omega_1}$ which is $\Sigma_1$-definbale in $H_{\omega_2}$ (with parameters) continuously reducible to $\mathrm{NS}_{\omega_1}$?
+\end{que}
+
+A positive solution to this would strengthen the aforementioned result as no $\Sigma_1$-complete set can belong to the dual pointclass of sets $\Pi_1$-definable over $H_{\omega_2}$. Unfortunately, this turns out to be false.
+
+\begin{thm}
+    Suppose Martin's Maximum holds. Then there is a $\Delta_1$ set definable from $\omega_1$ which is not continuously reducible to $\mathrm{NS}_{\omega_1}$. 
+\end{thm}
+
+If you'd like to know what the $\Delta_1$-definable set above is and how to prove this, I am giving a short talk about the result at the European Set Theory Conference in Helsinki.
+
+\section{The porblem I suggest}
+
